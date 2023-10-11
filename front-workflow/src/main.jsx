@@ -5,7 +5,7 @@ import "./index.css";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <div data-theme="light">
+    <div>
       <App />
     </div>
   </React.StrictMode>
