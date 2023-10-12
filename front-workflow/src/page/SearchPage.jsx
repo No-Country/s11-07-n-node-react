@@ -12,7 +12,7 @@ const SearchPage = () => {
   };
 
   return (
-    <div className="flex flex-col items-center h-screen mt-16">
+    <div className="flex flex-col items-center h-screen pt-16">
       <img src={workflow} alt="Workflow" className="w-48 h-48 mb-4" />
       <div className="flex items-center">
         <input

@@ -3,6 +3,7 @@ import logo from "../../pictures/logo.png";
 import { FcGoogle } from "react-icons/fc";
 import { BsFacebook } from "react-icons/bs";
 import { BsApple } from "react-icons/bs";
+import { Link } from "react-router-dom";
 const Login = () => {
   return (
     <>
@@ -14,7 +15,10 @@ const Login = () => {
             </div>
             <div className=" pt-[6vh] text-center">
               <button className="actionRegister">Iniciar Sesion</button>
-              <button className="actionRegister">Registrate</button>
+              {/* <button className="actionRegister">Registrate</button> */}
+              <Link to="/register" className="actionRegister">
+                <button className="actionRegister">Registrate</button>
+              </Link>
               <div className="flex my-8 text-xl w-full justify-center gap-10  ">
                 <span className="">
                   <FcGoogle />

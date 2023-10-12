@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import WorkFlow from "./WorkFlow.jsx";
 import Confirm from "./Confirm.jsx";
 import Ver from "./Ver.jsx";
+import Search from "./Search.jsx";
 
 const Carousel = () => {
   const [viewSelected, setViewSelected] = useState(1);
@@ -12,7 +13,7 @@ const Carousel = () => {
           <WorkFlow />
         </div>
         <div id="item2" className="carousel-item w-full">
-          <p>En construcción</p>
+          <Search />
         </div>
         <div id="item3" className="carousel-item w-full">
           <Confirm />
