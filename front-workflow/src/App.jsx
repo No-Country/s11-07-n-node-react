@@ -1,3 +1,4 @@
+import Confirm from "./components/homeCarousel/Confirm";
 import { Routes, Route } from "react-router-dom";
 import Login from "./components/login/Login";
 import LoginForm from "./components/login/LoginForm";
