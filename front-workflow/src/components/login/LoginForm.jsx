@@ -14,7 +14,9 @@ const LoginForm = () => {
 
     return (
         <>
-        <section className='h-screen max-w-xs px-4 m-auto  bg-white'>
+        <section className='h-screen w-full bg-white flex items-center'>
+
+        <section className='h-[800px] max-w-xs px-4 m-auto  bg-white md:shadow-[rgba(0,_0,_0,_0.24)_0px_3px_8px]'>
         <div className="w-full pt-[15vh] ">
           <img className="m-auto  " src={logo} alt="" />
         </div>
@@ -37,12 +39,13 @@ const LoginForm = () => {
             />
              <button
              type='button'
-            onClick={forgetPass}
-            className='text-xs  w-[85%] text-right' > ¿Haz olvidado tu contraseña?</button>
+             onClick={forgetPass}
+             className='text-xs  w-[85%] max-w-[350px] text-right' > ¿Haz olvidado tu contraseña?</button>
              <button className='actionRegister'>
             Iniciar sesión
              </button>
         </form>
+             </section>
         </section>
         </>
     );

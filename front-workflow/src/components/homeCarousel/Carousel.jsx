@@ -12,10 +12,7 @@ const Carousel = () => {
           <WorkFlow />
         </div>
         <div id="item2" className="carousel-item w-full">
-          <img
-            src="https://picsum.photos/200"
-            className="w-[100vw] h-[100vh]"
-          />
+          <p>En construcción</p>
         </div>
         <div id="item3" className="carousel-item w-full">
           <Confirm />

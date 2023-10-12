@@ -10,7 +10,8 @@ const LoginRegister = () => {
   }
   return (
     <>
-      <section className="h-screen max-w-xs px-4 m-auto  bg-white">
+<section className="h-screen w-full bg-white flex items-center">
+      <section className="h-[800px] w-full max-w-xs px-4 m-auto  bg-white md:shadow-[rgba(0,_0,_0,_0.24)_0px_3px_8px]">
         <div className="w-full pt-[10vh]">
           <img className="m-auto " src={logo} alt="" />
         </div>
@@ -62,6 +63,7 @@ const LoginRegister = () => {
           />
           <button className="actionRegister ">Finalizar</button>
         </form>
+          </section>
       </section>
     </>
   );

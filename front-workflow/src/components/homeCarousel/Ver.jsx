@@ -14,7 +14,7 @@ const Ver = () => {
         />
       </div>
 
-      <div className="m-6 flex flex-col justify-center items-center">
+      <div className="m-6 flex flex-col justify-center items-center font-roboto">
         <h1
           style={{
             fontFamily: "Roboto",
@@ -49,7 +49,6 @@ const Ver = () => {
         <Link to="/login" className="text-center actionRegister">
           Comenzar
         </Link>
-        <button className="actionRegister">Continuar</button>
       </div>
     </section>
   );
