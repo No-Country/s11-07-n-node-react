@@ -1,11 +1,8 @@
 import React from "react";
+import Carousel from "../components/homeCarousel/Carousel";
 
 const Home = () => {
-  return (
-    <div className="h-[100vh] w-auto flex justify-center items-center">
-      <button className="btn btn-primary">Click</button>
-    </div>
-  );
+  return <Carousel />;
 };
 
 export default Home;
