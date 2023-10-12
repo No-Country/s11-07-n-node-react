@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import WorkFlow from "./WorkFlow.jsx";
 import Confirm from "./Confirm.jsx";
+import Ver from "./Ver.jsx";
 
 const Carousel = () => {
   const [viewSelected, setViewSelected] = useState(1);
@@ -20,10 +21,7 @@ const Carousel = () => {
           <Confirm />
         </div>
         <div id="item4" className="carousel-item w-full">
-          <img
-            src="https://picsum.photos/200"
-            className="w-[100vw] h-[100vh]"
-          />
+          <Ver />
         </div>
       </div>
       <div className="flex justify-center w-full mt-[-50px]">
