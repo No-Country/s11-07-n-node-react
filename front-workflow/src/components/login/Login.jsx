@@ -6,12 +6,14 @@ import { BsApple} from 'react-icons/bs';
 const Login = () => {
   return (
     <>
-      <section className="h-screen px-4 max-w-xs bg-white m-auto ">
-        <div className="w-full pt-[15vh]">
+    <section className="h-screen w-full bg-white flex items-center">
+      <section className="h-[800px] w-full md:rounded-m px-2 md:px-3 max-w-xs m-auto flex items-center md:shadow-[rgba(0,_0,_0,_0.24)_0px_3px_8px]">
+        <section className="m-auto w-full  ">
+        <div className="w-full">
           <img className="m-auto " src={logo} alt="" />
         </div>
-        <div className=" pt-[6vh]  ">
-          <button className="actionRegister">iniciar sesion</button>
+        <div className=" pt-[6vh] text-center">
+          <button className="actionRegister ">iniciar sesion</button>
           <button className="actionRegister">Registrate</button>
         <div className="flex my-8 text-xl w-full justify-center gap-10  ">
          <span className=""><FcGoogle/></span>
@@ -23,6 +25,8 @@ const Login = () => {
           </button>
         </div>
       </section>
+        </section>
+    </section>
     </>
   );
 };
