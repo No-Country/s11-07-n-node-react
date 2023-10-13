@@ -46,7 +46,7 @@ const Ver = () => {
           {" "}
           Podrá ver a los profesionales más cercano a tu hogar{" "}
         </h3>
-        <Link to="/login" className="text-center actionRegister">
+        <Link to="/home" className="text-center actionRegister">
           Comenzar
         </Link>
       </div>

@@ -14,9 +14,10 @@ const Login = () => {
               <img className="m-auto " src={logo} alt="" />
             </div>
             <div className=" pt-[6vh] text-center">
-              <button className="actionRegister">Iniciar Sesion</button>
-              {/* <button className="actionRegister">Registrate</button> */}
-              <Link to="/register" className="actionRegister">
+              <Link to="/login">
+                <button className="actionRegister">Iniciar Sesion</button>
+              </Link>
+              <Link to="/register">
                 <button className="actionRegister">Registrate</button>
               </Link>
               <div className="flex my-8 text-xl w-full justify-center gap-10  ">
