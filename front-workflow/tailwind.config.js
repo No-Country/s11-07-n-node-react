@@ -6,6 +6,9 @@ export default {
       colors:{
         verdeMarino: '#41BCAC',
         gris1: '#CFCFCF',
+      },
+      fontFamily:{
+        roboto:["Roboto"]
       }
     },
   },

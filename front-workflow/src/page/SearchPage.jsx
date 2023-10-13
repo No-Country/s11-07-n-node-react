@@ -1,18 +1,18 @@
-import React from 'react';
-import workflow from '../assets/workflow.png';
-import lupa from '../assets/lupa.png';
-import Footer from '../components/Footer/Footer';
+import React from "react";
+import workflow from "../assets/workflow.png";
+import lupa from "../assets/lupa.png";
+import Footer from "../components/Footer/Footer";
 
 const SearchPage = () => {
   const inputStyle = {
     backgroundImage: `url(${lupa})`,
-    backgroundRepeat: 'no-repeat',
-    backgroundPosition: '10px center', 
-    paddingLeft: '60px'
+    backgroundRepeat: "no-repeat",
+    backgroundPosition: "10px center",
+    paddingLeft: "60px",
   };
 
   return (
-    <div className="flex flex-col items-center h-screen mt-16">
+    <div className="flex flex-col items-center h-screen pt-16">
       <img src={workflow} alt="Workflow" className="w-48 h-48 mb-4" />
       <div className="flex items-center">
         <input
@@ -22,7 +22,7 @@ const SearchPage = () => {
           style={inputStyle}
         />
       </div>
-      <Footer/>
+      <Footer />
     </div>
   );
 };

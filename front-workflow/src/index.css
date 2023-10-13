@@ -3,24 +3,34 @@
 @tailwind utilities;
 
 body {
-  background:white;
+  background: white;
   width: 100%;
   height: 100vh;
+  /* font-family: "Roboto", sans-serif; */
 }
-.actionRegister{@apply rounded-2xl w-full   p-2 bg-[#41BCAC] text-white mt-5 shadow-[0px_10px_6px_0px_#00000024] }
-.actionRegisterForm{@apply appearance-none leading-tight w-full max-w-[350px]  text-xs bg-white  outline-none border-b-2 border-gray-200 mt-7 text-black}
-.i-register{@apply  w-[85%] max-w-[300px] mt-6 bg-white outline-none text-xs  border-b-2 border-gray-200 text-black }
-.textblack{@apply text-black}
-.iconHome{@apply text-center text-lg}
+.actionRegister {
+  @apply rounded-2xl w-full   p-2 bg-[#41BCAC] text-white mt-5 shadow-[0px_10px_6px_0px_#00000024];
+}
+.actionRegisterForm {
+  @apply appearance-none leading-tight w-full max-w-[350px]  text-xs bg-white  outline-none border-b-2 border-gray-200 mt-7 text-black;
+}
+.i-register {
+  @apply w-[85%] max-w-[300px] mt-6 bg-white outline-none text-xs  border-b-2 border-gray-200 text-black;
+}
+.textblack {
+  @apply text-black;
+}
+.iconHome {
+  @apply text-center text-lg;
+}
 
 .m {
-  border:1px solid red;
+  border: 1px solid red;
 }
 
 .m2 {
-  border:1px solid green;
+  border: 1px solid green;
 }
 .m3 {
-  border:1px solid yellow;
+  border: 1px solid yellow;
 }
-
