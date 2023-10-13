@@ -7,6 +7,7 @@ import LoginRegister from "./components/login/LoginRegister";
 import Home from "./page/Home";
 import SearchPage from "./page/SearchPage";
 import IntroCarousel from "./page/IntroCarousel";
+import ErrorPage from "./page/ErrorPage";
 
 function App() {
   return (
@@ -20,14 +21,7 @@ function App() {
         <Route path="/login" element={<LoginForm />} />
         <Route path="/register" element={<LoginRegister />} />
         <Route path="/search" element={<SearchPage />} />
-        <Route
-          path="/*"
-          element={
-            <p className="font-bold text-[#000] justify-center flex">
-              Página no encontrada
-            </p>
-          }
-        />
+        <Route path="/*" element={<ErrorPage />} />
       </Routes>
     </>
   );
