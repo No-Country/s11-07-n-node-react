@@ -3,47 +3,42 @@ import mongoose, { Model, Schema } from "mongoose";
 
 
 
-// Template de base para modelo de usuario
-export interface IUser extends Document {
-    name: string;
-    email: string;
-    password: string;
-    roles: string[];
-    imgUrl: string;
-  }
+export interface UserModel extends Document {
+   nombre: string;
+   apellido: string;
+   email: string;
+   password: string;
+   ciudad: string;
+}
 
-const userSchema  = new Schema( {
+const userSchema = new Schema({
 
-name:{
-    type: String,
-    required: [true, 'Name is required'],
-    minlength: [1, 'Name must have at least 1 character']
-},
+   nombre: {
+      type: String
+      , required: [true, 'El nombre de la persona es requerido']
+   }
 
- email: {
-    type: String,
-    required: [true, 'Email is required'],
-    unique:true
- },
+   , apellido: {
+      type: String
+      , required: [true, 'El apellido de la persona es requerido']
+   }
 
- password: {
-    type: String,
-    required: [true, 'Password is required'],
-    minlength: [6, 'Password must be at least 8 characters long']
- },
+   , email: {
+      type: String,
+      required: [true, 'El email debe ser ingresado'],
+      unique: true
+   }
 
- roles: {
-    type: [String],
-    default: ['USER_ROLE'],
-    enum: ['USER_ADMIN', 'USER_ROLE', 'USER_CLIENT', 'USER_SERVICES']
- },
+   , password: {
+      type: String,
+      required: [true, 'La contraseña es necesaria para el acceso'],
+      minlength: [8, 'La contraseña debe ser en almenos de 8 caracteres']
+   }
 
- imgUrl: {
-    type: String,
-    default: ''
- }
-
+   , ciudad: {
+      type: String
+   }
 });
 
 
-export const UserModel: Model<IUser> = mongoose.model<IUser>('User', userSchema);
+export const UserModel: Model<UserModel> = mongoose.model<UserModel>('Usuario', userSchema);
