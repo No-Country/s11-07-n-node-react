@@ -5,8 +5,6 @@ interface Options {
     dbName: string
 }
 
-
-
 export class MongoDatabase {
 
     static async connect (options:Options) {
