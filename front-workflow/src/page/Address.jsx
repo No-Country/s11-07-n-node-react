@@ -2,11 +2,15 @@ import React, { useState } from 'react';
 import flecha from '../assets/flecha.png';
 import Footer from '../components/Footer/Footer';
 import signomas from '../assets/signomas.png';
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 const Address = () => {
   const [direccion, setDireccion] = useState('');
   const [direccionesGuardadas, setDireccionesGuardadas] = useState([]);
   const [guardado, setGuardado] = useState(false);
+
+  const navigate = useNavigate();
 
   const handleDireccionChange = (event) => {
     setDireccion(event.target.value);
@@ -21,12 +25,16 @@ const Address = () => {
   };
 
   const handleGuardarCambios = () => {
-    setGuardado(true);
-    console.log('Cambios guardados:', direccionesGuardadas);
+    // axios.post('http://localhost:3001/guardar-direcciones', { direccionesGuardadas })
+    //   .then(response => {
+        setGuardado(true);
+        console.log('Cambios guardados:', direccionesGuardadas);
+      // })
+      // .catch(error => console.error('Error al guardar las direcciones:', error));
   };
 
   const handlePerfilButtonClick = () => {
-    // Implementa la navegación a la página de perfil si es necesario
+    navigate('/perfil');
   };
 
   return (
