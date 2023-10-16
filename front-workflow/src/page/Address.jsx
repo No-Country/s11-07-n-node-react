@@ -9,6 +9,8 @@ const Address = () => {
   const [direccion, setDireccion] = useState('');
   const [direccionesGuardadas, setDireccionesGuardadas] = useState([]);
   const [guardado, setGuardado] = useState(false);
+  const [direccionAEliminar, setDireccionAEliminar] = useState(null);
+  const [direccionEliminada, setDireccionEliminada] = useState(false);
 
   const navigate = useNavigate();
 
@@ -18,7 +20,8 @@ const Address = () => {
 
   const handleAgregarDireccion = () => {
     if (direccion) {
-      setDireccionesGuardadas([...direccionesGuardadas, direccion]);
+      const direccionConNumero = `${direccionesGuardadas.length + 1}) ${direccion}`;
+      setDireccionesGuardadas([...direccionesGuardadas, direccionConNumero]);
       setDireccion('');
       setGuardado(false);
     }
@@ -35,6 +38,20 @@ const Address = () => {
 
   const handlePerfilButtonClick = () => {
     navigate('/perfil');
+  };
+
+  const handleEliminarDireccion = (index) => {
+    setDireccionAEliminar(index);
+  };
+
+  const handleConfirmarEliminarDireccion = () => {
+    const updatedDirecciones = direccionesGuardadas.filter((dir, index) => index !== direccionAEliminar);
+    setDireccionesGuardadas(updatedDirecciones);
+    setDireccionAEliminar(null);
+    setDireccionEliminada(true);
+    setTimeout(() => {
+      setDireccionEliminada(false);
+    }, 3000);
   };
 
   return (
@@ -63,10 +80,32 @@ const Address = () => {
       </button>
 
       <div className="mt-2 font-bold">
-        {direccionesGuardadas.map((dir, index) => (
-          <div key={index} className={`mb-1 ${guardado ? 'text-black' : 'text-red-500'}`}>
-            {dir}
+      {direccionesGuardadas.map((dir, index) => (
+      <div key={index} className={`flex justify-between items-center mb-1 
+      ${index === direccionesGuardadas.length - 1 && !guardado ? 'text-red-500' : 'text-black'}`}>
+        <div>{dir}</div>
+        {guardado && (
+          <div className="flex">
+            {direccionAEliminar === index ? (
+              <div>
+                <button
+                  className="bg-red-500  text-white py-2 px-4 rounded mr-2"
+                  onClick={handleConfirmarEliminarDireccion}
+                >
+                  Confirmar Eliminar
+                </button>
+              </div>
+            ) : (
+              <button
+                className="bg-red-500  text-white py-2 px-4 rounded mr-2"
+                onClick={() => handleEliminarDireccion(index)}
+              >
+                Eliminar
+              </button>
+            )}
           </div>
+        )}
+  </div>
         ))}
       </div>
 
@@ -80,7 +119,7 @@ const Address = () => {
       </div>
 
       {guardado && <p className="mt-2 text-center text-black">Dirección guardada exitosamente</p>}
-
+      {direccionEliminada && <p className="mt-2 text-center text-black">Dirección eliminada exitosamente</p>}
       <Footer />
     </div>
   );
