@@ -3,14 +3,16 @@ import search from "../../pictures/search.svg";
 const Search = () => {
   return (
     <>
-      <section className="h-screen w-full flex flex-col justify-center gap-7 text-center">
-        <div className="w-full">
-          <img className="m-auto " src={search} alt="" />
+      <section className="h-screen px-4 m-auto  max-w-xs  bg-white">
+        <div className="w-full pt-[15vh]">
+          <img className="m-auto w-[278px]" src={search} alt="" />
         </div>
-        <div className="flex flex-col gap-4">
-          <h3 className="text-3xl w-[70%] m-auto text-black">Buscar</h3>
-          <p className="text-black w-[70%] m-auto">
-            Busca a un profesional para la tarea que necesites
+        <div className=" pt-[6vh]">
+          <h2 className="text-3xl text-center font-roboto	text-black ">
+            Buscar
+          </h2>
+          <p className=" mt-8 text-center text-black w-72 font-roboto">
+          Busca a un profesional para la tarea que necesites
           </p>
         </div>
       </section>
