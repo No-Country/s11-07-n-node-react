@@ -1,4 +1,5 @@
-import { UserData, UserModel } from "../data/models/user.model"
+import { BcryptAdapter } from "../config/bcrypt";
+import { UserModel } from "../data/models/user.model"
 
 export class EmailFoundedError {
    message: string = `No fué posible registrase con el email suministrado. Contáctese con la administración.`
@@ -15,7 +16,7 @@ export class UserService {
    async push( first_name: string, last_name: string, email: string, password: string, city: string) {
       const user_data = {
          nombre: first_name, apellido: last_name, email: email, 
-         password: password, ciudad: city
+         password: BcryptAdapter.hash( password ), ciudad: city
       }
 
       try {
