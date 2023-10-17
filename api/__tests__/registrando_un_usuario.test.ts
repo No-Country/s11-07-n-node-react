@@ -13,7 +13,7 @@ const USER_DATA = {
 const app: Application = express();
 app.use( express.json() );
 
-const user_router = UserRoute.routes();
+const user_router = UserRoute.routes;
 
 app.use('/api/v1', user_router)
 
@@ -28,15 +28,15 @@ describe('POST /api/v1/users, registrando un usuario', function () {
          .toEqual(`Se registró exitosamente con el email ${USER_DATA.email}.`)
    })
 
-   /*
    it('cuando el usuario existe en el sistema', async function() {
       const response = await request(app)
          .post(USER_PATH)
          .send(USER_DATA)
 
       expect( response.statusCode ).toEqual( 400 );
-      expect( response.body ).toHaveProperty( 'mensaje' );
-      expect( response.body.mensaje ).toEqual( 'No fué posible registrar el email ingresado. Contáctese a administración' )
+      expect(response.body.mensaje)
+         .toEqual(`No fué posible registrase con el email suministrado. Contáctese con la administración.`)
    })
+   /*
    */
 });

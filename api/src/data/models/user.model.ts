@@ -14,25 +14,25 @@ export interface UserData extends Document {
 const userSchema = new Schema({
 
    nombre: {
-      type: String
-      , required: [true, 'El nombre de la persona es requerido']
+         type: String
+      ,  required: [true, 'El nombre de la persona es requerido']
    }
 
    , apellido: {
-      type: String
-      , required: [true, 'El apellido de la persona es requerido']
+         type: String
+      ,  required: [true, 'El apellido de la persona es requerido']
    }
 
    , email: {
-      type: String,
-      required: [true, 'El email debe ser ingresado'],
-      unique: true
+         type: String
+      ,  required: [true, 'El email debe ser ingresado']
+      ,  unique: [true, 'El email ya se encuentra registrado']
    }
 
    , password: {
-      type: String,
-      required: [true, 'La contraseña es necesaria para el acceso'],
-      minlength: [8, 'La contraseña debe ser en almenos de 8 caracteres']
+         type: String
+      ,  required: [true, 'La contraseña es necesaria para el acceso']
+      ,  minlength: [8, 'La contraseña debe ser en almenos de 8 caracteres']
    }
 
    , ciudad: {
