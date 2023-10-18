@@ -14,6 +14,7 @@ function App() {
     <>
       <Routes>
         <Route path="/" element={<IntroCarousel />} />
+        {/* <Route path="/intro" element={<IntroCarousel />} /> */}
 
         <Route path="/home" element={<Home />} />
         {/* <Route path="/login" element={<Login />} /> */}
