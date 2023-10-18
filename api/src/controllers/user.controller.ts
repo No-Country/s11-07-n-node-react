@@ -1,6 +1,7 @@
 import { Request, Response } from 'express';
 import { UserService, EmailFoundedError, UserDataError } from "../services/user.service";
 import { UserEntity } from '../data/entities/user.entity';
+import { EmailInvalidError, PasswordInvalid } from '../config/validators';
 
 export class UserController {
    async create(req: Request, res: Response) {
@@ -14,13 +15,11 @@ export class UserController {
          return res.status(201).json({ message: `User created` })
 
       } catch (error: any) {
-         if (error instanceof EmailFoundedError) {
-            return res.status(400).json({
-               message: error.message
-            })
-         }
+         if (error instanceof EmailFoundedError ||
+            error instanceof UserDataError ||
+            error instanceof EmailInvalidError ||
+            error instanceof PasswordInvalid) {
 
-         if (error instanceof UserDataError) {
             return res.status(400).json({
                message: error.message
             })

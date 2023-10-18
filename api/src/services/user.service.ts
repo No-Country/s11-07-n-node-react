@@ -1,10 +1,10 @@
 import { BcryptAdapter } from "../config/bcrypt";
-import { EmailInvalidError, EmailValidator } from "../config/validators";
+import { EmailInvalidError, EmailValidator, PasswordInvalid, PasswordValidator } from "../config/validators";
 import { UserEntity } from "../data/entities/user.entity";
 import { UserModel } from "../data/models/user.model"
 
 export class EmailFoundedError {
-   message: string = `No fué posible registrase con el email suministrado. Contáctese con la administración.`
+   message: string = 'Error registering. Contact administration'
 }
 
 export class UserDataError {
@@ -18,8 +18,9 @@ export class UserService {
    async push(user_data: UserEntity) {
 
       try {
+         EmailValidator.raises_an_error_if_email_is_invalid(user_data.email);
+         PasswordValidator.raises_an_error_if_password_is_invalid(user_data.password);
          
-         EmailValidator.raises_an_error_if_email_is_invalid( user_data.email );
 
          const user_searched = UserModel.findOne({ email: user_data.email })
          if (user_searched != null) {
@@ -31,23 +32,27 @@ export class UserService {
 
       } catch (error: any) {
          const date = new Date();
-         let message = `>> ${date.toISOString()}\tLOG ${user_data}`
+         let message = `>> LOG ${date.toISOString()}\n\t${JSON.stringify(user_data)}\n`
 
-         if( error instanceof EmailInvalidError ) {
+         if( error instanceof EmailInvalidError || error instanceof PasswordInvalid ) {
+            console.log( message.concat( error.message ) )
             throw error
          }
 
          if (!Object.keys(error).includes('errors')) {
             const email_error = new EmailFoundedError()
-            console.log( ">> LOG", message.concat( email_error.message ) );
+            console.log( message.concat( email_error.message ) )
             throw email_error;
          }
 
-         if (!Object.keys(error).includes('errors')) {
+         if (Object.keys(error).includes('errors')) {
             const property = Object.keys(error.errors).pop() || '__prototype'
-            const user_data_error = error.errors[property].properties.message;
+            const user_data_error = error.errors[property].properties.message
+            console.log( message.concat( user_data_error ) )
             throw new UserDataError(user_data_error)
          }
+
+         console.log( error );
 
          throw error;
       }
