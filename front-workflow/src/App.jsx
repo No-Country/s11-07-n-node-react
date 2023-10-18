@@ -8,6 +8,7 @@ import Home from "./page/Home";
 import SearchPage from "./page/SearchPage";
 import IntroCarousel from "./page/IntroCarousel";
 import ErrorPage from "./page/ErrorPage";
+import Address from "./page/Address";
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
         <Route path="/login" element={<LoginForm />} />
         <Route path="/register" element={<LoginRegister />} />
         <Route path="/search" element={<SearchPage />} />
+        <Route path="/address" element={<Address />} />
         <Route path="/*" element={<ErrorPage />} />
       </Routes>
     </>
