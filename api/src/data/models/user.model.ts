@@ -4,21 +4,21 @@ import mongoose, { Model, Schema } from "mongoose";
 
 
 export interface UserData extends Document {
-   nombre: string;
-   apellido: string;
+   first_name: string;
+   last_name: string;
    email: string;
    password: string;
-   ciudad: string;
+   city: string;
 }
 
 const userSchema = new Schema({
 
-   nombre: {
+   first_name: {
          type: String
       ,  required: [true, 'The first name is required']
    }
 
-   , apellido: {
+   , last_name: {
          type: String
       ,  required: [true, 'The last name is required']
    }
@@ -35,7 +35,7 @@ const userSchema = new Schema({
       ,  minlength: [8, 'The password must be at least 8 characters']
    }
 
-   , ciudad: {
+   , city: {
       type: String
    }
 });

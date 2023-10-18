@@ -1,6 +1,6 @@
 import { BcryptAdapter } from "../config/bcrypt";
 import { EmailInvalidError, EmailValidator } from "../config/validators";
-import { UserEntity } from "../data/entities/user.entity-template";
+import { UserEntity } from "../data/entities/user.entity";
 import { UserModel } from "../data/models/user.model"
 
 export class EmailFoundedError {

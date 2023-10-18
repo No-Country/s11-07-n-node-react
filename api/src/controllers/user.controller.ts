@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 import { UserService, EmailFoundedError, UserDataError } from "../services/user.service";
-import { UserEntity } from '../data/entities/user.entity-template';
+import { UserEntity } from '../data/entities/user.entity';
 
 export class UserController {
    async create(req: Request, res: Response) {
