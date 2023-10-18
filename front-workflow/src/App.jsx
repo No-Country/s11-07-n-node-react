@@ -1,7 +1,5 @@
 import Footer from "./components/Footer/Footer";
-import Confirm from "./components/homeCarousel/Confirm";
 import { Routes, Route } from "react-router-dom";
-import Login from "./components/login/Login";
 import LoginForm from "./components/login/LoginForm";
 import LoginRegister from "./components/login/LoginRegister";
 import Home from "./page/Home";
@@ -15,6 +13,7 @@ function App() {
     <>
       <Routes>
         <Route path="/" element={<IntroCarousel />} />
+        {/* <Route path="/intro" element={<IntroCarousel />} /> */}
 
         <Route path="/home" element={<Home />} />
         {/* <Route path="/login" element={<Login />} /> */}
