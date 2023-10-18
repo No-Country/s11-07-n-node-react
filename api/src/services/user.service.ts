@@ -24,11 +24,11 @@ export class UserService {
          if (user_searched != undefined || user_searched != null) {
             let user = new UserModel(user_data);
             const user_saved = await user.save()
-
+            console.info( '>> INFO. USUARIO CREADO CON EL EMAIL', user_data.email )
          }
       } catch( error: any) {
          const date = new Date();
-         let message = `>> ${date.toISOString()}\t`
+         let message = `>> ${date.toISOString()}\tLOG ${user_data}`
 
          if( !Object.keys( error ).includes( 'errors' ) ) {
             throw new EmailFoundedError();
@@ -36,7 +36,6 @@ export class UserService {
 
          const property = Object.keys(error.errors).pop() || '__prototype'
          const user_data_error = error.errors[property].properties.message;
-         console.log( user_data_error )
          throw new UserDataError( user_data_error )
       }
    }
