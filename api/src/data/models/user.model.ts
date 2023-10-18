@@ -15,24 +15,24 @@ const userSchema = new Schema({
 
    nombre: {
          type: String
-      ,  required: [true, 'El nombre de la persona es requerido']
+      ,  required: [true, 'The first name is required']
    }
 
    , apellido: {
          type: String
-      ,  required: [true, 'El apellido de la persona es requerido']
+      ,  required: [true, 'The last name is required']
    }
 
    , email: {
          type: String
-      ,  required: [true, 'El email debe ser ingresado']
-      ,  unique: [true, 'El email ya se encuentra registrado']
+      ,  required: [true, 'The email must be entered']
+      ,  unique: [true, 'The email is already registered']
    }
 
    , password: {
          type: String
-      ,  required: [true, 'La contraseña es necesaria para el acceso']
-      ,  minlength: [8, 'La contraseña debe ser en almenos de 8 caracteres']
+      ,  required: [true, 'The password must be entered']
+      ,  minlength: [8, 'The password must be at least 8 characters']
    }
 
    , ciudad: {
