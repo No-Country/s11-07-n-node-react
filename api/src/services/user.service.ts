@@ -20,15 +20,11 @@ export class UserService {
       try {
          EmailValidator.raises_an_error_if_email_invalid(user_data.email);
          PasswordValidator.raises_an_error_if_password_invalid(user_data.password);
-         
 
-         const user_searched = await UserModel.find({ email: user_data.email })
-         if (user_searched != null) {
-            user_data.password = BcryptAdapter.hash(user_data.password)
-            let user = new UserModel(user_data)
-            await user.save();
-            console.info('>> INFO. USUARIO CREADO CON EL EMAIL', user_data.email)
-         }
+         user_data.password = BcryptAdapter.hash(user_data.password)
+         let user = new UserModel(user_data)
+         await user.save();
+         console.info('>> INFO. USUARIO CREADO CON EL EMAIL', user_data.email)
 
       } catch (error: any) {
          const date = new Date();
