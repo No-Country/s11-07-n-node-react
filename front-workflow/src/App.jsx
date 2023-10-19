@@ -12,7 +12,6 @@ import { useEffect } from "react";
 import { localUser } from "./store/UserSlice";
 import { useDispatch } from "react-redux";
 
-
 function App() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -35,7 +34,7 @@ function App() {
       } else if (introStorage && !user) {
         navigate("/login");
       } else if (introStorage && user) {
-        navigate("/search");
+        navigate("/");
       }
     } catch (error) {
       console.error(error);
@@ -56,7 +55,7 @@ function App() {
         <Route path="/search" element={<SearchPage />} />
         <Route path="/address" element={<Address />} />
         <Route path="/*" element={<ErrorPage />} />
-        <Route path="/professionalfilter" element={<ProfessionalFilter/>}  />
+        <Route path="/professionalfilter" element={<ProfessionalFilter />} />
       </Routes>
     </>
   );
