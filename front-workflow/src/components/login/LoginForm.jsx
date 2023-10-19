@@ -1,14 +1,32 @@
-import React from "react";
+import React, { useState } from "react";
 import logo from "../../pictures/logo.png";
 import { useForm } from "react-hook-form";
 import { BsApple, BsFacebook } from "react-icons/bs";
 import { FcGoogle } from "react-icons/fc";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { localUser } from "../../store/UserSlice";
+import { useDispatch } from "react-redux";
+
 const LoginForm = () => {
   const { register, handleSubmit, reset } = useForm();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
-  const submit = (data) => {
-    console.log(data);
+  const submit = (e) => {
+    e.preventDefault();
+    console.log(email, password);
+
+    let userCredentials = {
+      username: email,
+      password: password,
+    };
+    dispatch(localUser(userCredentials));
+    setEmail("");
+    setPassword("");
+    localStorage.setItem("user", JSON.stringify(userCredentials));
+    navigate("/search");
   };
   const forgetPass = () => {
     console.log("olvide mi contrase;a");
@@ -21,13 +39,15 @@ const LoginForm = () => {
           <div className="w-full pt-[15vh] ">
             <img className="m-auto  " src={logo} alt="" />
           </div>
-          <form onSubmit={handleSubmit(submit)} className="py-7  text-center">
+          <form className="py-7  text-center">
             <input
               type="text"
               className="actionRegisterForm "
               placeholder="Ingresar correo o Usuario"
               {...register("email" || "user")}
               autoComplete="off"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
             />
             <input
               type="text"
@@ -35,6 +55,8 @@ const LoginForm = () => {
               placeholder="Contraseña"
               {...register("password")}
               autoComplete="off"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
             />
             <button
               type="button"
@@ -44,7 +66,9 @@ const LoginForm = () => {
               {" "}
               ¿Haz olvidado tu contraseña?
             </button>
-            <button className="actionRegister">Iniciar sesión</button>
+            <button onClick={submit} className="actionRegister">
+              Iniciar sesión
+            </button>
             <Link to="/register">
               <button className="actionRegister">Registrate</button>
             </Link>

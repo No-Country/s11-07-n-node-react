@@ -33,7 +33,7 @@ function App() {
       } else if (introStorage && !user) {
         navigate("/login");
       } else if (introStorage && user) {
-        navigate("/");
+        navigate("/search");
       }
     } catch (error) {
       console.error(error);
