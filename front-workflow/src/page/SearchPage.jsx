@@ -2,6 +2,7 @@ import React from "react";
 import workflow from "../assets/workflow.png";
 import lupa from "../assets/lupa.png";
 import Footer from "../components/Footer/Footer";
+import { Link } from "react-router-dom";
 
 const SearchPage = () => {
   const inputStyle = {
@@ -18,10 +19,11 @@ const SearchPage = () => {
         <input
           type="text"
           placeholder="Buscar"
-          className="w-64 h-12 mt-8 px-4 rounded-full bg-verdeMarino text-white ml-2"
+          className="w-64 h-12 mt-8 px-4 rounded-full bg-verdeMarino text-white ml-2 placeholder:text-white"
           style={inputStyle}
         />
       </div>
+      {/* <Link to="/address">address</Link> */}
       <Footer />
     </div>
   );
