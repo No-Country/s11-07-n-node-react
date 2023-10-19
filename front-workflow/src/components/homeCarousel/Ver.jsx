@@ -4,6 +4,9 @@ import "./Ver.css";
 import { Link } from "react-router-dom";
 
 const Ver = () => {
+  const handleClick = () => {
+    localStorage.setItem("introPage", true);
+  };
   return (
     // <section className="h-screen px-4 max-w-xs bg-white m-auto ">
     //   <div className="pt-28 flex flex-col justify-center items-center">
@@ -57,16 +60,16 @@ const Ver = () => {
           <img className="m-auto w-[278px]" src={ViewImage} alt="" />
         </div>
         <div className=" pt-[6vh]">
-          <h2 className="text-3xl text-center font-roboto	text-black ">
-            Ver
-          </h2>
+          <h2 className="text-3xl text-center font-roboto	text-black ">Ver</h2>
           <p className=" mt-8 text-center text-black w-72 font-roboto">
-          Podrá ver a los profesionales más cercano a tu hogar
+            Podrá ver a los profesionales más cercano a tu hogar
           </p>
         </div>
         <div className="mt-2">
-          <Link to="/home">
-              <button className="actionRegister w-full">Comenzar</button>
+          <Link to="/login">
+            <button onClick={handleClick} className="actionRegister w-full">
+              Comenzar
+            </button>
           </Link>
         </div>
       </section>

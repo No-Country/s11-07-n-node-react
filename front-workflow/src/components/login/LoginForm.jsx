@@ -1,6 +1,9 @@
 import React from "react";
 import logo from "../../pictures/logo.png";
 import { useForm } from "react-hook-form";
+import { BsApple, BsFacebook } from "react-icons/bs";
+import { FcGoogle } from "react-icons/fc";
+import { Link } from "react-router-dom";
 const LoginForm = () => {
   const { register, handleSubmit, reset } = useForm();
 
@@ -42,7 +45,25 @@ const LoginForm = () => {
               ¿Haz olvidado tu contraseña?
             </button>
             <button className="actionRegister">Iniciar sesión</button>
+            <Link to="/register">
+              <button className="actionRegister">Registrate</button>
+            </Link>
           </form>
+          <div className="flex my-8 text-xl w-full justify-center gap-10  ">
+            <span className="">
+              <FcGoogle />
+            </span>
+            <span>
+              <BsFacebook className="text-sky-600" />
+            </span>
+            <span>
+              {" "}
+              <BsApple className="text-black" />{" "}
+            </span>
+          </div>
+          <button className=" w-full text-center text-black ">
+            Continuar como invitado
+          </button>
         </section>
       </section>
     </>
