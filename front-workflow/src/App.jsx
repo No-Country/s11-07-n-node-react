@@ -46,6 +46,20 @@ function App() {
 
   return (
     <>
+      <Routes>
+        <Route path="/onboarding" element={<IntroCarousel />} />
+        {/* <Route path="/intro" element={<IntroCarousel />} /> */}
+
+        <Route path="/" element={<Home />} />
+        {/* <Route path="/login" element={<Login />} /> */}
+
+        <Route path="/login" element={<LoginForm />} />
+        <Route path="/register" element={<LoginRegister />} />
+        <Route path="/search" element={<SearchPage />} />
+        <Route path="/address" element={<Address />} />
+        <Route path="/*" element={<ErrorPage />} />
+        <Route path="/professionalfilter" element={<ProfessionalFilter />} />
+      </Routes >
     </>
   );
 }
