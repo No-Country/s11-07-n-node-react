@@ -18,11 +18,11 @@ export class UserService {
    async push(user_data: UserEntity) {
 
       try {
-         EmailValidator.raises_an_error_if_email_is_invalid(user_data.email);
-         PasswordValidator.raises_an_error_if_password_is_invalid(user_data.password);
+         EmailValidator.raises_an_error_if_email_invalid(user_data.email);
+         PasswordValidator.raises_an_error_if_password_invalid(user_data.password);
          
 
-         const user_searched = UserModel.findOne({ email: user_data.email })
+         const user_searched = await UserModel.find({ email: user_data.email })
          if (user_searched != null) {
             user_data.password = BcryptAdapter.hash(user_data.password)
             let user = new UserModel(user_data)
