@@ -1,4 +1,7 @@
 import Footer from "./components/Footer/Footer";
+import Directions from "./components/Profile/Directions";
+import EditProfile from "./components/Profile/editProfile";
+import Profile from "./components/Profile/profile";
 import { Routes, Route, useNavigate } from "react-router-dom";
 import LoginForm from "./components/login/LoginForm";
 import LoginRegister from "./components/login/LoginRegister";
