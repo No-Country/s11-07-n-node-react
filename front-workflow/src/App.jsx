@@ -7,6 +7,7 @@ import SearchPage from "./page/SearchPage";
 import IntroCarousel from "./page/IntroCarousel";
 import ErrorPage from "./page/ErrorPage";
 import Address from "./page/Address";
+import ProfessionalFilter from "./page/ProfessionalFilter";
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
         <Route path="/search" element={<SearchPage />} />
         <Route path="/address" element={<Address />} />
         <Route path="/*" element={<ErrorPage />} />
+        <Route path="/professionalfilter" element={<ProfessionalFilter/>}  />
       </Routes>
     </>
   );
