@@ -1,11 +1,8 @@
 import React from "react";
+import Login from "../components/login/Login";
 
 const Home = () => {
-  return (
-    <div className="h-[100vh] w-auto flex justify-center items-center bg-green-800">
-      <button className="btn btn-primary">Click</button>
-    </div>
-  );
+  return <Login />;
 };
 
 export default Home;

@@ -5,7 +5,11 @@ export default {
     extend: {
       colors: {
         verdeMarino: '#41BCAC',
+        verdeClaro: '#E3EFEA',
         gris1: '#CFCFCF',
+      },
+      fontFamily:{
+        roboto:["Roboto"]
       }
     },
     extend: {
