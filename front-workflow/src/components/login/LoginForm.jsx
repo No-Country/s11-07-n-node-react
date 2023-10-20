@@ -16,7 +16,6 @@ const LoginForm = () => {
 
   const submit = (e) => {
     e.preventDefault();
-    console.log(email, password);
 
     let userCredentials = {
       username: email,
@@ -26,7 +25,7 @@ const LoginForm = () => {
     setEmail("");
     setPassword("");
     localStorage.setItem("user", JSON.stringify(userCredentials));
-    navigate("/search");
+    navigate("/home");
   };
   const forgetPass = () => {
     console.log("olvide mi contrase;a");
