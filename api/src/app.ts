@@ -1,10 +1,7 @@
 import { envs } from "./config/envs.config";
 import { MongoDatabase } from "./data/mongo-database";
 import { AppRoutes } from "./routes/routes";
-
 import Server  from "./server/server";
-
-
 
 
 const main = async () => {
