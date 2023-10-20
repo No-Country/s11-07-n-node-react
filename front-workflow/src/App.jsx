@@ -14,37 +14,40 @@ import ProfessionalFilter from "./page/ProfessionalFilter";
 import { useEffect, useState } from "react";
 import { localUser } from "./store/UserSlice";
 import { useDispatch } from "react-redux";
+import PaymentMethods from "./page/PaymentMethods";
+import Pay from "./page/Pay";
+import NotPay from "./page/NotPay";
 
 function App() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [showFooter, setShowFooter] = useState(false);
 
-  useEffect(() => {
-    try {
-      // VERIFICAR SI ES LA PRIMERA VEZ EN ENTRAR A LA APLICACIÓN
-      let introStorage = JSON.parse(localStorage.getItem("introPage"));
-      if (introStorage) setShowFooter(true);
+  // useEffect(() => {
+  //   try {
+  //     // VERIFICAR SI ES LA PRIMERA VEZ EN ENTRAR A LA APLICACIÓN
+  //     let introStorage = JSON.parse(localStorage.getItem("introPage"));
+  //     if (introStorage) setShowFooter(true);
 
-      // VERIFICAR SI EL USUARIO ESTÁ LOGGEADO
-      let user = JSON.parse(localStorage.getItem("user"));
-      if (user) {
-        dispatch(localUser(user));
-      } else {
-        user = null;
-      }
+  //     // VERIFICAR SI EL USUARIO ESTÁ LOGGEADO
+  //     let user = JSON.parse(localStorage.getItem("user"));
+  //     if (user) {
+  //       dispatch(localUser(user));
+  //     } else {
+  //       user = null;
+  //     }
 
-      if (!introStorage) {
-        navigate("/onboarding");
-      } else if (introStorage && !user) {
-        navigate("/login");
-      } else if (introStorage && user) {
-        navigate("/home");
-      }
-    } catch (error) {
-      console.error(error);
-    }
-  }, [showFooter]);
+  //     if (!introStorage) {
+  //       navigate("/onboarding");
+  //     } else if (introStorage && !user) {
+  //       navigate("/login");
+  //     } else if (introStorage && user) {
+  //       navigate("/home");
+  //     }
+  //   } catch (error) {
+  //     console.error(error);
+  //   }
+  // }, [showFooter]);
 
   return (
     <>
@@ -61,6 +64,9 @@ function App() {
         <Route path="/professionalfilter" element={<ProfessionalFilter />} />
         <Route path="/editprofile" element={<EditProfile />} />
         <Route path="/profile" element={<Profile />} />
+        <Route path="/PaymentMethods" element={<PaymentMethods />} />
+        <Route path="/Pay" element={<Pay />} />
+        <Route path="/NotPay" element={<NotPay />} />
 
         <Route path="/*" element={<ErrorPage />} />
       </Routes>
