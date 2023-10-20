@@ -27,7 +27,6 @@ const Pay = () => {
    
   const handleCardNumberChange = (e) => {
     const input = e.target.value;
-    // Detectar el tipo de tarjeta (Visa, MasterCard, etc.) a partir de los primeros dígitos.
     if (/^4[0-9]{0,15}$/.test(input)) {
       setCardType('Visa');
     } else if (/^5[1-5][0-9]{0,14}$/.test(input)) {
@@ -39,18 +38,15 @@ const Pay = () => {
   };
 
   const handlePayment = () => {
-      // Realiza una validación simple del número de tarjeta y otros campos.
       if (
           /^\d{16}$/.test(cardNumber) &&
           cardHolderName &&
-          /^\d{2}-\d{2}$/.test(expiry) && // Cambio en la expresión regular
+          /^\d{2}-\d{2}$/.test(expiry) && 
           /^\d{3}$/.test(securityCode)
           ) {
             
-              // Aquí podrías realizar una acción simulada, como mostrar un mensaje de pago exitoso.
               setPaymentMessage('Pago exitoso');
             } else {
-                // Aquí mostrarías un mensaje de error si los datos no son válidos.
               setPaymentMessage('Por favor, ingrese todos los datos válidos');
             }
             setTimeout(() => {
