@@ -1,27 +1,23 @@
-import { envs } from "./config/envs.config";
-import { MongoDatabase } from "./data/mongo-database";
-import { AppRoutes } from "./routes/routes";
+import { envs } from './config/envs.config'
 
-import Server  from "./server/server";
+import { MongoDatabase } from './data/mongo-database'
+import { AppRoutes } from './routes/routes'
+import Server from './server/server'
 
+const main: () => Promise<void> = async () => {
+  await MongoDatabase.connect({
+    mongoUrl: envs.MONGO_URI,
+    dbName: envs.MONGO_DB_NAME
+  })
 
-
-
-const main = async () => {
-
-    await MongoDatabase.connect({
-        mongoUrl: envs.MONGO_URI,
-        dbName: envs.MONGO_DB_NAME,
-    })
-
-    new Server({
-       port: envs.PORT,
-       routes: AppRoutes.routes
-    }).start();
+  new Server({
+    port: envs.PORT,
+    routes: AppRoutes.routes
+  }).start()
 };
 
-
-
 (() => {
-    main();
-})();
+  main()
+    .then(() => { console.log('Server running') })
+    .catch(console.error)
+})()

@@ -1,24 +1,18 @@
-import {Request, Response} from 'express'
+// import { Request, Response } from 'express'
 
+// // Es un template de controlador usando clases en typescript
+// export class AuthControllerTemplate {
+//   constructor () {}
 
-// Es un template de controlador usando clases en typescript
-export class AuthControllerTemplate {
+//   registerUser = (req: Request, res: Response) => {
+//     res.json({
+//       msg: 'post register - controller'
+//     })
+//   }
 
-    constructor() {}
-
-    registerUser = (req: Request, res: Response) => {
-
-        res.json({
-            msg: 'post register - controller'
-        })
-    }
-    
-
-    loginUser = (req: Request, res: Response) => {
-
-        res.json({
-            msg: 'post login - controller'
-        })
-    }
-
-}
+//   loginUser = (req: Request, res: Response) => {
+//     res.json({
+//       msg: 'post login - controller'
+//     })
+//   }
+// }

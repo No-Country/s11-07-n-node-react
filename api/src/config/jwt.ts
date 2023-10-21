@@ -1,7 +1,5 @@
-
-
-import jwt from 'jsonwebtoken'
-import { envs } from './envs.config';
+// import jwt from 'jsonwebtoken'
+// import { envs } from './envs.config'
 
 // const JWT_SEED = envs.JWT_SEED;
 
@@ -21,7 +19,6 @@ import { envs } from './envs.config';
 //         })
 //     }
 
-
 //     static validatedToken<T>( token: string): Promise<T | null> {
 
 //         return new Promise((resolve) => {
@@ -31,7 +28,6 @@ import { envs } from './envs.config';
 //                 if( err ) return resolve(null);
 
 //                 resolve(decoded as T)
-
 
 //             })
 //         })
