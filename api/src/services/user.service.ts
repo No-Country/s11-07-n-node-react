@@ -19,7 +19,7 @@ export class EmailFoundedError {
 // }
 
 export class UserService {
-  // ! se agrego el response al metodo para manejar la respuesta httpde los errores
+  // ! se agrego el response al metodo para manejar la respuesta http de los errores
   // ! se cambio UserEntity por RegisterUserDto ya que este maneja la validacion de los datos del front y la del back la haremos con UserEntity
   async push (USER_DATA: RegisterUserDto, res: Response): Promise<UserEntity> {
     // *Para evitar instancias necesarias del modelo de usuario se valida si ya existe un usuario creado fuera del tryCatch
@@ -80,7 +80,10 @@ export class UserService {
 
       //  throw error;
       if (error instanceof UserDataError) {
-        throw error
+        res.status(error.statusCode).json({ error: error.message })
+      }
+      if (!(error instanceof UserDataError)) {
+        res.status(500).json({ error: 'Internal Server Error controlador' })
       }
     }
   }
