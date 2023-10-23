@@ -11,13 +11,14 @@ import { useNavigate } from "react-router-dom";
 import { logout } from "../../store/UserSlice";
 import { useDispatch } from "react-redux";
 
-const Profile = () => {
+const Profile = ({ setShowFooter }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const handleLogout = () => {
     dispatch(logout());
     navigate("/login");
     localStorage.removeItem("user");
+    setShowFooter(false);
   };
 
   return (
