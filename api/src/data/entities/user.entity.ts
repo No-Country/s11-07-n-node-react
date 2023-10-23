@@ -5,12 +5,11 @@
 export class UserEntity {
 
 constructor(
-    public id: string,
-    public name: string,
+    public first_name: string,
+    public last_name: string,
     public email: string,
     public password: string,
-    public roles?: string[],
-    public imgUrl?: string
+    public city: string
 ) {}
 
 }
