@@ -6,31 +6,55 @@ export class RegisterUserDto {
     public firstName: string,
     public lastName: string,
     public email: string,
-    public password: string,
-    public city?: string
+    public password: string
+
   ) {}
 
   static create (object: Record<string, unknown>): [string?, RegisterUserDto?] {
-    const { firstName, lastName, email, password } = object
+    const { firstName, lastName, email, password, roles, isActive, city } = object
+
+    const allowedProperties = ['firstName', 'lastName', 'email', 'password', 'roles', 'isActive', 'city']
+    for (const key in object) {
+      if (!allowedProperties.includes(key)) {
+        throw UserDataError.badRequest(`The field ${key} is not a user property`)
+      }
+    }
 
     if (typeof firstName !== 'string' || !Validators.isValidFirstName(firstName)) {
       throw UserDataError.badRequest('First Name is not valid')
-      // return ['First Name is not valid']
     }
 
     if (typeof lastName !== 'string' || !Validators.isValidLastName(lastName)) {
-      // return ['Last Name is not valid']
       throw UserDataError.badRequest('Last Name is not valid')
     }
 
     if (typeof email !== 'string' || !Validators.isValidEmail.test(email)) {
-      // return ['Email is not valid']
       throw UserDataError.badRequest('Email is not valid')
     }
 
     if (typeof password !== 'string' || !Validators.isValidPassword(password)!) {
-      // return ['Password too short or not valid']
       throw UserDataError.badRequest('Password too short or not valid')
+    }
+
+    // Validación de roles solo si se proporciona
+    if (roles !== undefined) {
+      if (!Array.isArray(roles) || !Validators.isValidRoles(roles)) {
+        throw UserDataError.badRequest('Roles is not valid')
+      }
+    }
+
+    // Validación de isActive solo si se proporciona
+    if (isActive !== undefined) {
+      if (typeof isActive !== 'boolean' || !Validators.isValidStatus(isActive)) {
+        throw UserDataError.badRequest('Status is not valid')
+      }
+    }
+
+    // Validación de city solo si se proporciona
+    if (city !== undefined && city !== '') {
+      if (typeof city !== 'string' || !Validators.isValidCity(city)) {
+        throw UserDataError.badRequest('City is not valid')
+      }
     }
 
     return [

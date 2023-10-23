@@ -1,3 +1,9 @@
+enum UserRole {
+  ADMIN = 'ADMIN',
+  USER = 'USER',
+  WORKER = 'WORKER',
+}
+
 export class Validators {
   static readonly isValidEmail: RegExp = /^[a-zA-Z0-9._\-%+]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/
 
@@ -10,14 +16,36 @@ export class Validators {
 
   static isValidFirstName (firstName: string): boolean {
     if (typeof firstName === 'string' && firstName !== null && firstName.trim() !== '') {
-      return /^[A-Za-z]{2,}$/.test(firstName)
+      return /^[A-Za-z ]{2,}$/.test(firstName)
     }
     return false
   }
 
   static isValidLastName (lastName: string): boolean {
     if (typeof lastName === 'string' && lastName !== null && lastName.trim() !== '') {
-      return /^[A-Za-z]{2,}$/.test(lastName)
+      return /^[A-Za-z ]{2,}$/.test(lastName)
+    }
+    return false
+  }
+
+  static isValidCity (city: string): boolean {
+    if (typeof city === 'string' && city !== null && city !== '') {
+      return /^[A-Za-z ]{2,}$/.test(city)
+    }
+    return false
+  }
+
+  static isValidRoles (roles: UserRole[]): boolean {
+    if (Array.isArray(roles) && roles.length > 0) {
+      // Verificar que todos los roles estén en el enum UserRole
+      return roles.every(role => Object.values(UserRole).includes(role))
+    }
+    return false
+  }
+
+  static isValidStatus (status: boolean): boolean {
+    if (typeof status === 'boolean') {
+      return true
     }
     return false
   }

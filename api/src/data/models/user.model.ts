@@ -24,8 +24,20 @@ const userSchema = new Schema({
     minlength: [8, 'The password must be at least 8 characters']
   },
 
+  roles: {
+    type: String,
+    default: 'USER',
+    enum: ['ADMIN', 'USER', 'WORKER']
+  },
+
+  isActive: {
+    type: Boolean,
+    default: true
+  },
+
   city: {
-    type: String
+    type: String,
+    default: ''
   }
 })
 

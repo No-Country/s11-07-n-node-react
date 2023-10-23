@@ -1,35 +1,34 @@
-// import jwt from 'jsonwebtoken'
-// import { envs } from './envs.config'
+import jwt from 'jsonwebtoken'
+import { envs } from './envs.config'
+import { Types } from 'mongoose'
 
-// const JWT_SEED = envs.JWT_SEED;
+const JWT_SEED = envs.JWT_SEED
+const JWT_EXPIRE = envs.JWT_EXPIRE
 
-// export class JwtAdapter {
+export interface Payload {
+  id: Types.ObjectId
+  email: string
+  roles: string[]
+};
 
-//     static async generateToken( payload: Object, duration: '2h'): Promise<string | null> {
+export class JwtAdapter {
+  static async generateToken (payload: Payload, duration: typeof JWT_EXPIRE): Promise<string | null> {
+    return await new Promise((resolve) => {
+      jwt.sign(payload, JWT_SEED, { expiresIn: duration }, (err, token) => {
+        if (err) { resolve(null); return }
 
-//         return new Promise((resolve) =>{
+        resolve(token!)
+      })
+    })
+  }
 
-//             jwt.sign(payload, JWT_SEED, { expiresIn: duration }, (err, token) => {
+  static async validatedToken<T>(token: string): Promise<T | null> {
+    return await new Promise((resolve) => {
+      jwt.verify(token, JWT_SEED, (err, decoded) => {
+        if (err) { resolve(null); return }
 
-//                 if( err ) return resolve( null );
-
-//                 resolve( token! );
-
-//             })
-//         })
-//     }
-
-//     static validatedToken<T>( token: string): Promise<T | null> {
-
-//         return new Promise((resolve) => {
-
-//             jwt.verify(token, JWT_SEED, (err, decoded) => {
-
-//                 if( err ) return resolve(null);
-
-//                 resolve(decoded as T)
-
-//             })
-//         })
-//     }
-// }
+        resolve(decoded as T)
+      })
+    })
+  }
+}
