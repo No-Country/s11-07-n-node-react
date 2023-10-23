@@ -23,7 +23,6 @@ const SearchPage = () => {
           style={inputStyle}
         />
       </div>
-      <Footer />
     </div>
   );
 };

@@ -7,7 +7,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { localUser } from "../../store/UserSlice";
 import { useDispatch } from "react-redux";
 
-const LoginForm = () => {
+const LoginForm = ({ setShowFooter }) => {
   const { register, handleSubmit, reset } = useForm();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -26,6 +26,7 @@ const LoginForm = () => {
     setPassword("");
     localStorage.setItem("user", JSON.stringify(userCredentials));
     navigate("/home");
+    setShowFooter(true);
   };
   const forgetPass = () => {
     console.log("olvide mi contrase;a");
