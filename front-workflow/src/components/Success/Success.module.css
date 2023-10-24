@@ -1,0 +1,21 @@
+.success{
+    width: 100px;
+    height: 100px;
+    margin: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: url("../../pictures/Success_icon.png");
+    background-position: 0 -839px;
+    animation: success 1.5s steps(10) ;
+    border: none;
+}
+
+@keyframes success{
+    0%{
+        background-position: 0 0;
+    }
+    100%{
+        background-position: 0 -932px;
+    }
+}

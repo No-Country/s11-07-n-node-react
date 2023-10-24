@@ -7,7 +7,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { localUser } from "../../store/UserSlice";
 import { useDispatch } from "react-redux";
 
-const LoginForm = () => {
+const LoginForm = ({ setShowFooter }) => {
   const { register, handleSubmit, reset } = useForm();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -16,7 +16,6 @@ const LoginForm = () => {
 
   const submit = (e) => {
     e.preventDefault();
-    console.log(email, password);
 
     let userCredentials = {
       username: email,
@@ -26,7 +25,8 @@ const LoginForm = () => {
     setEmail("");
     setPassword("");
     localStorage.setItem("user", JSON.stringify(userCredentials));
-    navigate("/search");
+    navigate("/home");
+    setShowFooter(true);
   };
   const forgetPass = () => {
     console.log("olvide mi contrase;a");

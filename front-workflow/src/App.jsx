@@ -1,4 +1,7 @@
 import Footer from "./components/Footer/Footer";
+import Directions from "./components/Profile/Directions";
+import EditProfile from "./components/Profile/editProfile";
+import Profile from "./components/Profile/profile";
 import { Routes, Route, useNavigate } from "react-router-dom";
 import LoginForm from "./components/login/LoginForm";
 import LoginRegister from "./components/login/LoginRegister";
@@ -8,14 +11,17 @@ import IntroCarousel from "./page/IntroCarousel";
 import ErrorPage from "./page/ErrorPage";
 import Address from "./page/Address";
 import ProfessionalFilter from "./page/ProfessionalFilter";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { localUser } from "./store/UserSlice";
 import { useDispatch } from "react-redux";
-
+import PaymentMethods from "./page/PaymentMethods";
+import Pay from "./page/Pay";
+import NotPay from "./page/NotPay";
 
 function App() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const [showFooter, setShowFooter] = useState(false);
 
   useEffect(() => {
     try {
@@ -34,29 +40,41 @@ function App() {
       } else if (introStorage && !user) {
         navigate("/login");
       } else if (introStorage && user) {
-        navigate("/search");
+        // navigate("/home");
       }
     } catch (error) {
       console.error(error);
     }
-  }, []);
+  }, [showFooter]);
 
   return (
     <>
       <Routes>
         <Route path="/onboarding" element={<IntroCarousel />} />
-        {/* <Route path="/intro" element={<IntroCarousel />} /> */}
 
-        <Route path="/" element={<Home />} />
-        {/* <Route path="/login" element={<Login />} /> */}
+        <Route path="/home" element={<Home />} />
 
-        <Route path="/login" element={<LoginForm />} />
+        <Route
+          path="/login"
+          element={<LoginForm setShowFooter={setShowFooter} />}
+        />
         <Route path="/register" element={<LoginRegister />} />
         <Route path="/search" element={<SearchPage />} />
         <Route path="/address" element={<Address />} />
+        {/* <Route path="/address" element={<Directions />} /> */}
+        <Route path="/professionalfilter" element={<ProfessionalFilter />} />
+        <Route path="/editprofile" element={<EditProfile />} />
+        <Route
+          path="/profile"
+          element={<Profile setShowFooter={setShowFooter} />}
+        />
+        <Route path="/PaymentMethods" element={<PaymentMethods />} />
+        <Route path="/Pay" element={<Pay />} />
+        <Route path="/NotPay" element={<NotPay />} />
+
         <Route path="/*" element={<ErrorPage />} />
-        <Route path="/professionalfilter" element={<ProfessionalFilter/>}  />
       </Routes>
+      {showFooter && <Footer />}
     </>
   );
 }

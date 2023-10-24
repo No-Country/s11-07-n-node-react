@@ -23,8 +23,6 @@ const SearchPage = () => {
           style={inputStyle}
         />
       </div>
-      {/* <Link to="/address">address</Link> */}
-      <Footer />
     </div>
   );
 };
