@@ -1,8 +1,7 @@
 import { Router } from 'express'
 import { UserRoute } from './user/user.route'
 import { AuthRoutes } from './auth/auth.routes'
-import swaggerUi from 'swagger-ui-express'
-import swaggerSpec from '../config/swagger'
+import { StripeRoute } from './stripe/stripe.route'
 
 export class AppRoutes {
   static get routes (): Router {
@@ -10,7 +9,7 @@ export class AppRoutes {
 
     router.use('/api/v1', UserRoute.routes)
     router.use('/api/v1', AuthRoutes.routes)
-    // router.use('/apiv1/docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec))
+    router.use('/api/v1', StripeRoute.routes)
 
     return router
   }

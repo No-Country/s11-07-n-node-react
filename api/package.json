@@ -3,14 +3,11 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "engines": {
-    "node": ">=18.17.0 <18.1.0"
-  },
   "scripts": {
     "test": "jest --coverage --detectOpenHandles",
-    "dev": "tsnd --respawn --clear /src/app.ts",
-    "build": "rimraf ./api/dist && tsc",
-    "start": "npm run build && node ./api/dist/src/app.js",
+    "dev": "tsnd --respawn --clear src/app.ts",
+    "build": "rimraf ./dist && tsc",
+    "start": "npm run build && node dist/src/app.js",
     "lint": "eslint --ignore-path .gitignore --ext .ts src/",
     "lint:fix": "npm run lint -- --fix",
     "start:dev": "nodemon --exec ts-node src/app.ts"
@@ -57,6 +54,7 @@
     "express-validator": "^7.0.1",
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^7.6.1",
+    "stripe": "^14.1.0",
     "swagger-jsdoc": "^6.2.8",
     "swagger-ui-express": "^5.0.0"
   },
