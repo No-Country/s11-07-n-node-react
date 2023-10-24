@@ -29,7 +29,6 @@ function App() {
       } else {
         user = null;
       }
-
       if (!introStorage) {
         navigate("/onboarding");
       } else if (introStorage && !user) {
