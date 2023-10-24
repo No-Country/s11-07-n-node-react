@@ -17,37 +17,35 @@ import { useDispatch } from "react-redux";
 import PaymentMethods from "./page/PaymentMethods";
 import Pay from "./page/Pay";
 import NotPay from "./page/NotPay";
-
+import Notification from './components/Notifications/Notification'
 function App() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [showFooter, setShowFooter] = useState(false);
 
-  // useEffect(() => {
-  //   try {
-  //     // VERIFICAR SI ES LA PRIMERA VEZ EN ENTRAR A LA APLICACIÓN
-  //     let introStorage = JSON.parse(localStorage.getItem("introPage"));
-  //     if (introStorage) setShowFooter(true);
+  useEffect(() => {
+    try {
+      // VERIFICAR SI ES LA PRIMERA VEZ EN ENTRAR A LA APLICACIÓN
+      let introStorage = JSON.parse(localStorage.getItem("introPage"));
 
-  //     // VERIFICAR SI EL USUARIO ESTÁ LOGGEADO
-  //     let user = JSON.parse(localStorage.getItem("user"));
-  //     if (user) {
-  //       dispatch(localUser(user));
-  //     } else {
-  //       user = null;
-  //     }
-
-  //     if (!introStorage) {
-  //       navigate("/onboarding");
-  //     } else if (introStorage && !user) {
-  //       navigate("/login");
-  //     } else if (introStorage && user) {
-  //       navigate("/home");
-  //     }
-  //   } catch (error) {
-  //     console.error(error);
-  //   }
-  // }, [showFooter]);
+      // VERIFICAR SI EL USUARIO ESTÁ LOGGEADO
+      let user = JSON.parse(localStorage.getItem("user"));
+      if (user) {
+        dispatch(localUser(user));
+      } else {
+        user = null;
+      }
+      if (!introStorage) {
+        navigate("/onboarding");
+      } else if (introStorage && !user) {
+        navigate("/login");
+      } else if (introStorage && user) {
+        // navigate("/home");
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  }, [showFooter]);
 
   return (
     <>
@@ -56,14 +54,21 @@ function App() {
 
         <Route path="/home" element={<Home />} />
 
-        <Route path="/login" element={<LoginForm />} />
+        <Route
+          path="/login"
+          element={<LoginForm setShowFooter={setShowFooter} />}
+        />
         <Route path="/register" element={<LoginRegister />} />
         <Route path="/search" element={<SearchPage />} />
         <Route path="/address" element={<Address />} />
+        <Route path="/noti" element={<Notification/>} />
         {/* <Route path="/address" element={<Directions />} /> */}
         <Route path="/professionalfilter" element={<ProfessionalFilter />} />
         <Route path="/editprofile" element={<EditProfile />} />
-        <Route path="/profile" element={<Profile />} />
+        <Route
+          path="/profile"
+          element={<Profile setShowFooter={setShowFooter} />}
+        />
         <Route path="/PaymentMethods" element={<PaymentMethods />} />
         <Route path="/Pay" element={<Pay />} />
         <Route path="/NotPay" element={<NotPay />} />
