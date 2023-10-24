@@ -1,61 +1,95 @@
-import { BcryptAdapter } from "../config/bcrypt";
-import { EmailInvalidError, EmailValidator, PasswordInvalid, PasswordValidator } from "../config/validators";
-import { UserEntity } from "../data/entities/user.entity";
-import { UserModel } from "../data/models/user.model"
-
-export class EmailFoundedError {
-   message: string = 'Error registering. Contact administration'
-}
-
-export class UserDataError {
-   message: string;
-   constructor(message: string) {
-      this.message = message;
-   }
-}
+import { Types } from 'mongoose'
+import { BcryptAdapter } from '../config/bcrypt'
+import { UserDataError } from '../config/handlerErrors'
+import { UserEntity } from '../data/entities/user.entity'
+import { UserModel } from '../data/models/user.model'
+import { RegisterUserDto } from '../data/dtos/create-user.dto'
+import { UpdateUserDto } from '../data/dtos/update-user.dto'
 
 export class UserService {
-   async push(user_data: UserEntity) {
+  async push (USER_DATA: RegisterUserDto): Promise<UserEntity | undefined> {
+    const { firstName, lastName, email, password, ...data } = USER_DATA
 
-      try {
-         EmailValidator.raises_an_error_if_email_invalid(user_data.email);
-         PasswordValidator.raises_an_error_if_password_invalid(user_data.password);
-         
-         user_data.password = BcryptAdapter.hash(user_data.password)
+    try {
+      const newUser = await UserModel.create({
+        firstName,
+        lastName,
+        email,
+        password: BcryptAdapter.hash(USER_DATA.password),
+        data
+      })
+      await newUser.save()
+      return newUser.toObject() as UserEntity
+    } catch (error: unknown) {
+      if (error instanceof UserDataError) {
+        throw error
+      }
+      throw UserDataError.internalServer()
+    }
+  }
 
-         let user = new UserModel(user_data)
-         await user.save();
+  async findAllUsers (): Promise<UserEntity[]> {
+    try {
+      const users = await UserModel.find().exec()
+      return users.map(user => user.toObject()) as UserEntity[]
+    } catch (error: unknown) {
+      if (error instanceof UserDataError) {
+        throw error
+      }
+      throw UserDataError.internalServer()
+    }
+  }
 
-         console.info('>> INFO. USUARIO CREADO CON EL EMAIL', user_data.email)
+  async findUserById (id: string): Promise<UserEntity> {
+    UserDataError.handleCommonErrors(!Types.ObjectId.isValid(id), 'Invalid ObjectId')
+    try {
+      const user = await UserModel.findById(id).exec()
 
-      } catch (error: any) {
-         const date = new Date();
-         let message = `>> LOG ${date.toISOString()}\n\t${JSON.stringify(user_data)}\n`
-
-         if( error instanceof EmailInvalidError || error instanceof PasswordInvalid ) {
-            console.log( message.concat( error.message ) )
-            throw error
-         }
-
-         if (!Object.keys(error).includes('errors')) {
-            const email_error = new EmailFoundedError()
-            console.log( message.concat( email_error.message ) )
-            throw email_error;
-         }
-
-         if (Object.keys(error).includes('errors')) {
-            const property = Object.keys(error.errors).pop() || '__prototype'
-            const user_data_error = error.errors[property].properties.message
-            console.log( message.concat( user_data_error ) )
-            throw new UserDataError(user_data_error)
-         }
-
-         console.log( error );
-
-         throw error;
+      if (user === null) {
+        throw UserDataError.badRequest('User not found')
       }
 
-   }
+      return user.toObject() as UserEntity
+    } catch (error: unknown) {
+      if (error instanceof UserDataError) {
+        throw error
+      }
+      throw UserDataError.internalServer()
+    }
+  }
 
+  async updateUser (id: string, DATA_USER: UpdateUserDto): Promise<UserEntity> {
+    UserDataError.handleCommonErrors(!Types.ObjectId.isValid(id), 'Invalid ObjectId')
+    try {
+      const user = await UserModel.findByIdAndUpdate(id, DATA_USER, { new: true }).exec()
+
+      if (user === null) {
+        throw UserDataError.badRequest('User not found')
+      }
+
+      return user.toObject() as UserEntity
+    } catch (error) {
+      if (error instanceof UserDataError) {
+        throw error
+      }
+      throw UserDataError.internalServer()
+    }
+  }
+
+  async deleteUser (id: string): Promise<void> {
+    try {
+      UserDataError.handleCommonErrors(!Types.ObjectId.isValid(id), 'Invalid ObjectId')
+
+      const user = await UserModel.findByIdAndDelete(id).exec()
+
+      if (user === null) {
+        throw UserDataError.badRequest('User not found')
+      }
+    } catch (error) {
+      if (error instanceof UserDataError) {
+        throw error
+      }
+      throw UserDataError.internalServer()
+    }
+  }
 }
-

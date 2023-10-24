@@ -1,15 +1,17 @@
+// enum UserRole {
+//   ADMIN = 'ADMIN',
+//   USER = 'USER',
+//   WORKER = 'WORKER',
+// }
 
-
-
-// Template de base para entidad de usuario
 export class UserEntity {
-
-constructor(
-    public first_name: string,
-    public last_name: string,
+  constructor (
+    public firstName: string,
+    public lastName: string,
     public email: string,
     public password: string,
-    public city: string
-) {}
-
+    public roles?: [string],
+    public isActive?: boolean,
+    public city?: string
+  ) {}
 }

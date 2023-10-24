@@ -1,33 +1,52 @@
-
+enum UserRole {
+  ADMIN = 'ADMIN',
+  USER = 'USER',
+  WORKER = 'WORKER',
+}
 
 export class Validators {
+  static readonly isValidEmail: RegExp = /^[a-zA-Z0-9._\-%+]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/
 
-    static get email() {
-        return /^[a-zA-Z0-9._\-%+]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-
+  static isValidPassword (password: string): boolean {
+    if (typeof password === 'string' && password !== null && password.trim() !== '') {
+      return /^.{8,16}$/.test(password)
     }
+    return false
+  }
 
-}
-
-
-export class EmailValidator {
-    static raises_an_error_if_email_invalid(email: string) {
-        if (Validators.email.test(email) === false)
-            throw new EmailInvalidError();
+  static isValidFirstName (firstName: string): boolean {
+    if (typeof firstName === 'string' && firstName !== null && firstName.trim() !== '') {
+      return /^[A-Za-z ]{2,}$/.test(firstName)
     }
-}
+    return false
+  }
 
-export class PasswordValidator {
-    static raises_an_error_if_password_invalid( password: string ) {
-        if (8 > password.length)
-            throw new PasswordInvalid();
+  static isValidLastName (lastName: string): boolean {
+    if (typeof lastName === 'string' && lastName !== null && lastName.trim() !== '') {
+      return /^[A-Za-z ]{2,}$/.test(lastName)
     }
-}
+    return false
+  }
 
-export class PasswordInvalid {
-    message: string = 'Invalid password'
-}
+  static isValidCity (city: string): boolean {
+    if (typeof city === 'string' && city !== null && city !== '') {
+      return /^[A-Za-z ]{2,}$/.test(city)
+    }
+    return false
+  }
 
-export class EmailInvalidError {
-    message: string = "Invalid email format"
+  static isValidRoles (roles: UserRole[]): boolean {
+    if (Array.isArray(roles) && roles.length > 0) {
+      // Verificar que todos los roles estén en el enum UserRole
+      return roles.every(role => Object.values(UserRole).includes(role))
+    }
+    return false
+  }
+
+  static isValidStatus (status: boolean): boolean {
+    if (typeof status === 'boolean') {
+      return true
+    }
+    return false
+  }
 }

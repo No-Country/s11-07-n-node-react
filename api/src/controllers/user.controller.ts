@@ -1,31 +1,63 @@
-import { Request, Response } from 'express';
-import { UserService, EmailFoundedError, UserDataError } from "../services/user.service";
-import { UserEntity } from '../data/entities/user.entity';
-import { EmailInvalidError, PasswordInvalid } from '../config/validators';
+import { Request, Response } from 'express'
+import { UserService } from '../services/user.service'
+import { UserDataError } from '../config/handlerErrors'
+import { UpdateUserDto } from '../data/dtos/update-user.dto'
 
 export class UserController {
-   async create(req: Request, res: Response) {
-      const { first_name, last_name, email, password, city } = req.body
-
-      try {
-         const user_entity = new UserEntity(first_name, last_name, email, password, city)
-         const users = new UserService()
-         await users.push( user_entity )
-
-         return res.status(201).json({ message: `User created` })
-
-      } catch (error: any) {
-         if (error instanceof EmailFoundedError ||
-            error instanceof UserDataError ||
-            error instanceof EmailInvalidError ||
-            error instanceof PasswordInvalid) {
-
-            return res.status(400).json({
-               message: error.message
-            })
-         }
-
-         res.status( 404 ).json( {message: error.message })
+  async getAllUsers (req: Request, res: Response): Promise<void> {
+    try {
+      const users = await new UserService().findAllUsers()
+      res.status(200).json({ users })
+    } catch (error) {
+      if (error instanceof UserDataError) {
+        res.status(error.statusCode).json({ error: error.message })
       }
-   }
+      if (!(error instanceof UserDataError)) {
+        res.status(500).json({ error: 'Internal Server Error' })
+      }
+    }
+  }
+
+  async getUserById (req: Request, res: Response): Promise<void> {
+    try {
+      const user = await new UserService().findUserById(req.params.id)
+      res.status(200).json({ user })
+    } catch (error) {
+      if (error instanceof UserDataError) {
+        res.status(error.statusCode).json({ error: error.message })
+      }
+      if (!(error instanceof UserDataError)) {
+        res.status(500).json({ error: 'Internal Server Error controlador' })
+      }
+    }
+  }
+
+  async updateUser (req: Request, res: Response): Promise<void> {
+    try {
+      const [, USER_DATA] = UpdateUserDto.updateUser(req.body)
+      const user = await new UserService().updateUser(req.params.id, USER_DATA!)
+      res.status(201).json({ user })
+    } catch (error) {
+      if (error instanceof UserDataError) {
+        res.status(error.statusCode).json({ error: error.message })
+      }
+      if (!(error instanceof UserDataError)) {
+        res.status(500).json({ error: 'Internal Server Error controlador' })
+      }
+    }
+  }
+
+  async deleteUser (req: Request, res: Response): Promise<void> {
+    try {
+      await new UserService().deleteUser(req.params.id)
+      res.status(200).json({ message: 'User deleted' })
+    } catch (error) {
+      if (error instanceof UserDataError) {
+        res.status(error.statusCode).json({ error: error.message })
+      }
+      if (!(error instanceof UserDataError)) {
+        res.status(500).json({ error: 'Internal Server Error controlador' })
+      }
+    }
+  }
 }
