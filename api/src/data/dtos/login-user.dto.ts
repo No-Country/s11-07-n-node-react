@@ -10,12 +10,19 @@ export class LoginUserDto {
   static login (object: Record<string, unknown>): [string?, LoginUserDto?] {
     const { email, password } = object
 
+    const allowedProperties = ['email', 'password']
+    for (const key in object) {
+      if (!allowedProperties.includes(key)) {
+        throw UserDataError.badRequest(`The field ${key} is not a login user property`)
+      }
+    }
+
     if (typeof email !== 'string' || !Validators.isValidEmail.test(email)) {
-      throw UserDataError.badRequest('Email is not valid')
+      throw UserDataError.badRequest('Credentials not valid')
     }
 
     if (typeof password !== 'string' || !Validators.isValidPassword(password)!) {
-      throw UserDataError.badRequest('Password too short or not valid')
+      throw UserDataError.badRequest('Credentials not valid')
     }
 
     return [

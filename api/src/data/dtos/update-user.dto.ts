@@ -3,6 +3,10 @@ import { Validators } from '../../config/validators'
 
 export class UpdateUserDto {
   private constructor (
+    public firstName?: string,
+    public city?: string,
+    public lastName?: string,
+    public password?: string
 
   ) {}
 
@@ -40,7 +44,7 @@ export class UpdateUserDto {
 
     return [
       undefined,
-      new UpdateUserDto()
+      new UpdateUserDto(firstName, city, lastName, password)
     ]
   }
 }
