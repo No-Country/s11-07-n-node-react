@@ -8,9 +8,9 @@
   },
   "scripts": {
     "test": "jest --coverage --detectOpenHandles",
-    "dev": "tsnd --respawn --clear src/app.ts",
-    "build": "rimraf dist && tsc",
-    "start": "npm run build && node dist/src/app.js",
+    "dev": "tsnd --respawn --clear /src/app.ts",
+    "build": "rimraf ./api/dist && tsc",
+    "start": "npm run build && node ./api/dist/src/app.js",
     "lint": "eslint --ignore-path .gitignore --ext .ts src/",
     "lint:fix": "npm run lint -- --fix",
     "start:dev": "nodemon --exec ts-node src/app.ts"
