@@ -6,12 +6,10 @@ import { UserService } from '../services/user.service'
 import { RegisterUserDto } from '../data/dtos/create-user.dto'
 
 export class AuthController {
-  async create (req: Request, res: Response): Promise<void> {
-    const user = new UserService()
-
+  async registerUser (req: Request, res: Response): Promise<void> {
     try {
       const [, USER_DATA] = RegisterUserDto.create(req.body)
-
+      const user = new UserService()
       await user.push(USER_DATA!)
 
       res.status(201).json({ message: 'User created' })

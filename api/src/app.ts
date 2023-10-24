@@ -1,5 +1,4 @@
 import { envs } from './config/envs.config'
-
 import { MongoDatabase } from './data/mongo-database'
 import { AppRoutes } from './routes/routes'
 import Server from './server/server'
@@ -18,6 +17,6 @@ const main: () => Promise<void> = async () => {
 
 (() => {
   main()
-    .then(() => { console.log('Server running') })
+    .then(() => { })
     .catch(console.error)
 })()

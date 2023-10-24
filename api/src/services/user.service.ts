@@ -10,6 +10,7 @@ export class UserService {
   async push (USER_DATA: RegisterUserDto): Promise<UserEntity | undefined> {
     const { firstName, lastName, email, password, ...data } = USER_DATA
 
+    await this.findUserByEmail(email)
     try {
       const newUser = await UserModel.create({
         firstName,
@@ -40,6 +41,21 @@ export class UserService {
     }
   }
 
+  async findUserByEmail (email: string): Promise<boolean> {
+    try {
+      const user = await UserModel.findOne({ email })
+      if (user === null) {
+        return true
+      }
+      throw UserDataError.badRequest('Email already exists')
+    } catch (error: unknown) {
+      if (error instanceof UserDataError) {
+        throw error
+      }
+      throw UserDataError.internalServer()
+    }
+  }
+
   async findUserById (id: string): Promise<UserEntity> {
     UserDataError.handleCommonErrors(!Types.ObjectId.isValid(id), 'Invalid ObjectId')
     try {
@@ -60,6 +76,7 @@ export class UserService {
 
   async updateUser (id: string, DATA_USER: UpdateUserDto): Promise<UserEntity> {
     UserDataError.handleCommonErrors(!Types.ObjectId.isValid(id), 'Invalid ObjectId')
+
     try {
       const user = await UserModel.findByIdAndUpdate(id, DATA_USER, { new: true }).exec()
 
@@ -67,6 +84,7 @@ export class UserService {
         throw UserDataError.badRequest('User not found')
       }
 
+      await user.save()
       return user.toObject() as UserEntity
     } catch (error) {
       if (error instanceof UserDataError) {

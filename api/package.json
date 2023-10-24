@@ -7,7 +7,7 @@
     "test": "jest --coverage --detectOpenHandles",
     "dev": "tsnd --respawn --clear src/app.ts",
     "build": "rimraf ./dist && tsc",
-    "start": "npm run build && node dist/app.js",
+    "start": "npm run build && node dist/src/app.js",
     "lint": "eslint --ignore-path .gitignore --ext .ts src/",
     "lint:fix": "npm run lint -- --fix",
     "start:dev": "nodemon --exec ts-node src/app.ts"
@@ -23,6 +23,8 @@
     "@types/jest": "^29.5.5",
     "@types/node": "^20.8.4",
     "@types/supertest": "^2.0.14",
+    "@types/swagger-jsdoc": "^6.0.2",
+    "@types/swagger-ui-express": "^4.1.5",
     "@typescript-eslint/eslint-plugin": "^6.8.0",
     "@typescript-eslint/parser": "^6.7.5",
     "eslint": "^8.51.0",
@@ -35,6 +37,7 @@
     "nodemon": "^3.0.1",
     "rimraf": "^5.0.5",
     "supertest": "^6.3.3",
+    "swagger-spec-validator": "^5.0.0",
     "ts-jest": "^29.1.1",
     "ts-node": "^10.9.1",
     "ts-node-dev": "^2.0.0",
@@ -50,7 +53,9 @@
     "express": "^4.18.2",
     "express-validator": "^7.0.1",
     "jsonwebtoken": "^9.0.2",
-    "mongoose": "^7.6.1"
+    "mongoose": "^7.6.1",
+    "swagger-jsdoc": "^6.2.8",
+    "swagger-ui-express": "^5.0.0"
   },
   "ts-standard": {
     "ignore": [

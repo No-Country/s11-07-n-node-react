@@ -16,21 +16,23 @@ export class Validators {
 
   static isValidFirstName (firstName: string): boolean {
     if (typeof firstName === 'string' && firstName !== null && firstName.trim() !== '') {
-      return /^[A-Za-z ]{2,}$/.test(firstName)
+      // La expresión regular permite letras (mayúsculas y minúsculas), espacios y letras con acentos.
+      return /^[A-Za-zÁáÉéÍíÓóÚúÜüÑñ ]{2,}$/.test(firstName)
     }
     return false
   }
 
   static isValidLastName (lastName: string): boolean {
     if (typeof lastName === 'string' && lastName !== null && lastName.trim() !== '') {
-      return /^[A-Za-z ]{2,}$/.test(lastName)
+      // La expresión regular permite letras (mayúsculas y minúsculas), espacios y letras con acentos.
+      return /^[A-Za-zÁáÉéÍíÓóÚúÜüÑñ ]{2,}$/.test(lastName)
     }
     return false
   }
 
   static isValidCity (city: string): boolean {
     if (typeof city === 'string' && city !== null && city !== '') {
-      return /^[A-Za-z ]{2,}$/.test(city)
+      return /^[A-Za-z0-9\s!"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~]{2,}$/.test(city)
     }
     return false
   }

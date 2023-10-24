@@ -2,6 +2,8 @@ import express, { Application, Router } from 'express'
 import cors from 'cors'
 import { NextFunction, type Request, type Response } from 'express'
 import { UserDataError } from '../config/handlerErrors'
+import swaggerUi from 'swagger-ui-express'
+import swaggerSpec from '../config/swagger'
 
 export interface Options {
   port?: number
@@ -17,6 +19,7 @@ export default class Server {
     const { port = 3300, routes } = options
     this.port = port
     this.routes = routes
+    this.setupSwaggerDocs()
   }
 
   middlewares (): void {
@@ -30,6 +33,16 @@ export default class Server {
         res.status(500).json({ error: 'Internal Server Error' })
       }
     })
+  }
+
+  private setupSwaggerDocs (): void {
+    this.app.use('/api/v1/docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec))
+    this.app.get('/api/v1/docs.json', (req, res) => {
+      res.setHeader('Content-Type', 'application/json')
+      res.send(swaggerSpec)
+    })
+
+    console.log(`Version 1 Docs available at http://localhost:${this.port}/api/v1/docs`)
   }
 
   start (): void {

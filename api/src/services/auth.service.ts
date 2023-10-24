@@ -8,12 +8,6 @@ import { LoginUserDto } from '../data/dtos/login-user.dto'
 import { JwtAdapter, Payload } from '../config/jwt'
 import { envs } from '../config/envs.config'
 
-const userData = {
-  userId: '123',
-  email: 'usuario@example.com',
-  roles: ['user', 'admin']
-}
-
 type HashFunction = (password: string) => string
 type MatchPasswordFucntion = (password: string, passHash: string) => boolean
 
@@ -25,25 +19,9 @@ export class AuthService {
 
   ) {}
 
-  async register (USER_DATA: RegisterUserDto): Promise<UserEntity | undefined> {
-    const { email } = USER_DATA
-
-    const emailExists = await UserModel.findOne({ email })
-
-    if (emailExists !== null) {
-      throw UserDataError.badRequest('Email already exists')
-    }
-
-    const newUser = new UserService()
-
-    try {
-      return await newUser.push(USER_DATA)
-    } catch (error: unknown) {
-      if (error instanceof UserDataError) {
-        throw error
-      }
-      throw UserDataError.internalServer()
-    }
+  async register (USER_DATA: RegisterUserDto): Promise<UserEntity > {
+    const newUser = await new UserService().push(USER_DATA)
+    return newUser as UserEntity
   }
 
   async login (loginUserDto: LoginUserDto): Promise<string> {
@@ -60,11 +38,10 @@ export class AuthService {
       if (!isPasswordValid) {
         throw UserDataError.unauthorized('Invalid credentials')
       }
-
       const token = JwtAdapter.generateToken({
         id: user._id,
         email: user.email,
-        roles: userData.roles
+        roles: [user.roles]
       }, envs.JWT_EXPIRE)
 
       // 4. Devolver el token
