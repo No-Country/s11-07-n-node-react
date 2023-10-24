@@ -10,7 +10,8 @@ const swaggerSpec = {
       description: 'Documentación de la API de Work Flow mongoDB'
     },
     servers: [
-      { url: 'http://localhost:3000/api/v1' }
+      { url: 'http://localhost:3000/api/v1' },
+      { url: 'https://work-flow-mongodb.herokuapp.com/api/v1' }
     ]
   },
   apis: ['./src/routes/*.ts', './src/routes/**/*.ts', './src/routes/**/**/*.ts'

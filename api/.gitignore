@@ -4,6 +4,7 @@ node_modules/
 mongo/
 .env
 *.txt
+swagger.js
 
 # Logs
 logs
