@@ -5,6 +5,7 @@ mongo/
 .env
 *.txt
 swagger.js
+/client
 
 # Logs
 logs
