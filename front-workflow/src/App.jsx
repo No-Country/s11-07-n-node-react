@@ -22,6 +22,7 @@ import { loadStripe } from '@stripe/stripe-js';
 
 const stripePromise = loadStripe('pk_test_51O4gkgD3YXfw7A9OCrcmMR7KH5RB0lHjigzLXqtap7qigk2Le0kh9Q0OGTjSaYpdSTRTcJS1yIFA9jIVML956B9O00NqWfPeG6');
 
+import Notification from './components/Notifications/Notification'
 function App() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -39,7 +40,6 @@ function App() {
       } else {
         user = null;
       }
-
       if (!introStorage) {
         navigate("/onboarding");
       } else if (introStorage && !user) {
@@ -66,6 +66,7 @@ function App() {
         <Route path="/register" element={<LoginRegister />} />
         <Route path="/search" element={<SearchPage />} />
         <Route path="/address" element={<Address />} />
+        <Route path="/noti" element={<Notification/>} />
         {/* <Route path="/address" element={<Directions />} /> */}
         <Route path="/professionalfilter" element={<ProfessionalFilter />} />
         <Route path="/editprofile" element={<EditProfile />} />

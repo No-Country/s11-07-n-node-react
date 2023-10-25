@@ -24,3 +24,6 @@ body {
 }
 .orderDataCart{@apply flex items-center  px-2 }
 
+.m{
+  border:1px solid red;
+}
