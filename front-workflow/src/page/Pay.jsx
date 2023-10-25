@@ -1,152 +1,90 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { CardElement, useStripe, useElements } from '@stripe/react-stripe-js';
 import ImagenTop from '../assets/ImagenTop.png';
-import card from '../assets/card.jpg';
-import calendar from '../assets/calendar.jpg';
-import code from '../assets/code.jpg';
-import { Link } from 'react-router-dom';
-import Footer from '../components/Footer/Footer';
+import { loadStripe } from '@stripe/stripe-js';
+
 
 const Pay = () => {
-  const [cardNumber, setCardNumber] = useState('');
-  const [cardType, setCardType] = useState('');
-  const [cardHolderName, setCardHolderName] = useState('');
-  const [expiry, setExpiry] = useState('');
-  const [securityCode, setSecurityCode] = useState('');
-  const [cancellationMessage, setCancellationMessage] = useState('');
-  const [paymentMessage, setPaymentMessage] = useState('');
+  const [clientSecret, setClientSecret] = useState('');
+  const stripe = useStripe();
+  const elements = useElements();
+  const [cancelMessage, setCancelMessage] = useState('');
+
+  useEffect(() => {
+    const stripePromise = loadStripe('pk_test_51O4gkgD3YXfw7A9OCrcmMR7KH5RB0lHjigzLXqtap7qigk2Le0kh9Q0OGTjSaYpdSTRTcJS1yIFA9jIVML956B9O00NqWfPeG6');
+
+    
+    stripePromise.then((stripe) => {
+      
+      stripe.paymentIntents.create({
+        amount: 1000, 
+        currency: 'USD', 
+      }).then((data) => {
+        setClientSecret(data.client_secret);
+      });
+    });
+  }, []);
 
   const handleCancel = () => {
-    setCancellationMessage('Proceso de pago cancelado');
+    setCancelMessage('Cancelando proceso de pago...');
 
     setTimeout(() => {
-        setCancellationMessage('');
-        window.location.href = '/PaymentMethods';
-      }, 1000);
-    };
-
-   
-  const handleCardNumberChange = (e) => {
-    const input = e.target.value;
-    if (/^4[0-9]{0,15}$/.test(input)) {
-      setCardType('Visa');
-    } else if (/^5[1-5][0-9]{0,14}$/.test(input)) {
-      setCardType('MasterCard');
-    } else {
-      setCardType('');
-    }
-    setCardNumber(input);
+      setCancelMessage('');
+      window.history.back();
+    }, 1000);
   };
 
-  const handlePayment = () => {
-      if (
-          /^\d{16}$/.test(cardNumber) &&
-          cardHolderName &&
-          /^\d{2}-\d{2}$/.test(expiry) && 
-          /^\d{3}$/.test(securityCode)
-          ) {
-            
-              setPaymentMessage('Pago exitoso');
-            } else {
-              setPaymentMessage('Por favor, ingrese todos los datos válidos');
-            }
-            setTimeout(() => {
-                setPaymentMessage('');
-              }, 1000);
-        };
-        
-        return (
+  const handlePayment = async () => {
+    if (!stripe || !elements) {
+      return;
+    }
+
+    const result = await stripe.confirmCardPayment(clientSecret, {
+      payment_method: {
+        card: elements.getElement(CardElement),
+      },
+    });
+
+    if (result.error) {
+      console.error(result.error);
+    } else if (result.paymentIntent.status === 'succeeded') {
+      
+    }
+  };
+
+  return (
     <div className="min-h-screen bg-gray-100 ">
-        <img
-          src={ImagenTop}
-          alt="ImagenTop"
-          className="w-full h-[273px]"
-          />
-        <div className="absolute top-4 left-4 ">
+      <img
+        src={ImagenTop}
+        alt="ImagenTop"
+        className="w-full h-[273px]"
+      />
+      <div className="absolute top-4 left-4 ">
         <a href="/PaymentMethods" className="text-white text-4xl">
           {'<'}
         </a>
+        <h2 className="text-xl font-semibold mt-4">PAGAR CON TARJETA</h2>
       </div>
-        <div className="bg-white absolute flex flex-col items-center top-[100px]  left-8 right-8 p-6 rounded-lg shadow-lg">
-        <h2 className="text-xl font-semibold mb-4">PAGAR CON TARJETA</h2>
-        <div className="mb-4 w-full">
-          <label htmlFor="cardHolderName" className="block font-medium  text-gray-700">Nombre del Propietario</label>
-        
-          <input
-            type="text"
-            id="cardHolderName"
-            placeholder='Nombre del Propietario'
-            className="w-full border border-gray-300 rounded-md p-2"
-            value={cardHolderName}
-            onChange={(e) => setCardHolderName(e.target.value)}
-          />
-        </div>
-        <div className="mb-2">
-          <label htmlFor="cardNumber" className="block font-medium text-gray-700">Número de tarjeta</label>
-          <div className='flex flex-row'>
-        <img src={card} alt='card' className="w-8 h-8 mr-1" />
-          <input
-            type="text"
-            id="cardNumber"
-            className="w-full border border-gray-300 rounded-md p-2"
-            placeholder="XXXX - XXXX - XXXX - XXXX"
-            value={cardNumber}
-            onChange={handleCardNumberChange}
-            />
-        </div>  
-        </div>
-        <div className="mb-2">
-          <label htmlFor="expiry" className="block font-medium text-gray-700">Caducidad (MM-YY)</label>
-          <div className='flex flex-row'>
-        <img src={calendar} alt='card' className="w-8 h-8 mr-1" />
-          <input
-            type="text"
-            id="expiry"
-            placeholder="MM-YY"
-            className="w-full border border-gray-300 rounded-md p-2"
-            value={expiry}
-            onChange={(e) => setExpiry(e.target.value)}
-            />
-        </div>  
-        </div>
-        <div className="mb-2">
-          <label htmlFor="securityCode" className="block font-medium text-gray-700">Código de Seguridad</label>
-          <div className='flex flex-row'>
-        <img src={code} alt='card' className="w-12 h-12 mr-1" />
-          <input
-            type="text"
-            id="securityCode"
-            placeholder="XXX"
-            className="w-full border border-gray-300 rounded-md p-2"
-            value={securityCode}
-            onChange={(e) => setSecurityCode(e.target.value)}
-            />
-        </div>  
-        </div>
-        <div>
-          {cardType && <p>Tipo de tarjeta: {cardType}</p>}
-        </div>
-        <div className="mt-6">
-        {paymentMessage && (
-            <div className="text-[#41BCAC] font-bold text-center">{paymentMessage}</div>
-            )}
-            {cancellationMessage && (
-            <div className="text-black font-bold text-center">{cancellationMessage}</div>
-          )}
+      <h2 className="text-xl font-semibold text-center mb-8">INGRESA LOS DATOS DE TU TARJETA</h2>
+
+      <CardElement className="p-3 border border-gray-300 rounded mb-16" />
+      <div>{cancelMessage && <p className="text-black font-bold text-center mb-2 text-xl">{cancelMessage}</p>}</div>
+      <div className='flex justify-center'>
         <button
-          className="bg-gray-700 text-white rounded-md px-4 py-2 mr-4 hover:bg-gray-700"
+          className="bg-gray-700 text-white rounded-md px-4 py-2 mr-16 hover-bg-gray-700"
           onClick={handleCancel}
         >
           Cancelar
         </button>
-          <button
-            className="bg-[#41BCAC] text-white rounded-md px-4 py-2 hover:bg-[#41BCAC]"
-            onClick={handlePayment}
-          >
-            Realizar Pago
-          </button>
-        </div>
+        <button
+          className="bg-[#41BCAC] text-white rounded-md px-4 py-2 hover-bg-[#41BCAC]"
+          onClick={handlePayment}
+        >
+          Realizar Pago
+        </button>
       </div>
-      <Footer/>
+      <div>
+      </div>
     </div>
   );
 };
