@@ -49,11 +49,10 @@ function App() {
 
   return (
     <>
+    <Notification/>
       <Routes>
         <Route path="/onboarding" element={<IntroCarousel />} />
-
         <Route path="/home" element={<Home />} />
-
         <Route
           path="/login"
           element={<LoginForm setShowFooter={setShowFooter} />}
@@ -61,7 +60,6 @@ function App() {
         <Route path="/register" element={<LoginRegister />} />
         <Route path="/search" element={<SearchPage />} />
         <Route path="/address" element={<Address />} />
-        <Route path="/noti" element={<Notification/>} />
         {/* <Route path="/address" element={<Directions />} /> */}
         <Route path="/professionalfilter" element={<ProfessionalFilter />} />
         <Route path="/editprofile" element={<EditProfile />} />
@@ -72,7 +70,6 @@ function App() {
         <Route path="/PaymentMethods" element={<PaymentMethods />} />
         <Route path="/Pay" element={<Pay />} />
         <Route path="/NotPay" element={<NotPay />} />
-
         <Route path="/*" element={<ErrorPage />} />
       </Routes>
       {showFooter && <Footer />}

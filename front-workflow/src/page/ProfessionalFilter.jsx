@@ -1,16 +1,15 @@
 import React from "react";
 import imagenTop from "../assets/imagenTop.png";
-import { useNavigate, useParams } from "react-router-dom";
-import { IoIosArrowBack, IoIosNotifications } from "react-icons/io";
+import {useParams } from "react-router-dom";
 import CartUser from "../components/CartUser/CartUser";
 
 const ProfessionalFilter = () => {
-  const navigate = useNavigate();
+ 
   const { category } = useParams();
 
   const users = [
     {
-      name: "Pablo villafañe",
+      name: "Pablo villafañes",
       ubication: "19 de abril 667",
       distance: "Cerca de tu ubicacion",
       price: "2500",
@@ -42,7 +41,7 @@ const ProfessionalFilter = () => {
         "https://d1ih8jugeo2m5m.cloudfront.net/2021/07/imagenes-sin-copyright-gratis.jpg",
     },
     {
-      name: "Micaela Aranda",
+      name: "Micaela Arandas",
       ubication: "the giga mall",
       distance: "a 2km",
       price: "3000",
@@ -50,7 +49,7 @@ const ProfessionalFilter = () => {
         "https://etinor.com/wp-content/uploads/2023/02/76o-Imagen-01-scaled.jpg",
     },
     {
-      name: "Fatima Alvarez",
+      name: "Fatima Alvarezs",
       ubication: "Facio 530",
       distance: "a 5km",
       price: "2800",
@@ -65,13 +64,8 @@ const ProfessionalFilter = () => {
         <div className="w-full absolute -top-2 z-10">
           <img className="w-full" src={imagenTop} alt="" />
         </div>
-        <header className=" relative z-20 p-2">
-          <div className="flex text-white text-2xl justify-between">
-            <div onClick={() => navigate(-1)}>
-              <IoIosArrowBack />
-            </div>
-            <IoIosNotifications />
-          </div>
+        <header className=" relative z-20 p-2 pt-[60px]">
+    
           <h2 className="text-white font-semibold font-roboto tracking-widest">
             {category || "Electricista"}
           </h2>
