@@ -12,7 +12,7 @@ const EditProfile = () => {
   };
 
   return (
-    <section className="h-screen px-4 m-auto  max-w-xs  bg-white">
+    <section className="h-screen m-auto max-w-xs bg-white">
       <div className="w-full absolute -top-2 max-w-xs">
         <img className="w-full" src={imagenTop} alt="" />
       </div>
