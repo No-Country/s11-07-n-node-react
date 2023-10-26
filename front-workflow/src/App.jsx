@@ -25,6 +25,8 @@ const stripePromise = loadStripe(
 );
 
 import Notification from "./components/Notifications/Notification";
+import Message from "./page/Message";
+import Chat from "./components/message/Chat";
 function App() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -97,6 +99,8 @@ function App() {
           }
         />
         <Route path="/NotPay" element={<NotPay />} />
+        <Route path="/message" element={<Message />} />
+        <Route path="message/:id" element={<Chat />} />
         <Route path="/*" element={<ErrorPage />} />
       </Routes>
       {showFooter && <Footer />}

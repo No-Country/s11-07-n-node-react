@@ -1,10 +1,10 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import logo from "../../pictures/logo.png";
 import { useForm } from "react-hook-form";
 import { BsApple, BsFacebook } from "react-icons/bs";
 import { FcGoogle } from "react-icons/fc";
 import { Link, useNavigate } from "react-router-dom";
-import { localUser } from "../../store/UserSlice";
+import { localUser, loginUser } from "../../store/UserSlice";
 import { useDispatch } from "react-redux";
 import bg from "../../assets/img_WL_IS.png";
 import logob from "../../assets/logo_b.png";
@@ -20,9 +20,10 @@ const LoginForm = ({ setShowFooter, setShowNavbar }) => {
     e.preventDefault();
 
     let userCredentials = {
-      username: email,
+      email: email,
       password: password,
     };
+    // PARA PROBAR
     dispatch(localUser(userCredentials));
     setEmail("");
     setPassword("");
@@ -30,6 +31,20 @@ const LoginForm = ({ setShowFooter, setShowNavbar }) => {
     navigate("/home");
     setShowFooter(true);
     setShowNavbar(true);
+    // PARA USAR
+    // dispatch(loginUser(userCredentials)).then((result) => {
+    //   if (result.payload) {
+    //     console.log("Payload");
+    //     setEmail("");
+    //     setPassword("");
+    //     localStorage.setItem("user", JSON.stringify(userCredentials));
+    //     navigate("/home");
+    //     setShowFooter(true);
+    //     setShowNavbar(true);
+    //   } else {
+    //     console.log("Error al logear");
+    //   }
+    // });
   };
   const forgetPass = () => {
     console.log("olvide mi contrase;a");
@@ -44,10 +59,10 @@ const LoginForm = ({ setShowFooter, setShowNavbar }) => {
           </div>
           <form className="py-7  text-center">
             <input
-              type="text"
+              type="email"
               className="actionRegisterForm "
               placeholder="Ingresar correo o Usuario"
-              {...register("email" || "user")}
+              // {...register("email" || "user")}
               autoComplete="off"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
@@ -56,7 +71,7 @@ const LoginForm = ({ setShowFooter, setShowNavbar }) => {
               type="password"
               className="actionRegisterForm"
               placeholder="Contraseña"
-              {...register("password")}
+              // {...register("password")}
               autoComplete="off"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
@@ -120,7 +135,7 @@ const LoginForm = ({ setShowFooter, setShowNavbar }) => {
                       <span className="text-black font-semibold">Email</span>
                       <input
                         type="email"
-                        {...register("email" || "user")}
+                        // {...register("email" || "user")}
                         autoComplete="off"
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
@@ -133,7 +148,7 @@ const LoginForm = ({ setShowFooter, setShowNavbar }) => {
                       </span>
                       <input
                         type="password"
-                        {...register("password")}
+                        // {...register("password")}
                         autoComplete="off"
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
