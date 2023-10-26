@@ -81,7 +81,7 @@ function App() {
         <Route path="/NotPay" element={<NotPay />} />
         <Route path="/*" element={<ErrorPage />} />
       </Routes>
-      {showFooter && <Footer />}
+      {showFooter && <Footer/>}
     </>
   );
 }

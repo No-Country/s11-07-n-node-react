@@ -32,9 +32,8 @@ const Notification = () => {
       description: "te ha realizado una transferencia",
     },
   ];
-
-  const [isOpen, setIsOpen] = useState(false);
-
+  const [isOpen,setIsOpen] = useState(false);
+  
   return (
     <>
       <section className="flex justify-between p-3 absolute z-50 w-full text-2xl ">

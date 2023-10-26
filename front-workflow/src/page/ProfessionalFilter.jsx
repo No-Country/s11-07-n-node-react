@@ -60,12 +60,11 @@ const ProfessionalFilter = () => {
 
   return (
     <>
-      <section className="relative  ">
+      <section className="relative">
         <div className="w-full absolute -top-2 z-10">
           <img className="w-full" src={imagenTop} alt="" />
         </div>
-        <header className=" relative z-20 p-2 pt-[60px]">
-    
+        <header className="relative z-20 p-2 pt-[60px]">
           <h2 className="text-white font-semibold font-roboto tracking-widest">
             {category || "Electricista"}
           </h2>
