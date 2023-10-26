@@ -13,7 +13,7 @@ const Chat = () => {
         <img className="w-full" src={imagenTop} alt="fondo" />
       </div> 
 
-      <div className="h-screen mx-5 flex flex-col gap-7 relative z-10  ">
+      <div className="h-screen mx-5 flex flex-col gap-7 relative  ">
         <h1 className="text-2xl font-bold text-white pt-[8vh]">Mensajes</h1>
         <div className="h-[70vh] flex flex-col gap-5 justify-between bg-white bg-opacity-30 shadow-[rgba(0,_0,_0,_0.24)_0px_3px_8px]  rounded-xl p-5">
           <div className="flex flex-col gap-7">
@@ -31,7 +31,7 @@ const Chat = () => {
             <BubbleMsg position="start" msg="OK" color="bg-white" />
             <BubbleMsg
               position="end"
-              msg="Ya llegué, estoy afuera de su domicilio"
+              msg="Ya llegué, estoy afuera de suu domicilio "
               color="bg-[#41BCAC]"
             />
           </div>

@@ -6,7 +6,7 @@ const Message = () => {
   const messagesList = [
     {
       name: "Pablo Villafañe",
-      message: "Ya llegué, estoy afuera de su do...",
+      message: "Ya llegué, estoy afuera de ...",
       imgURL: "https://random.imagecdn.app/150/150",
     },
     {
@@ -31,7 +31,7 @@ const Message = () => {
       <div className="w-full absolute -top-2 z-5">
         <img className="w-full" src={imagenTop} alt="fondo" />
       </div> 
-      <div className="h-screen mx-5 flex flex-col gap-7 relative z-20 ">
+      <div className="h-screen mx-5 flex flex-col gap-7 relative">
         <h1 className="text-2xl font-bold text-white pt-[8vh]">Mensajes</h1>
         <div className="flex flex-col gap-1">
           {messagesList.map(({ name, message, imgURL }) => (
