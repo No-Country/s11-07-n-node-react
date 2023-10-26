@@ -27,6 +27,8 @@ const stripePromise = loadStripe(
 import Notification from "./components/Notifications/Notification";
 import Message from "./page/Message";
 import Chat from "./components/message/Chat";
+import ProvideService from "./page/ProvideService";
+import ConfirmService from "./page/ConfirmService";
 function App() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -80,6 +82,7 @@ function App() {
         <Route path="/address" element={<Address />} />
         {/* <Route path="/address" element={<Directions />} /> */}
         <Route path="/professionalfilter" element={<ProfessionalFilter />} />
+        <Route path="/confirm" element={<ConfirmService />} />
         <Route path="/editprofile" element={<EditProfile />} />
         <Route
           path="/profile"
@@ -102,6 +105,7 @@ function App() {
         <Route path="/NotPay" element={<NotPay />} />
         <Route path="/message" element={<Message />} />
         <Route path="message/:id" element={<Chat />} />
+        <Route path="provide" element={<ProvideService />} />
         <Route path="/*" element={<ErrorPage />} />
       </Routes>
       {showFooter && <Footer />}

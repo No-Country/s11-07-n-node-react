@@ -35,8 +35,8 @@ const Message = () => {
       <div className="h-screen mx-5 flex flex-col gap-7 relative">
         <h1 className="text-2xl font-bold text-white pt-[8vh]">Mensajes</h1>
         <div className="flex flex-col gap-1">
-          {messagesList.map(({ name, message, imgURL }) => (
-            <Item name={name} message={message} imgURL={imgURL} />
+          {messagesList.map(({ name, message, imgURL, i }) => (
+            <Item key={i} name={name} message={message} imgURL={imgURL} />
           ))}
         </div>
       </div>

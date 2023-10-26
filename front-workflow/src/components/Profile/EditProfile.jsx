@@ -15,11 +15,11 @@ const EditProfile = () => {
       <div className="w-full absolute -top-2 ">
         <img className="w-full" src={imagenTop} alt="" />
       </div>
-      <div className="bg-white p-4 rounded-lg w-80">
+      <div className="bg-white p-4 rounded-lg w-80 mx-auto">
         <div className="flex items-center space-x-6 mb-[5rem] pt-10">
-          <span onClick={handleBack} className="cursor-pointer z-10 text-white">
+          {/* <span onClick={handleBack} className="cursor-pointer z-10 text-white">
             <FaArrowLeft />
-          </span>
+          </span> */}
           <h1 className="text-2xl font-bold text-white z-10">Editar perfil</h1>
         </div>
 

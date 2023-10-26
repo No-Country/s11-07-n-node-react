@@ -38,9 +38,11 @@ const Chat = () => {
         <h1 className="text-2xl font-bold text-white pt-[8vh]">Mensajes</h1>
         <div className="h-[70vh] flex flex-col gap-5 justify-between bg-white bg-opacity-30 shadow-[rgba(0,_0,_0,_0.24)_0px_3px_8px]  rounded-xl p-5">
           <div className="flex flex-col gap-7">
-            <div className="font-bold text-black text-2xl">{params.id}</div>
-            {messageList.map(({ position, msg, color }) => (
-              <BubbleMsg position={position} msg={msg} color={color} />
+            <div className="font-bold text-black text-2xl shadow-bottom-black rounded-md p-1 bg-[rgba(255,255,255,0.5)]">
+              {params.id}
+            </div>
+            {messageList.map(({ position, msg, color, i }) => (
+              <BubbleMsg key={i} position={position} msg={msg} color={color} />
             ))}
           </div>
           <div className="flex flex-row items-center gap-2 ">

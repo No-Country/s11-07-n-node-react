@@ -4,7 +4,9 @@ import Line from "../CartUser/iconssvg/Line";
 import Simdoll from "./iconssvg/Simdoll";
 import phun from "../../pictures/phun.png";
 import { IoIosArrowForward } from "react-icons/io";
+import { Link, useNavigate } from "react-router-dom";
 const CartUser = ({ name, ubication, distance, photo, price }) => {
+  const navigate = useNavigate();
   return (
     <article className="text-black bg-white my-3  h-[180px] py-2 rounded-md shadow-[0_3px_10px_rgb(0,0,0,0.2)] relative ">
       <div className="orderDataCart ">
@@ -30,7 +32,12 @@ const CartUser = ({ name, ubication, distance, photo, price }) => {
       <div className="orderDataCart  ">
         <Simdoll />
         <p className="px-2">{price}</p>
-        <p className="ml-auto text-[#31D2DC]">siguiente </p>
+        <p
+          onClick={() => navigate("/confirm")}
+          className="ml-auto text-[#31D2DC]"
+        >
+          siguiente{" "}
+        </p>
         <IoIosArrowForward className="bg-black text-white ml-1 " />
       </div>
     </article>
