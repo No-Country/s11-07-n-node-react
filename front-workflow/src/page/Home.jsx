@@ -32,7 +32,7 @@ const Home = () => {
               <img className="m-auto " src={logo} alt="" />
             </div>
             <div className=" pt-[6vh] text-center">
-              <Link to="/professionalfilter">
+              <Link to="/search-services">
                 <button
                   style={inputStyle}
                   className="w-64 h-12 mt-8 px-4 rounded-full bg-[#41BCAC] text-white ml-2 placeholder:text-white"
