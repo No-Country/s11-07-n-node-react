@@ -1,10 +1,9 @@
 import React from "react";
 import imagenTop from "../assets/imagenTop.png";
-import {useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import CartUser from "../components/CartUser/CartUser";
 
 const ProfessionalFilter = () => {
- 
   const { category } = useParams();
 
   const users = [

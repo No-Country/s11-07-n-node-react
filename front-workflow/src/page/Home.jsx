@@ -2,10 +2,8 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import logo from "../pictures/logo.png";
 import { BsSearch } from "react-icons/bs";
-import { GiShakingHands } from 'react-icons/gi';
+import { GiShakingHands } from "react-icons/gi";
 const Home = () => {
-
-
   return (
     <>
       <section className="w-full h-screen pt-[10vh]">
@@ -15,7 +13,7 @@ const Home = () => {
             <span className="iconsHome">
               <BsSearch className="ml-auto" />
             </span>
-            <Link to='/professionalfilter' >
+            <Link to="/search-services">
               <button className=" buttonsHome ">Buscar servicio </button>
             </Link>
           </div>

@@ -11,7 +11,7 @@ const Footer = () => {
         to="/home"
         className="flex items-center transform transition-transform hover:scale-150 hover:-translate-y-4"
       >
-        <div className="bg-verdeMarino w-12 h-12 p-2 rounded-full">
+        <div className="bg-[#41BCAC] w-12 h-12 p-2 rounded-full hover:outline hover:outline-white transition-all">
           <img src={house} alt="House" className="w-full h-full" />
         </div>
       </Link>
@@ -19,7 +19,7 @@ const Footer = () => {
         to="/message"
         className="flex items-center transform transition-transform hover:scale-150 hover:-translate-y-4"
       >
-        <div className="bg-verdeMarino w-12 h-12 p-2 rounded-full">
+        <div className="bg-[#41BCAC] w-12 h-12 p-2 rounded-full hover:outline hover:outline-white transition-all">
           <img src={message} alt="Message" className="w-full h-full" />
         </div>
       </Link>
@@ -27,7 +27,7 @@ const Footer = () => {
         to="/profile"
         className="flex items-center transform transition-transform hover:scale-150 hover:-translate-y-4"
       >
-        <div className="bg-verdeMarino w-12 h-12 p-2 rounded-full">
+        <div className="bg-[#41BCAC] w-12 h-12 p-2 rounded-full hover:outline hover:outline-white transition-all">
           <img src={profile1} alt="Profile" className="w-full h-full" />
         </div>
       </Link>

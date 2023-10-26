@@ -2,7 +2,7 @@ import Footer from "./components/Footer/Footer";
 import Directions from "./components/Profile/Directions";
 import EditProfile from "./components/Profile/editProfile";
 import Profile from "./components/Profile/profile";
-import { Routes, Route, useNavigate } from "react-router-dom";
+import { Routes, Route, useNavigate, useLocation } from "react-router-dom";
 import LoginForm from "./components/login/LoginForm";
 import LoginRegister from "./components/login/LoginRegister";
 import Home from "./page/Home";
@@ -25,13 +25,16 @@ const stripePromise = loadStripe(
 );
 
 import Notification from "./components/Notifications/Notification";
+import Message from "./page/Message";
+import Chat from "./components/message/Chat";
 function App() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [showFooter, setShowFooter] = useState(false);
   const [showNavbar, setShowNavbar] = useState(false);
-
+  const location = useLocation();
   useEffect(() => {
+    if (location.pathname === "/") navigate("/home");
     try {
       // VERIFICAR SI ES LA PRIMERA VEZ EN ENTRAR A LA APLICACIÓN
       let introStorage = JSON.parse(localStorage.getItem("introPage"));
@@ -97,6 +100,8 @@ function App() {
           }
         />
         <Route path="/NotPay" element={<NotPay />} />
+        <Route path="/message" element={<Message />} />
+        <Route path="message/:id" element={<Chat />} />
         <Route path="/*" element={<ErrorPage />} />
       </Routes>
       {showFooter && <Footer />}
