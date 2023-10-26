@@ -12,6 +12,7 @@ const LoginRegister = () => {
   const submit = (data) => {
     console.log(data);
   };
+  
   return (
     <>
       <section className="h-screen w-full bg-white flex items-center">

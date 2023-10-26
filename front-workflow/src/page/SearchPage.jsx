@@ -2,8 +2,6 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import logo from "../pictures/logo.png";
 import lupa from "../assets/lupa.png";
-import { IoIosNotifications } from "react-icons/io";
-import Notification from "../components/Notifications/Notification";
 import electrician from '../assets/electrician.png';
 import air from '../assets/air.png';
 import car from '../assets/car.png';
@@ -43,19 +41,18 @@ const SearchPage = () => {
     <>
       <section className="min-h-screen w-full bg-[#EFEFF4] flex items-center font-roboto relative ">
         <div className="w-full absolute top-0 h-[80px]  flex items-center  px-4">
-          <button onClick={() => setIsOpen(!isOpen)} className="ml-auto">
-            <IoIosNotifications className=" text-3xl text-[#41BCAC]" />
-          </button>
+
         </div>
-        <section className=" w-full md:rounded-m px-2 md:px-3 max-w-xs m-auto flex items-center md:shadow-[rgba(0,_0,_0,_0.24)_0px_3px_8px] ">
+        <section className=" w-full md:rounded-m px-2 md:px-3 max-w-xs m-auto flex items-center  ">
           <section className="m-auto w-full">
             <div className="w-full">
-              <img className="m-auto mt-[-100px] " src={logo} alt="" />
+              <img className="m-auto " src={logo} alt="" />
             </div>
-            <div>
+
+            <div className="">
                 <select value={selectedOption} onClick={handleSearch} onChange={handleOptionChange} 
-                style={inputStyle} 
-                className="w-full h-16 mt-8 px-4 rounded-full bg-[#41BCAC] text-white ml-2 placeholder:text-white relative">
+                 style={inputStyle} 
+                className="w-full h-16 mt-8  rounded-full bg-[#41BCAC] text-white  placeholder:text-white ">
                   <option value="">Seleccionar servicio</option>
                   <option value="Electricista">Electricista</option>
                   <option value="Plomero">Plomero</option>
