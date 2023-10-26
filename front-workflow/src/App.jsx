@@ -18,6 +18,7 @@ import PaymentMethods from "./page/PaymentMethods";
 import Pay from "./page/Pay";
 import NotPay from "./page/NotPay";
 import Notification from './components/Notifications/Notification'
+import ConfirmService from "./page/ConfirmService";
 function App() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -61,7 +62,7 @@ function App() {
         <Route path="/register" element={<LoginRegister />} />
         <Route path="/search" element={<SearchPage />} />
         <Route path="/address" element={<Address />} />
-        <Route path="/noti" element={<Notification/>} />
+        <Route path="/noti" element={<Notification />} />
         {/* <Route path="/address" element={<Directions />} /> */}
         <Route path="/professionalfilter" element={<ProfessionalFilter />} />
         <Route path="/editprofile" element={<EditProfile />} />
