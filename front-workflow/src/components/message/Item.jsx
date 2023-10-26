@@ -5,7 +5,7 @@ const Item = ({ name, message, imgURL }) => {
   // const newMessage =
   return (
     <Link to={name}>
-      <div className="flex flex-row gap-5 p-4 shadow-md">
+      <div className="bg-white flex flex-row gap-5 p-4 shadow-md">
         <div className="avatar">
           <div className="w-12 rounded-full">
             <img src={imgURL} />

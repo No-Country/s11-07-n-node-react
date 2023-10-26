@@ -2,15 +2,20 @@ import React from "react";
 import { useParams } from "react-router-dom";
 import BubbleMsg from "./BubbleMsg";
 import { IoIosSend } from "react-icons/io";
-
+import imagenTop from '../../assets/imagenTop.png'
 const Chat = () => {
   const params = useParams();
 
   return (
     <div>
-      <div className="h-screen mx-5 flex flex-col gap-7">
+
+      <div className="w-full absolute -top-2 z-5">
+        <img className="w-full" src={imagenTop} alt="fondo" />
+      </div> 
+
+      <div className="h-screen mx-5 flex flex-col gap-7 relative z-10  ">
         <h1 className="text-2xl font-bold text-black pt-[8vh]">Mensajes</h1>
-        <div className="h-[70vh] flex flex-col gap-5 justify-between border border-solid border-[#41BCAC] rounded-xl p-5">
+        <div className="h-[70vh] flex flex-col gap-5 justify-between bg-white bg-opacity-30 shadow-[rgba(0,_0,_0,_0.24)_0px_3px_8px]  rounded-xl p-5">
           <div className="flex flex-col gap-7">
             <div className="font-bold text-black text-2xl">{params.id}</div>
             <BubbleMsg

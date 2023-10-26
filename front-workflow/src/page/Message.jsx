@@ -28,10 +28,10 @@ const Message = () => {
 
   return (
     <>
-      {/* <div className="w-full absolute -top-2 z-10">
+      <div className="w-full absolute -top-2 z-5">
         <img className="w-full" src={imagenTop} alt="fondo" />
-      </div> */}
-      <div className="h-screen mx-5 flex flex-col gap-7">
+      </div> 
+      <div className="h-screen mx-5 flex flex-col gap-7 relative z-20 ">
         <h1 className="text-2xl font-bold text-black pt-[8vh]">Mensajes</h1>
         <div className="flex flex-col gap-1">
           {messagesList.map(({ name, message, imgURL }) => (
