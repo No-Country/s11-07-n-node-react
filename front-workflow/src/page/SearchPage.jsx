@@ -1,16 +1,14 @@
-import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import logo from "../pictures/logo.png";
 import { AiFillCar, AiOutlineSearch } from "react-icons/ai";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
 import { MdElectricRickshaw } from 'react-icons/md'; 
 import { LuAirVent } from "react-icons/lu";
 const SearchPage = () => {
-  const navigate = useNavigate();
 
   const [selectedOption, setSelectedOption] = useState("");
   const [isOpen, setIsOpen] = useState(false);
-
   const handleOptionChange = (event) => {
     setSelectedOption(event.target.value);
   };

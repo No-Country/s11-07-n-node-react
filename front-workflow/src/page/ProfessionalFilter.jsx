@@ -60,16 +60,18 @@ const ProfessionalFilter = () => {
 
   return (
     <>
-      <section className="relative">
-        <div className="w-full absolute -top-2 z-10">
+      <section className="relative ">
+        <div className="w-full absolute -top-2 z-5 ">
           <img className="w-full" src={imagenTop} alt="" />
         </div>
-        <header className="relative z-20 p-2 pt-[60px]">
+
+        <header className="relative z-20 p-2 pt-[60px] ">
           <h2 className="text-white font-semibold font-roboto tracking-widest">
             {category || "Electricista"}
           </h2>
         </header>
-        <div className="relative z-20 w-full p-2  ">
+
+        <div className="relative w-full p-2 pb-16  ">
           {users?.map((user) => (
             <CartUser
               key={user.name}
