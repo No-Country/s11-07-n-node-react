@@ -59,11 +59,11 @@ const Address = () => {
   };
 
   return (
-    <div className="p-4 bg-gray-100 w-full min-h-screen">
-      <div className="flex items-center mb-16">
-        <button onClick={handlePerfilButtonClick}>
+    <div data-theme="light" className="p-4 bg-gray-100 w-full min-h-screen">
+      <div className="flex items-center my-16">
+        {/* <button onClick={handlePerfilButtonClick}>
           <img src={flecha} alt="Flecha" className="h-4 w-4" />
-        </button>
+        </button> */}
         <h5 className="font-bold ml-4 text-2xl">Mis direcciones</h5>
       </div>
 

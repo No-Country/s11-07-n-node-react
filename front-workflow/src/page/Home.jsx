@@ -21,7 +21,7 @@ const Home = () => {
             <span className="iconsHome">
               <GiShakingHands className="ml-auto" />
             </span>
-            <Link to="/search-services">
+            <Link to="/provide">
               <button className="buttonsHome ">Brindar servicio</button>
             </Link>
           </div>
