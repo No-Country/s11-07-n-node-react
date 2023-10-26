@@ -2,7 +2,7 @@ import Footer from "./components/Footer/Footer";
 import Directions from "./components/Profile/Directions";
 import EditProfile from "./components/Profile/editProfile";
 import Profile from "./components/Profile/profile";
-import { Routes, Route, useNavigate } from "react-router-dom";
+import { Routes, Route, useNavigate, useLocation } from "react-router-dom";
 import LoginForm from "./components/login/LoginForm";
 import LoginRegister from "./components/login/LoginRegister";
 import Home from "./page/Home";
@@ -32,8 +32,9 @@ function App() {
   const dispatch = useDispatch();
   const [showFooter, setShowFooter] = useState(false);
   const [showNavbar, setShowNavbar] = useState(false);
-
+  const location = useLocation();
   useEffect(() => {
+    if (location.pathname === "/") navigate("/home");
     try {
       // VERIFICAR SI ES LA PRIMERA VEZ EN ENTRAR A LA APLICACIÓN
       let introStorage = JSON.parse(localStorage.getItem("introPage"));
@@ -50,7 +51,7 @@ function App() {
       } else if (introStorage && !user) {
         navigate("/login");
       } else if (introStorage && user) {
-        navigate("/home");
+        // navigate("/home");
         setShowFooter(true);
         setShowNavbar(true);
       }
