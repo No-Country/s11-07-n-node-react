@@ -1,0 +1,11 @@
+import 'dotenv/config'
+import { get } from 'env-var'
+
+export const envs = {
+
+  PORT: get('PORT').required().asPortNumber(),
+  MONGO_URI: get('MONGO_URI').required().asString(),
+  MONGO_DB_NAME: get('MONGO_DB_NAME').required().asString(),
+  JWT_SEED: get('JWT_SEED').required().asString(),
+  JWT_EXPIRE: get('JWT_EXPIRE').required().asString()
+}

@@ -9,7 +9,7 @@ import { useDispatch } from "react-redux";
 import bg from "../../assets/img_WL_IS.png";
 import logob from "../../assets/logo_b.png";
 
-const LoginForm = ({ setShowFooter }) => {
+const LoginForm = ({ setShowFooter, setShowNavbar }) => {
   const { register, handleSubmit, reset } = useForm();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -29,6 +29,7 @@ const LoginForm = ({ setShowFooter }) => {
     localStorage.setItem("user", JSON.stringify(userCredentials));
     navigate("/home");
     setShowFooter(true);
+    setShowNavbar(true);
   };
   const forgetPass = () => {
     console.log("olvide mi contrase;a");
