@@ -17,6 +17,11 @@ import { useDispatch } from "react-redux";
 import PaymentMethods from "./page/PaymentMethods";
 import Pay from "./page/Pay";
 import NotPay from "./page/NotPay";
+import { Elements } from '@stripe/react-stripe-js';
+import { loadStripe } from '@stripe/stripe-js';
+
+const stripePromise = loadStripe('pk_test_51O4gkgD3YXfw7A9OCrcmMR7KH5RB0lHjigzLXqtap7qigk2Le0kh9Q0OGTjSaYpdSTRTcJS1yIFA9jIVML956B9O00NqWfPeG6');
+
 import Notification from './components/Notifications/Notification'
 function App() {
   const navigate = useNavigate();
@@ -49,19 +54,17 @@ function App() {
 
   return (
     <>
+    <Notification/>
       <Routes>
         <Route path="/onboarding" element={<IntroCarousel />} />
-
         <Route path="/home" element={<Home />} />
-
         <Route
           path="/login"
           element={<LoginForm setShowFooter={setShowFooter} />}
         />
         <Route path="/register" element={<LoginRegister />} />
-        <Route path="/search" element={<SearchPage />} />
+        <Route path="/search-services" element={<SearchPage />} />
         <Route path="/address" element={<Address />} />
-        <Route path="/noti" element={<Notification/>} />
         {/* <Route path="/address" element={<Directions />} /> */}
         <Route path="/professionalfilter" element={<ProfessionalFilter />} />
         <Route path="/editprofile" element={<EditProfile />} />
@@ -70,12 +73,15 @@ function App() {
           element={<Profile setShowFooter={setShowFooter} />}
         />
         <Route path="/PaymentMethods" element={<PaymentMethods />} />
-        <Route path="/Pay" element={<Pay />} />
+        <Route path="/Pay" element={
+          <Elements stripe={stripePromise}>
+            <Pay />
+          </Elements>
+        } />
         <Route path="/NotPay" element={<NotPay />} />
-
         <Route path="/*" element={<ErrorPage />} />
       </Routes>
-      {showFooter && <Footer />}
+      {showFooter && <Footer/>}
     </>
   );
 }
