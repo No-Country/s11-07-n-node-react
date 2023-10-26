@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 
 const Footer = () => {
   return (
-    <div className="z-20 fixed bottom-0 left-0 w-full h-[60px] bg-[#41BCAC] flex justify-between items-center p-4">
+    <div className="z-60 fixed bottom-0 left-0 w-full h-[60px] bg-[#41BCAC] flex justify-between items-center p-4">
       <Link
         to="/home"
         className="flex items-center transform transition-transform hover:scale-150 hover:-translate-y-4"

@@ -1,6 +1,7 @@
 import React from "react";
 import logo from "../../pictures/logo.png";
 import { useForm } from "react-hook-form";
+import axios from "axios";
 import bg from "../../assets/img_WL_IS.png";
 import logob from "../../assets/logo_b.png";
 import { BsApple, BsFacebook } from "react-icons/bs";
@@ -11,6 +12,19 @@ const LoginRegister = () => {
 
   const submit = (data) => {
     console.log(data);
+    e.preventDefault();
+
+    axios
+      .post(``, userData)
+      .then((res) => {
+        // localStorage.setItem('user', userData.user)
+        navigate("/login");
+        console.log(res.data);
+      })
+      .catch((err) => {
+        // console.log(err)
+        console.log(err.response.data.error);
+      });
   };
   return (
     <>
@@ -92,7 +106,9 @@ const LoginRegister = () => {
                   >
                     <div className="flex justify-between w-full">
                       <label className="flex flex-col mb-2 w-[48%]">
-                        <span className="text-black font-semibold">Apellido</span>
+                        <span className="text-black font-semibold">
+                          Apellido
+                        </span>
                         <input
                           type="text"
                           {...register("apellido")}
@@ -101,9 +117,7 @@ const LoginRegister = () => {
                         />
                       </label>
                       <label className="flex flex-col mb-2 w-[48%]">
-                        <span className="text-black font-semibold">
-                          Nombre
-                        </span>
+                        <span className="text-black font-semibold">Nombre</span>
                         <input
                           type="text"
                           {...register("nombre")}
@@ -113,9 +127,7 @@ const LoginRegister = () => {
                       </label>
                     </div>
                     <label className="flex flex-col mb-2">
-                      <span className="text-black font-semibold">
-                        Email
-                      </span>
+                      <span className="text-black font-semibold">Email</span>
                       <input
                         type="text"
                         {...register("email")}
@@ -163,7 +175,10 @@ const LoginRegister = () => {
                           id=""
                           className=" cursor-pointer"
                         />
-                        <span className="ml-1 text-xs">He leído y acepto los términos de servicio y nuestra politica de privacidad</span>
+                        <span className="ml-1 text-xs">
+                          He leído y acepto los términos de servicio y nuestra
+                          politica de privacidad
+                        </span>
                       </div>
                     </div>
                     <input
