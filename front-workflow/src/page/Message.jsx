@@ -32,7 +32,7 @@ const Message = () => {
         <img className="w-full" src={imagenTop} alt="fondo" />
       </div> 
       <div className="h-screen mx-5 flex flex-col gap-7 relative z-20 ">
-        <h1 className="text-2xl font-bold text-black pt-[8vh]">Mensajes</h1>
+        <h1 className="text-2xl font-bold text-white pt-[8vh]">Mensajes</h1>
         <div className="flex flex-col gap-1">
           {messagesList.map(({ name, message, imgURL }) => (
             <Item name={name} message={message} imgURL={imgURL} />
