@@ -17,12 +17,19 @@ import { useDispatch } from "react-redux";
 import PaymentMethods from "./page/PaymentMethods";
 import Pay from "./page/Pay";
 import NotPay from "./page/NotPay";
-import Notification from './components/Notifications/Notification'
-import ConfirmService from "./page/ConfirmService";
+import { Elements } from "@stripe/react-stripe-js";
+import { loadStripe } from "@stripe/stripe-js";
+
+const stripePromise = loadStripe(
+  "pk_test_51O4gkgD3YXfw7A9OCrcmMR7KH5RB0lHjigzLXqtap7qigk2Le0kh9Q0OGTjSaYpdSTRTcJS1yIFA9jIVML956B9O00NqWfPeG6"
+);
+
+import Notification from "./components/Notifications/Notification";
 function App() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [showFooter, setShowFooter] = useState(false);
+  const [showNavbar, setShowNavbar] = useState(false);
 
   useEffect(() => {
     try {
@@ -42,38 +49,54 @@ function App() {
         navigate("/login");
       } else if (introStorage && user) {
         // navigate("/home");
+        setShowFooter(true);
+        setShowNavbar(true);
       }
     } catch (error) {
       console.error(error);
     }
-  }, [showFooter]);
+  }, []);
 
   return (
     <>
+      {showNavbar && <Notification />}
       <Routes>
         <Route path="/onboarding" element={<IntroCarousel />} />
-
         <Route path="/home" element={<Home />} />
-
         <Route
           path="/login"
-          element={<LoginForm setShowFooter={setShowFooter} />}
+          element={
+            <LoginForm
+              setShowFooter={setShowFooter}
+              setShowNavbar={setShowNavbar}
+            />
+          }
         />
         <Route path="/register" element={<LoginRegister />} />
-        <Route path="/search" element={<SearchPage />} />
+        <Route path="/search-services" element={<SearchPage />} />
         <Route path="/address" element={<Address />} />
-        <Route path="/noti" element={<Notification />} />
         {/* <Route path="/address" element={<Directions />} /> */}
         <Route path="/professionalfilter" element={<ProfessionalFilter />} />
         <Route path="/editprofile" element={<EditProfile />} />
         <Route
           path="/profile"
-          element={<Profile setShowFooter={setShowFooter} />}
+          element={
+            <Profile
+              setShowFooter={setShowFooter}
+              setShowNavbar={setShowNavbar}
+            />
+          }
         />
         <Route path="/PaymentMethods" element={<PaymentMethods />} />
-        <Route path="/Pay" element={<Pay />} />
+        <Route
+          path="/Pay"
+          element={
+            <Elements stripe={stripePromise}>
+              <Pay />
+            </Elements>
+          }
+        />
         <Route path="/NotPay" element={<NotPay />} />
-
         <Route path="/*" element={<ErrorPage />} />
       </Routes>
       {showFooter && <Footer />}

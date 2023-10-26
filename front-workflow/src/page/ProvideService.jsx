@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import Logo from "../../pictures/logo.png";
-import { IoMdNotifications } from "react-icons/io";
+import Logo from "../pictures/logo.png";
+import { FaCheckCircle } from "react-icons/fa";
 
 const ProvideService = () => {
     // Estado para almacenar los datos del formulario
@@ -12,26 +12,44 @@ const ProvideService = () => {
         service: "",
     });
 
-    // Función para manejar cambios en los campos de entrada
+    // Estado para controlar la visibilidad del modal
+    const [isModalOpen, setIsModalOpen] = useState(false);
+
+    // Manejar cambios en los campos de entrada
     const handleInputChange = (e) => {
         const { id, value } = e.target;
         // Actualiza el estado con los nuevos valores del campo cambiado
         setFormData({ ...formData, [id]: value });
     };
 
-    // Función para manejar el envío del formulario
+    // Manejar el envío del formulario
     const handleSubmit = (e) => {
         e.preventDefault();
-        // Aquí puedes acceder a formData y realizar la lógica para guardar o procesar los datos.
-        console.log(formData);
+        // Abre el modal de éxito
+        setIsModalOpen(true);
     };
 
+    // Cancelar el modal de éxito
+    const cancelModal = () => {
+        // Cierra el modal de éxito
+        setIsModalOpen(false);
+    };
+
+    // Cerrar el modal de éxito
+    const closeModal = () => {
+        // Cierra el modal de éxito
+        setIsModalOpen(false);
+    };
+
+    // Función para guardar los datos en una base de datos (aquí, solo se muestra en la consola)
+    const saveDataToDatabase = () => {
+        // Aquí puedes enviar los datos a una base de datos
+        // En este caso, solo los mostraremos en la consola
+        console.log("Datos guardados:", formData);
+    };
     return (
         <section className="h-screen px-4 m-auto max-w-xs bg-white">
             <div>
-                <div className="text-[#41BCAC] mt-8 text-2xl cursor-pointer float-right">
-                    <IoMdNotifications />
-                </div>
                 <div className="w-[70px] m-auto pt-14">
                     <img src={Logo} alt="Logo" />
                 </div>
@@ -111,15 +129,51 @@ const ProvideService = () => {
                         <div className="flex justify-center p-4">
                             <button
                                 type="submit"
-                                className="bg-[#41BCAC] shadow-bottom-black text-white text-base rounded-[18px] w-[180px] h-[35px] text-[15px] transition-transform transform hover:scale-105"
+                                className="bg-[#41BCAC] shadow-bottom-black text-white text-base rounded-[18px] 
+                                w-[180px] h-[35px] text-[15px] transition-transform transform hover:scale-105"
                             >
                                 CONFIRMAR
                             </button>
-
                         </div>
                     </form>
                 </div>
             </div>
+
+            {/*Fondo oscurecido cuando se muestra el modal*/}
+            {isModalOpen && <div className="fixed inset-0 bg-black opacity-50 z-10" />}
+            
+            {/*Ventana emergente*/}
+            {isModalOpen && (
+                <div className="fixed inset-0 flex items-center justify-center z-50">
+                    <div className="bg-white rounded-2xl p-6 pb-1 shadow-md flex flex-col">
+                        <div className="flex flex-col items-center">
+                            <span className="text-center mb-4 text-[#41BCAC]" style={{ fontSize: '90px' }}>
+                                <FaCheckCircle />
+                            </span>
+
+                            <p className="text-[#41BCAC] text-2xl font-bold mb-2">Realizado con éxito</p>
+                            <p>¡Mantén activas las notificaciones!</p>
+                        </div>
+                        <div className="flex justify-end mt-auto">
+                            <button
+                                onClick={cancelModal}
+                                className=" text-[#3f3f3f] p-6 pb-1 hover:text-[#3e9e92] mr-4"
+                            >
+                                Cancelar
+                            </button>
+                            <button
+                                onClick={() => {
+                                    closeModal();
+                                    saveDataToDatabase();
+                                }}
+                                className=" text-[#41BCAC] p-6 pb-1 hover:text-[#3f3f3f]"
+                            >
+                                Confirmar
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            )}
         </section>
     );
 };
