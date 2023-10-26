@@ -9,9 +9,10 @@ import {
 import { MdBuildCircle } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
 import { logout } from "../../store/UserSlice";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 const Profile = ({ setShowFooter, setShowNavbar }) => {
+  const user = useSelector((state) => state.user);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const handleLogout = () => {
@@ -36,7 +37,7 @@ const Profile = ({ setShowFooter, setShowNavbar }) => {
         </div>
         <div>
           <h2 className="text-2xl font-bold text-black text-center">
-            Martín Rocco
+            {user?.user?.email}
           </h2>
           <hr className="border-t-2 border-gray-400 m-4" />
         </div>
