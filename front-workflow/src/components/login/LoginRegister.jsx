@@ -1,11 +1,25 @@
 import React from "react";
 import logo from "../../pictures/logo.png";
 import { useForm } from "react-hook-form";
+import axios from "axios";
 const LoginRegister = () => {
   const { register, handleSubmit, reset } = useForm();
 
   const submit = (data) => {
     console.log(data);
+    e.preventDefault();
+
+    axios
+      .post(``, userData)
+      .then((res) => {
+        // localStorage.setItem('user', userData.user)
+        navigate("/login");
+        console.log(res.data);
+      })
+      .catch((err) => {
+        // console.log(err)
+        console.log(err.response.data.error);
+      });
   };
   return (
     <>
