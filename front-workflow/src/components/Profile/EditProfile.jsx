@@ -11,12 +11,11 @@ const EditProfile = () => {
   };
 
   return (
-    <section className="h-screen m-auto max-w-xs bg-white ">
-      <div className="w-full absolute -top-2 max-w-xs">
+    <section className="h-screen m-auto  bg-white ">
+      <div className="w-full absolute -top-2 ">
         <img className="w-full" src={imagenTop} alt="" />
       </div>
       <div className="bg-white p-4 rounded-lg w-80">
-
         <div className="flex items-center space-x-6 mb-[5rem] pt-10">
           <span onClick={handleBack} className="cursor-pointer z-10 text-white">
             <FaArrowLeft />
@@ -55,7 +54,10 @@ const EditProfile = () => {
           <div className=" bg-white text-xs relative">
             <div className="w-full p-1 bg-slate-50 ">
               <div className="flex items-center justify-between mb-1 bg-slate-100 ">
-                <label className="text-gray-700 font-bold pl-2" htmlFor="nombre">
+                <label
+                  className="text-gray-700 font-bold pl-2"
+                  htmlFor="nombre"
+                >
                   Nombre
                 </label>
                 <input
@@ -127,7 +129,10 @@ const EditProfile = () => {
                 />
               </div>
               <div className="flex items-center justify-between mb-1 bg-slate-100">
-                <label className="text-gray-700 font-bold pl-2" htmlFor="contraseña">
+                <label
+                  className="text-gray-700 font-bold pl-2"
+                  htmlFor="contraseña"
+                >
                   Contraseña
                 </label>
                 <input
@@ -150,10 +155,8 @@ const EditProfile = () => {
             </button>
           </div>
         </form>
-        
       </div>
     </section>
-    
   );
 };
 

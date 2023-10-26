@@ -10,14 +10,17 @@ const Notification = () => {
   const [showItem, setShowItem] = useState(true);
   const [showItem2, setShowItem2] = useState(true);
   const [notification, setNotification] = useState(true);
+  const [backButton, setBackButton] = useState(false);
   const path = location.pathname;
 
   useEffect(() => {
-    if (path == "/profile") {
-      setNotification(!notification);
+    if (path === "/home" || path === "/message" || path === "/profile") {
+      // setNotification(!notification);
+      setBackButton(false);
+    } else {
+      setBackButton(true);
     }
-    console.log(path)
-  }, []);
+  }, [path]);
 
   const noti = [
     {
@@ -45,21 +48,27 @@ const Notification = () => {
       description: "te ha realizado una transferencia",
     },
   ];
-  
+
   const [isOpen, setIsOpen] = useState(false);
 
   return (
     <>
       {notification && (
-        <section className="flex justify-between p-3 absolute z-50 w-full text-2xl ">
-          <button
-            onClick={() => {
-              navigate(-1),
-                isOpen == false ? setIsOpen(false) : setIsOpen(!isOpen);
-            }}
-          >
-            <IoIosArrowBack />
-          </button>
+        <section
+          className={`flex ${
+            backButton ? "justify-between" : "justify-end"
+          } p-3 absolute z-50 w-full text-2xl`}
+        >
+          {backButton && (
+            <button
+              onClick={() => {
+                navigate(-1),
+                  isOpen == false ? setIsOpen(false) : setIsOpen(!isOpen);
+              }}
+            >
+              <IoIosArrowBack />
+            </button>
+          )}
           <button onClick={() => setIsOpen(!isOpen)}>
             <IoIosNotifications />
           </button>
