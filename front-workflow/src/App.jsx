@@ -63,7 +63,7 @@ function App() {
           element={<LoginForm setShowFooter={setShowFooter} />}
         />
         <Route path="/register" element={<LoginRegister />} />
-        <Route path="/search" element={<SearchPage />} />
+        <Route path="/search-services" element={<SearchPage />} />
         <Route path="/address" element={<Address />} />
         {/* <Route path="/address" element={<Directions />} /> */}
         <Route path="/professionalfilter" element={<ProfessionalFilter />} />
