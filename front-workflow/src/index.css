@@ -18,7 +18,6 @@ body {
 .i-register {
   @apply w-[85%] max-w-[300px] mt-6 bg-white outline-none text-xs  border-b-2 border-gray-200 text-black;
 }
-
 .textblack {
   @apply text-black;
 }
@@ -27,6 +26,8 @@ body {
 }
 .orderDataCart{@apply flex items-center  px-2 }
 
+.wastedOption-services{@apply flex gap-2 items-center bg-[#EFEFF4] p-2 px-4 my-2}
+.wastedOption-icon{@apply text-[#41BCAC] text-lg}
 .m{
   border:1px solid red;
 }
