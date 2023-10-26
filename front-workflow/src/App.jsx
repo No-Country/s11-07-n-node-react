@@ -50,7 +50,7 @@ function App() {
       } else if (introStorage && !user) {
         navigate("/login");
       } else if (introStorage && user) {
-        // navigate("/home");
+        navigate("/home");
         setShowFooter(true);
         setShowNavbar(true);
       }
