@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 import logo from "../pictures/logo.png";
 import lupa from "../assets/lupa.png";
 
@@ -14,8 +14,7 @@ const Home = () => {
   return (
     <>
       <section className="min-h-screen w-full bg-white flex items-center font-roboto relative z-10">
-        <div className="w-full absolute top-0 h-[80px]  flex items-center  px-4">
-        </div>
+        <div className="w-full absolute top-0 h-[80px]  flex items-center  px-4"></div>
         <section className=" w-full md:rounded-m px-2 md:px-3 max-w-xs m-auto flex items-center md:shadow-[rgba(0,_0,_0,_0.24)_0px_3px_8px] ">
           <section className="m-auto w-full">
             <div className="w-full">
@@ -35,7 +34,6 @@ const Home = () => {
                   Brindar Servicio
                 </button>
               </Link>
-              {/* <Footer /> */}
             </div>
           </section>
         </section>
