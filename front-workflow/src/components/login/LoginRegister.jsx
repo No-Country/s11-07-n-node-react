@@ -26,6 +26,7 @@ const LoginRegister = () => {
         console.log(err.response.data.error);
       });
   };
+  
   return (
     <>
       <section className="h-screen w-full bg-white flex items-center">

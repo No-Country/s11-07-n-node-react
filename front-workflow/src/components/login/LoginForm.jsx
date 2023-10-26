@@ -53,7 +53,7 @@ const LoginForm = ({ setShowFooter, setShowNavbar }) => {
   return (
     <>
       <section className="h-screen w-full bg-white flex items-center">
-        <section className="lg:hidden max-w-xs px-4 m-auto  bg-white md:shadow-[rgba(0,_0,_0,_0.24)_0px_3px_8px]">
+        <section className="lg:hidden max-w-xs px-4 m-auto  bg-white">
           <div className="w-full pt-8 ">
             <img className="m-auto  " src={logo} alt="" />
           </div>
