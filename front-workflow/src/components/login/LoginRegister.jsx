@@ -15,18 +15,16 @@ const LoginRegister = () => {
     e.preventDefault();
 
     axios
-      .post(``, userData)
+      .post("http://localhost:3000/api/v1/auth/register", userData)
       .then((res) => {
-        // localStorage.setItem('user', userData.user)
         navigate("/login");
         console.log(res.data);
       })
       .catch((err) => {
-        // console.log(err)
-        console.log(err.response.data.error);
+        console.log(err);
       });
   };
-  
+
   return (
     <>
       <section className="h-screen w-full bg-white flex items-center">
