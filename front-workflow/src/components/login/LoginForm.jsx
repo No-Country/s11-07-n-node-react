@@ -5,14 +5,16 @@ import { BsApple, BsFacebook } from "react-icons/bs";
 import { FcGoogle } from "react-icons/fc";
 import { Link, useNavigate } from "react-router-dom";
 import { localUser, loginUser } from "../../store/UserSlice";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import bg from "../../assets/img_WL_IS.png";
 import logob from "../../assets/logo_b.png";
+import Success from "../Success/Success";
 
 const LoginForm = ({ setShowFooter, setShowNavbar }) => {
   const { register, handleSubmit, reset } = useForm();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const { loading, error } = useSelector((state) => state.user);
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -23,7 +25,7 @@ const LoginForm = ({ setShowFooter, setShowNavbar }) => {
       email: email,
       password: password,
     };
-    // PARA PROBAR
+    // PARA PROBAR SIN CONECTAR AL BACK
     dispatch(localUser(userCredentials));
     setEmail("");
     setPassword("");
@@ -31,10 +33,10 @@ const LoginForm = ({ setShowFooter, setShowNavbar }) => {
     navigate("/home");
     setShowFooter(true);
     setShowNavbar(true);
-    // PARA USAR
+
+    // PARA USAR CONECTADO AL BACK
     // dispatch(loginUser(userCredentials)).then((result) => {
     //   if (result.payload) {
-    //     console.log("Payload");
     //     setEmail("");
     //     setPassword("");
     //     localStorage.setItem("user", JSON.stringify(userCredentials));
@@ -47,13 +49,22 @@ const LoginForm = ({ setShowFooter, setShowNavbar }) => {
     // });
   };
   const forgetPass = () => {
-    console.log("olvide mi contrase;a");
+    // console.log("olvide mi contrase;a");
   };
 
   return (
     <>
-      <section className="h-screen w-full bg-white flex items-center">
-        <section className="lg:hidden max-w-xs px-4 m-auto  bg-white">
+      {loading && (
+        <div className="bg-white">
+          <span className="p-2 text-[#000] blur-0 loading loading-spinner loading-lg absolute top-[40%] left-[50%] translate-x-[-50%] translate-y-[-50%]"></span>
+        </div>
+      )}
+      <section
+        className={`h-screen w-full bg-white flex items-center ${
+          loading && "bg-[rgba(0,0,0,0.2)] blur-sm"
+        }`}
+      >
+        <section className="lg:hidden max-w-xs px-4 m-auto  ">
           <div className="w-full pt-8 ">
             <img className="m-auto  " src={logo} alt="" />
           </div>
@@ -85,13 +96,17 @@ const LoginForm = ({ setShowFooter, setShowNavbar }) => {
               ¿Haz olvidado tu contraseña?
             </button>
             <button onClick={submit} className="actionRegister">
-              Iniciar sesión
+              {loading ? "Cargando..." : "Iniciar Sesión"}
+              {/* Iniciar sesión */}
             </button>
+            {error && (
+              <p className="text-red-600">Usuario o contaseña incorrectas</p>
+            )}
             <Link to="/register">
               <button className="actionRegister">Registrate</button>
             </Link>
           </form>
-          <div className="flex my-8 text-xl w-full justify-center gap-10  ">
+          <div className="flex my-8 text-xl w-full justify-center gap-10">
             <span className="">
               <FcGoogle />
             </span>

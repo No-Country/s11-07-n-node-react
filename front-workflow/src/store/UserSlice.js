@@ -1,7 +1,9 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
+import jwtDecode from 'jwt-decode';
 
 const URL = "http://localhost:3000/api/v1/auth/login";
+// const URL = "https://workflow-api-qa.onrender.com/api/v1/auth/login"
 
 export const loginUser = createAsyncThunk(
   "user/loginUser",
@@ -13,10 +15,8 @@ export const loginUser = createAsyncThunk(
         headers: { accept: "application/json" },
       }
     );
-    const response = await request.data.user;
+    const response = await request.data;
     // localStorage.setItem("user", JSON.stringify(response));
-    console.log("login....");
-    console.log("Response bd: ",response);
     return response;
   }
 );
@@ -33,7 +33,7 @@ const UserSlice = createSlice({
   reducers: {
     localUser: (state, action) => {
       state.loading = false;
-      state.user = action.payload;
+      state.user = action.payload
       state.error = null;
     },
     logout: (state) => (state = initialState),
@@ -47,7 +47,7 @@ const UserSlice = createSlice({
       })
       .addCase(loginUser.fulfilled, (state, action) => {
         state.loading = false;
-        state.user = action.payload;
+        state.user = jwtDecode(action.payload.token);
         state.error = null;
       })
       .addCase(loginUser.rejected, (state, action) => {
