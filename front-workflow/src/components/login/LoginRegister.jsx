@@ -1,21 +1,28 @@
 import React from "react";
+import { useState } from "react";
 import logo from "../../pictures/logo.png";
 import { useForm } from "react-hook-form";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 import bg from "../../assets/img_WL_IS.png";
 import logob from "../../assets/logo_b.png";
 import { BsApple, BsFacebook } from "react-icons/bs";
 import { FcGoogle } from "react-icons/fc";
 import { Link } from "react-router-dom";
 const LoginRegister = () => {
-  const { register, handleSubmit, reset } = useForm();
+ // const { register, handleSubmit, reset } = useForm();
+  const navigate = useNavigate();
+  const [form, setForm] = useState({
+    "firstName": "",
+    "lastName":"",
+    "email": "",
+    "password": "",
+  });
 
-  const submit = (data) => {
-    console.log(data);
-    e.preventDefault();
-
-    axios
-      .post("http://localhost:3000/api/v1/auth/register", userData)
+  console.log(form);
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    axios.post("http://localhost:3000/api/v1/auth/register",form  )
       .then((res) => {
         navigate("/login");
         console.log(res.data);
@@ -25,6 +32,14 @@ const LoginRegister = () => {
       });
   };
 
+  const handleChange = (event) => {
+    const property = event.target.name;
+    const value = event.target.value;
+
+    setForm({ ...form, [property]: value });
+  };
+
+
   return (
     <>
       <section className="h-screen w-full bg-white flex items-center">
@@ -33,50 +48,54 @@ const LoginRegister = () => {
             <img className="m-auto " src={logo} alt="" />
           </div>
 
-          <form className="text-center" onSubmit={handleSubmit(submit)}>
+          <form className="text-center" onSubmit={handleSubmit}>
             <input
               type="text"
               className="i-register"
               placeholder="Nombre"
-              {...register("nombre")}
+              onChange={handleChange}
+              name="firstName"
               autoComplete="off"
             />
             <input
               type="text"
               className="i-register"
               placeholder="Apellido"
-              {...register("apellido")}
+              onChange={handleChange}
+              name="lastName"
               autoComplete="off"
             />
-            <input
+            {/* <input
               type="text"
               className="i-register"
               placeholder="Ciudad"
               {...register("ciudad")}
               autoComplete="off"
-            />
-            <input
+            /> */}
+            {/* <input
               type="text"
               className="i-register"
               placeholder="Numero de telefono"
               {...register("numero")}
               autoComplete="off"
-            />
+            /> */}
             <input
               type="email"
               className="i-register"
               placeholder="Email"
-              {...register("email")}
+              onChange={handleChange}
+              name="email"
               autoComplete="off"
             />
             <input
               type="password"
               className="i-register"
               placeholder="Contraseña"
-              {...register("pass")}
+              onChange={handleChange}
+              name="password"
               autoComplete="off"
             />
-            <button className="actionRegister ">Finalizar</button>
+            <button className="actionRegister " type="submit">Finalizar</button>
           </form>
         </section>
         <section className="hidden lg:block w-full">
@@ -100,28 +119,30 @@ const LoginRegister = () => {
                 </h1>
                 <div className="w-[80%] 2xl:w-[50%] m-auto">
                   <form
-                    onSubmit={handleSubmit(submit)}
+                    onSubmit={handleSubmit}
                     className="w-full rounded-2xl p-4  shadow shadow-black flex flex-col"
                   >
                     <div className="flex justify-between w-full">
+                      <label className="flex flex-col mb-2 w-[48%]">
+                        <span className="text-black font-semibold">Nombre</span>
+                        <input
+                          type="text"
+                          onChange={handleChange}
+                          name="firstName"
+                          autoComplete="off"
+                          className="border-4 bg-white outline-none border-gray rounded-md py-1"
+                        />
+                      </label>
                       <label className="flex flex-col mb-2 w-[48%]">
                         <span className="text-black font-semibold">
                           Apellido
                         </span>
                         <input
                           type="text"
-                          {...register("apellido")}
+                          onChange={handleChange}
+                          name="lastName"
                           autoComplete="off"
                           className="border-4 bg-white outline-none border-gray rounded-md py-1 "
-                        />
-                      </label>
-                      <label className="flex flex-col mb-2 w-[48%]">
-                        <span className="text-black font-semibold">Nombre</span>
-                        <input
-                          type="text"
-                          {...register("nombre")}
-                          autoComplete="off"
-                          className="border-4 bg-white outline-none border-gray rounded-md py-1"
                         />
                       </label>
                     </div>
@@ -129,43 +150,26 @@ const LoginRegister = () => {
                       <span className="text-black font-semibold">Email</span>
                       <input
                         type="text"
-                        {...register("email")}
+                        onChange={handleChange}
+                        name="email"
                         autoComplete="off"
                         className="border-4 bg-white outline-none border-gray rounded-md py-1"
                       />
                     </label>
-                    <label className="flex flex-col mb-2">
-                      <span className="text-black font-semibold">
-                        Numero de teléfono
-                      </span>
-                      <input
-                        type="text"
-                        {...register("numero")}
-                        autoComplete="off"
-                        className="border-4 bg-white outline-none border-gray rounded-md py-1"
-                      />
-                    </label>
+                    
                     <label className="flex flex-col mb-2">
                       <span className="text-black font-semibold">
                         Contraseña
                       </span>
                       <input
-                        type="text"
-                        {...register("pass")}
+                        type="password"
+                        onChange={handleChange}
+                        name="password"
                         autoComplete="off"
                         className="border-4 bg-white outline-none border-gray rounded-md py-1"
                       />
                     </label>
-                    <label className="flex flex-col mb-2">
-                      <span className="text-black font-semibold">
-                        Confirmar contraseña
-                      </span>
-                      <input
-                        type="text"
-                        autoComplete="off"
-                        className="border-4 bg-white outline-none border-gray rounded-md py-1"
-                      />
-                    </label>
+                    
                     <div className="flex mb-4">
                       <div className="">
                         <input
