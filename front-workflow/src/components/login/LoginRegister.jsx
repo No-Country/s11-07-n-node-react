@@ -19,7 +19,6 @@ const LoginRegister = () => {
     "password": "",
   });
 
-  console.log(form);
   const handleSubmit = (e) => {
     e.preventDefault()
     axios.post("http://localhost:3000/api/v1/auth/register",form  )
@@ -65,20 +64,6 @@ const LoginRegister = () => {
               name="lastName"
               autoComplete="off"
             />
-            {/* <input
-              type="text"
-              className="i-register"
-              placeholder="Ciudad"
-              {...register("ciudad")}
-              autoComplete="off"
-            /> */}
-            {/* <input
-              type="text"
-              className="i-register"
-              placeholder="Numero de telefono"
-              {...register("numero")}
-              autoComplete="off"
-            /> */}
             <input
               type="email"
               className="i-register"
