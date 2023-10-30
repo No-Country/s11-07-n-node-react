@@ -20,6 +20,7 @@ export default class Server {
   private readonly io: ServerSocket
 
   constructor (options: Options) {
+    process.env.NODE_ENV = 'development'
     const { port = 3300, routes } = options
     this.port = port
     this.routes = routes
@@ -32,9 +33,6 @@ export default class Server {
   }
 
   middlewares (): void {
-    this.app.use(cors())
-    this.app.use(express.json())
-
     // Middleware para manejo de errores personalizados
     this.app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
       if (err instanceof UserDataError) {
@@ -43,6 +41,14 @@ export default class Server {
         res.status(500).json({ error: 'Internal Server Error' })
       }
     })
+
+    this.app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
+      console.error(err.stack)
+      res.status(500).send('Something broke!')
+    })
+
+    this.app.use(cors())
+    this.app.use(express.json())
   }
 
   private setupSwaggerDocs (): void {

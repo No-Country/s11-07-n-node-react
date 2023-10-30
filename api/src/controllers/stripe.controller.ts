@@ -1,48 +1,41 @@
 import { Response, Request } from 'express'
-import Stripe from 'stripe'
-import { envs } from '../config/envs.config'
-import fakeData from '../data/fake-data/fake-data'
-
-interface StripeConfig {
-  apiKey: string
-}
-
-const stripeConfig: StripeConfig = {
-  apiKey: envs.API_KEY_STRIPE
-}
-
-const stripe = new Stripe(stripeConfig.apiKey, { apiVersion: '2023-10-16' })
+import { StripeService } from '../services/stripe.service'
+import { JwtAdapter } from '../config/jwt'
+import { UserDataError } from '../config/handlerErrors'
 
 export class StripeController {
   async createCheckoutSession (req: Request, res: Response): Promise<void> {
-    const lineItems = fakeData.services.map((data) => ({
-      quantity: data.quantity,
-      price_data: {
-        product_data: {
-          name: data.name,
-          images: [data.image],
-          description: data.description
-        },
-        currency: data.price_data.currency,
-        unit_amount: data.price
+    try {
+      const token = req.header('Authorization')?.replace('Bearer ', '')
+
+      if (!token) {
+        res.status(401).json({ error: 'You must log in' })
+        return
       }
 
-    }))
+      // Validar el token JWT utilizando tu función validatedToken
+      const decodedToken = await JwtAdapter.validatedToken<{ id: string }>(token)
 
-    const session = await stripe.checkout.sessions.create({
-      line_items: [...lineItems],
-      mode: 'payment',
-      success_url: 'http://localhost:3000/api/v1/success',
-      cancel_url: 'http://localhost:3000/api/v1/cancel'
-    })
-    // .then(session => {
-    //   res.json({ id: session.id })
-    // })
-    // .catch(error => {
-    //   res.json({ error })
-    // })
+      if (!decodedToken) {
+        res.status(401).json({ error: 'Token not valid' })
+        return
+      }
 
-    res.json({ session })
+      // Ahora puedes acceder al ID del usuario desde el token decodificado
+      const userId = decodedToken.id
+      const stripeService = new StripeService()
+
+      // eslint-disable-next-line @typescript-eslint/no-confusing-void-expression
+      const session = await stripeService.createCheckoutSession(userId, req.body.typeService)
+      res.status(200).json({ message: 'Checkout Session', session })
+    } catch (error: unknown) {
+      if (error instanceof UserDataError) {
+        res.status(error.statusCode).json({ error: error.message })
+      }
+      if (!(error instanceof UserDataError)) {
+        res.status(500).json({ error: 'Internal Server Error' })
+      }
+    }
   }
 
   async success (req: Request, res: Response): Promise<void> {
@@ -57,45 +50,3 @@ export class StripeController {
     res.json({ message: 'Cancel json' })
   }
 }
-
-// const session = await stripe.checkout.sessions.create({
-//   line_items: [
-//     {
-//       quantity: 2,
-//       price_data: {
-//         product_data: {
-//           name: 'Laptop',
-//           images: ['https://i.imgur.com/EHyR2nP.png'],
-//           description: 'Laptop de 16 pulgadas, 1TB de disco duro, 16GB de RAM, procesador i7, tarjeta gráfica 2GB'
-//         },
-//         currency: 'ars',
-//         unit_amount: 100000
-//       }
-
-//     },
-//     {
-//       quantity: 4,
-//       price_data: {
-//         product_data: {
-//           name: 'TV',
-//           images: ['https://i.imgur.com/EHyR2nP.png'],
-//           description: 'TV de 32 pulgadas, 1TB de disco duro, 16GB de RAM, procesador i7, tarjeta gráfica 2GB'
-//         },
-//         currency: 'ars',
-//         unit_amount: 150000
-//       }
-//     }
-//   ],
-//   mode: 'payment',
-//   success_url: 'http://localhost:3000/api/v1/success',
-//   cancel_url: 'http://localhost:3000/api/v1/cancel'
-// })
-// // .then(session => {
-// //   res.json({ id: session.id })
-// // })
-// // .catch(error => {
-// //   res.json({ error })
-// // })
-
-// res.json({ session })
-// }

@@ -1,5 +1,5 @@
 import { Router } from 'express'
-import { AuthController } from '../../controllers/auth.controller-template'
+import { AuthController } from '../../controllers/auth.controller'
 
 export class AuthRoutes {
   static get routes (): Router {

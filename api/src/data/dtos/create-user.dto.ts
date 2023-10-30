@@ -11,7 +11,7 @@ export class RegisterUserDto {
   ) {}
 
   static create (object: Record<string, unknown>): [string?, RegisterUserDto?] {
-    const { firstName, lastName, email, password, roles, isActive, city } = object
+    const { firstName, lastName, email, password, roles, isActive, city, portfolio, availabilityStatus } = object
 
     const allowedProperties = ['firstName', 'lastName', 'email', 'password', 'roles', 'isActive', 'city']
     for (const key in object) {
@@ -54,6 +54,20 @@ export class RegisterUserDto {
     if (city !== undefined && city !== '') {
       if (typeof city !== 'string' || !Validators.isValidCity(city)) {
         throw UserDataError.badRequest('City is not valid')
+      }
+    }
+
+    // Validación de portfolioWorkerId solo si se proporciona
+    if (portfolio !== undefined) {
+      if (typeof portfolio !== 'string') {
+        throw UserDataError.badRequest('Portfolio Worker Id is not valid')
+      }
+    }
+
+    // Validación de availabilityStatus solo si se proporciona
+    if (availabilityStatus !== undefined) {
+      if (typeof availabilityStatus !== 'string') {
+        throw UserDataError.badRequest('Availability Status is not valid')
       }
     }
 

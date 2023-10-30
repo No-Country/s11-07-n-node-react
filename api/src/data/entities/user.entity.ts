@@ -1,8 +1,4 @@
-// enum UserRole {
-//   ADMIN = 'ADMIN',
-//   USER = 'USER',
-//   WORKER = 'WORKER',
-// }
+import mongoose from 'mongoose'
 
 export class UserEntity {
   constructor (
@@ -10,8 +6,11 @@ export class UserEntity {
     public lastName: string,
     public email: string,
     public password: string,
-    public roles?: [string],
+    public roles?: string,
     public isActive?: boolean,
-    public city?: string
+    public city?: string,
+    public portfolio?: mongoose.Types.ObjectId,
+    public availabilityStatus?: string,
+    public id?: string
   ) {}
 }
