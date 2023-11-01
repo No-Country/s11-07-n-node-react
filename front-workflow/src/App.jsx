@@ -96,7 +96,7 @@ function App() {
             />
           }
         />
-        <Route path="/PaymentMethods" element={<PaymentMethods />} />
+        <Route path="/paymentMethods" element={<PaymentMethods />} />
         {/* <Route
           path="/Pay"
           element={

@@ -26,27 +26,28 @@ const LoginForm = ({ setShowFooter, setShowNavbar }) => {
       password: password,
     };
     // PARA PROBAR SIN CONECTAR AL BACK
-    dispatch(localUser(userCredentials));
-    setEmail("");
-    setPassword("");
-    localStorage.setItem("user", JSON.stringify(userCredentials));
-    navigate("/home");
-    setShowFooter(true);
-    setShowNavbar(true);
+    // dispatch(localUser(userCredentials));
+    // setEmail("roles@mail.com");
+    // setPassword("abcd12345");
+    // localStorage.setItem("user", JSON.stringify(userCredentials));
+    // navigate("/home");
+    // setShowFooter(true);
+    // setShowNavbar(true);
 
     // PARA USAR CONECTADO AL BACK
-    // dispatch(loginUser(userCredentials)).then((result) => {
-    //   if (result.payload) {
-    //     setEmail("");
-    //     setPassword("");
-    //     localStorage.setItem("user", JSON.stringify(userCredentials));
-    //     navigate("/home");
-    //     setShowFooter(true);
-    //     setShowNavbar(true);
-    //   } else {
-    //     console.log("Error al logear");
-    //   }
-    // });
+    dispatch(loginUser(userCredentials)).then((result) => {
+      if (result.payload) {
+        setEmail("");
+        setPassword("");
+        // es mas rapido y seguro almacenar solo la cadena sin parsearlo a JSON
+        localStorage.setItem("token", result.payload.token);
+        navigate("/paymentMethods");
+        setShowFooter(true);
+        setShowNavbar(true);
+      } else {
+        console.log("Error al logear");
+      }
+    });
   };
   const forgetPass = () => {
     // console.log("olvide mi contrase;a");
@@ -60,9 +61,8 @@ const LoginForm = ({ setShowFooter, setShowNavbar }) => {
         </div>
       )}
       <section
-        className={`h-screen w-full bg-white flex items-center ${
-          loading && "bg-[rgba(0,0,0,0.2)] blur-sm"
-        }`}
+        className={`h-screen w-full bg-white flex items-center ${loading && "bg-[rgba(0,0,0,0.2)] blur-sm"
+          }`}
       >
         <section className="lg:hidden max-w-xs px-4 m-auto  ">
           <div className="w-full pt-8 ">
