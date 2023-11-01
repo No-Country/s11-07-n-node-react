@@ -16,18 +16,17 @@ export class PortfolioController {
       }
 
       // Validar el token JWT utilizando tu función validatedToken
-      const decodedToken = await JwtAdapter.validatedToken<{ id: string }>(token)
+      const decodedToken = await JwtAdapter.validatedToken<{ id: string, portfolio: string }>(token)
 
       if (!decodedToken) {
         res.status(401).json({ error: 'Token not valid' })
         return
       }
 
-      // Ahora puedes acceder al ID del usuario desde el token decodificado
-      const userId = decodedToken.id
+      const portfolioId = decodedToken.portfolio
 
       const portfolioService = new PortfolioService()
-      const portfolio = await portfolioService.findPortfolioById(req.params.id)
+      const portfolio = await portfolioService.findPortfolioById(portfolioId)
       res.status(200).json({ portfolio })
     } catch (error: unknown) {
       if (error instanceof UserDataError) {
@@ -35,6 +34,20 @@ export class PortfolioController {
       }
       if (!(error instanceof UserDataError)) {
         res.status(500).json({ error: 'Internal Server Error controlador' })
+      }
+    }
+  }
+
+  async getAllPortfolios (req: Request, res: Response): Promise<void> {
+    try {
+      const porfolios = await new PortfolioService().getAllPortfolios()
+      res.status(200).json({ porfolios })
+    } catch (error) {
+      if (error instanceof UserDataError) {
+        res.status(error.statusCode).json({ error: error.message })
+      }
+      if (!(error instanceof UserDataError)) {
+        res.status(500).json({ error: 'Internal Server Error' })
       }
     }
   }

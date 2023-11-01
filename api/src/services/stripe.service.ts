@@ -41,8 +41,8 @@ export class StripeService {
         throw UserDataError.badRequest('Service not found')
       }
 
-      if (!roles.includes('WORKER')) {
-        throw UserDataError.badRequest('You are not a worker')
+      if (!roles.includes('USER')) {
+        throw UserDataError.unauthorized('You are not authorized to perform this action')
       }
 
       const selectedService = [service]

@@ -129,8 +129,24 @@ export class AddWorkController {
 
   async findArrayServiceById (req: Request, res: Response): Promise<void> {
     try {
+      const token = req.header('Authorization')?.replace('Bearer ', '')
+
+      if (!token) {
+        res.status(401).json({ error: 'You must log in' })
+        return
+      }
+
+      const decodedToken = await JwtAdapter.validatedToken<{ id: string, roles: string[] }>(token)
+
+      if (!decodedToken) {
+        res.status(401).json({ error: 'Token not valid' })
+        return
+      }
+
+      const userId = decodedToken.id
+
       const addService = new AddWorkService()
-      const service = await addService.findArrayServiceById(req.params.id, req.body.typeService)
+      const service = await addService.findArrayServiceById(userId, req.params.type_service)
       res.status(200).json({ service })
     } catch (error) {
       if (error instanceof UserDataError) {

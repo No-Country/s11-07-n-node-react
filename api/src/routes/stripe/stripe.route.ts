@@ -6,8 +6,6 @@ export class StripeRoute {
     const route = Router()
     const STRIPE_CONTROLLER = new StripeController()
 
-    // route.delete('/payment', USER_CONTROLLER.deleteUser)
-
     /**
      * @swagger
      * components:
@@ -35,14 +33,16 @@ export class StripeRoute {
      *         - typeService
      *       example:
      *         typeService: serviceElectrician
-     *   authorization:
-     *     type: token
-     *     description: Token de autorización
-     *     in: header
-     *     name: Authorization
-     *     required: true
-     *     tokenType: string  // Cambiado para evitar repetición
      */
+
+    // /**
+    //  * @swagger
+    //  * paths:
+    //  *   /create-checkout-session:
+    //  *     get:
+    //  *      security:
+    //  *        - bearerAuth: []
+    //  */
 
     /**
      * @swagger

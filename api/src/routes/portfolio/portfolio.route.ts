@@ -8,6 +8,20 @@ export class PortfolioRoutes {
 
     /**
      * @swagger
+     * /portfolios:
+     *   get:
+     *     summary: Obtener todos los portafolios
+     *     description: Obtiene una lista de todos los portafolios registrados en el sistema.
+     *     responses:
+     *       '200':
+     *         description: Respuesta exitosa. Devuelve una lista de usuarios.
+     *       '500':
+     *         description: Error interno del servidor.
+     */
+    route.get('/portfolios', PORTFOLIO_CONTROLLER.getAllPortfolios)
+
+    /**
+     * @swagger
      * components:
      *   schemas:
      *     Portfolio:
@@ -39,18 +53,12 @@ export class PortfolioRoutes {
 
     /**
      * @swagger
-     * /portfolio/{id}:
-     *   get:
+     * /portfolio/id:
+     *     get:
+     *       security:
+     *        - bearerAuth: []
      *     summary: Obtener un portafolio de usuario por ID
      *     description: Obtiene un portafolio por su ID.
-     *     parameters:
-     *       - in: path
-     *         name: id
-     *         required: true
-     *         schema:
-     *           type: string
-     *     requestParams:
-     *       required: true
      *     responses:
      *       '200':
      *         description: Respuesta exitosa. Devuelve el portafolio especificado.
@@ -59,7 +67,17 @@ export class PortfolioRoutes {
      *       '500':
      *         description: Error interno del servidor.
      */
-    route.get('/portfolio/:id', PORTFOLIO_CONTROLLER.findPortfolioById)
+
+    /**
+     * @swagger
+     * components:
+     *   securitySchemes:
+     *     bearerAuth:
+     *       type: http
+     *       scheme: bearer
+     *       bearerFormat: JWT
+     */
+    route.get('/portfolio/id', PORTFOLIO_CONTROLLER.findPortfolioById)
 
     // route.post('/create-portfolio', PORTFOLIO_CONTROLLER.createPortfolio)
     // route.put('/update-portfolio/:id', PORTFOLIO_CONTROLLER.updatePortfolio)

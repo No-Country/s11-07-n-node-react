@@ -34,11 +34,13 @@ export class AuthRoutes {
      *         - lastName
      *         - email
      *         - password
+     *         - roles
      *       example:
      *         firstName: John W
      *         lastName: Doe h
      *         email: example@mail.com
      *         password: abcd12345
+     *         roles: [WORKER]
      */
 
     /**

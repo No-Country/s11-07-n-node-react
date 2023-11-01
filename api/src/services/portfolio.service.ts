@@ -1,23 +1,11 @@
 import { UserDataError } from '../config/handlerErrors'
-// import { PortfolioDto } from '../data/dtos/portfolio.dto'
 import { PortfolioEntity } from '../data/entities/portfolio.entity'
 import AddWorkModel from '../data/models/add-work/add-work.model'
 import PortfolioModel from '../data/models/portfolio.model'
-// import { AddWorkModel } from '../data/models/add-work/add-work.model'
-// import { PortfolioModel } from '../data/models/portfolio.model'
-
-import { UserService } from './user.service'
 
 export class PortfolioService {
-  // private readonly portfolioEntity: PortfolioEntity
-
-  // constructor () {
-  //   // this.portfolioEntity = new PortfolioModel()
-  // }
-
   async createPortfolio ():
   Promise<PortfolioEntity> {
-    // const { ...data } = this.portfolioEntity
     try {
       const newPortfolio = await PortfolioModel.create({
         servicePlumber: [],
@@ -26,7 +14,6 @@ export class PortfolioService {
         serviceMechanic: []
       })
 
-      // const newPortfolio = await PortfolioModel.create({ data })
       if (newPortfolio === null) {
         throw UserDataError.badRequest('Error creating portfolio')
       }
@@ -41,11 +28,47 @@ export class PortfolioService {
     }
   }
 
-  async findPortfolioById (id: string): Promise<PortfolioEntity> {
-    const checkUser = new UserService()
+  async getAllPortfolios (): Promise<PortfolioEntity[]> {
     try {
-      const user = await checkUser.findUserById(id)
-      const portfolio = await PortfolioModel.findById(user.portfolio)
+      const portfolios = await PortfolioModel.find()
+        .populate([
+          {
+            path: 'servicePlumber',
+            model: AddWorkModel
+          },
+          {
+            path: 'serviceElectrician',
+            model: AddWorkModel
+          },
+          {
+            path: 'servicePainter',
+            model: AddWorkModel
+          },
+          {
+            path: 'serviceMechanic',
+            model: AddWorkModel
+          }
+        ])
+        .exec()
+
+      if (portfolios === null) {
+        throw UserDataError.badRequest('Portfolios not found')
+      }
+
+      return portfolios.map(portfolio => portfolio.toObject()) as PortfolioEntity[]
+    } catch (error: unknown) {
+      if (error instanceof UserDataError) {
+        throw error
+      }
+      throw UserDataError.internalServer()
+    }
+  }
+
+  async findPortfolioById (portfolioId: string): Promise<PortfolioEntity> {
+    // const checkUser = new UserService()
+    try {
+      // const user = await checkUser.findUserById(id)
+      const portfolio = await PortfolioModel.findById(portfolioId)
         .populate([
           {
             path: 'servicePlumber',
