@@ -36,7 +36,7 @@ const CartUser = ({ name, ubication, distance, photo, price }) => {
           onClick={() => navigate("/confirm")}
           className="ml-auto text-[#31D2DC]"
         >
-          siguiente{" "}
+          ver perfil{" "}
         </p>
         <IoIosArrowForward className="bg-black text-white ml-1 " />
       </div>

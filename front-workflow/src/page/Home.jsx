@@ -17,7 +17,7 @@ const Home = () => {
               <button className=" buttonsHome ">Buscar servicio </button>
             </Link>
           </div>
-          <div className="flex shadow-[0px_10px_6px_0px_#00000024] bg-[#41BCAC] rounded-2xl mt-5">
+          <div className="flex shadow-[0px_10px_6px_0px_#00000024] bg-[#41BCAC] rounded-2xl mt-5 ">
             <span className="iconsHome">
               <GiShakingHands className="ml-auto" />
             </span>
