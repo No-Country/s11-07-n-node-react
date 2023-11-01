@@ -4,6 +4,7 @@ import { AvailabilityStatusEnum } from '../models/add-work/add-work.model'
 export interface AddWorkEntity extends Document {
   typeService: string
   experienceYears: number
+  provider: string
   name: string
   category: string
   quantity: number

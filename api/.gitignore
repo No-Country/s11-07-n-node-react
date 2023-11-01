@@ -5,8 +5,8 @@ mongo/
 .env
 *.txt
 swagger.js
-/client
-
+client/
+src/data/fake-data
 # Logs
 logs
 *.log

@@ -12,6 +12,11 @@ const AddWorkSchema = new Schema<AddWorkEntity>({
     type: String
   },
 
+  provider: {
+    type: String,
+    ref: 'User'
+  },
+
   experienceYears: {
     type: Number
   },

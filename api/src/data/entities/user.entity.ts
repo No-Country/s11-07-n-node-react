@@ -1,16 +1,16 @@
-import mongoose from 'mongoose'
+import mongoose, { Schema } from 'mongoose'
 
 export class UserEntity {
   constructor (
+    public _id: mongoose.Types.ObjectId,
     public firstName: string,
     public lastName: string,
     public email: string,
     public password: string,
-    public roles?: string,
-    public isActive?: boolean,
+    public roles: string[],
+    public isActive: boolean,
+    public portfolio: Schema.Types.ObjectId,
     public city?: string,
-    public portfolio?: mongoose.Types.ObjectId,
-    public availabilityStatus?: string,
-    public id?: string
+    public availabilityStatus?: string
   ) {}
 }

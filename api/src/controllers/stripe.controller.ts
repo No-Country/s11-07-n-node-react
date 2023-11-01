@@ -14,7 +14,8 @@ export class StripeController {
       }
 
       // Validar el token JWT utilizando tu función validatedToken
-      const decodedToken = await JwtAdapter.validatedToken<{ id: string }>(token)
+      // const decodedToken = await JwtAdapter.validatedToken<{ id: string }>(token)
+      const decodedToken = await JwtAdapter.validatedToken<{ id: string, roles: string[] }>(token)
 
       if (!decodedToken) {
         res.status(401).json({ error: 'Token not valid' })
@@ -23,10 +24,13 @@ export class StripeController {
 
       // Ahora puedes acceder al ID del usuario desde el token decodificado
       const userId = decodedToken.id
+      const roles = decodedToken.roles
+      // const userId = await req.body.id
+
       const stripeService = new StripeService()
 
       // eslint-disable-next-line @typescript-eslint/no-confusing-void-expression
-      const session = await stripeService.createCheckoutSession(userId, req.body.typeService)
+      const session = await stripeService.createCheckoutSession(userId, req.body.typeService, roles)
       res.status(200).json({ message: 'Checkout Session', session })
     } catch (error: unknown) {
       if (error instanceof UserDataError) {

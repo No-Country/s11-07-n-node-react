@@ -16,7 +16,7 @@ export class AddWorkController {
       }
 
       // Validar el token JWT utilizando tu función validatedToken
-      const decodedToken = await JwtAdapter.validatedToken<{ id: string }>(token)
+      const decodedToken = await JwtAdapter.validatedToken<{ id: string, roles: string[] }>(token)
 
       if (!decodedToken) {
         res.status(401).json({ error: 'Token not valid' })
@@ -24,14 +24,22 @@ export class AddWorkController {
       }
 
       // Ahora puedes acceder al ID del usuario desde el token decodificado
-      const userId = decodedToken.id
+      // const userId = decodedToken.id
+      // const roles = decodedToken.roles
 
       const [, SERVICE_DATA] = AddWorkDto.create(req.body)
-      // const SERVICE_DATA = req.body
+
+      const newService = {
+        userId: decodedToken.id,
+        roles: decodedToken.roles,
+        data: SERVICE_DATA ?? {},
+        action: 'add-service'
+      }
 
       const addService = new AddWorkService()
 
-      await addService.managerServicesUser(userId, SERVICE_DATA!, 'add-service')
+      await addService.managerServicesUser(newService)
+      // await addService.managerServicesUser(userId, SERVICE_DATA!, 'add-service')
 
       res.status(200).json({ message: 'Add Service' })
     } catch (error: unknown) {
@@ -53,17 +61,24 @@ export class AddWorkController {
         return
       }
 
-      const decodedToken = await JwtAdapter.validatedToken<{ id: string }>(token)
+      const decodedToken = await JwtAdapter.validatedToken<{ id: string, roles: string[] }>(token)
 
       if (!decodedToken) {
         res.status(401).json({ error: 'Token not valid' })
         return
       }
 
-      const userId = decodedToken.id
+      // const userId = decodedToken.id
+
+      const updateData = {
+        userId: decodedToken.id,
+        roles: decodedToken.roles,
+        data: req.body,
+        action: 'update-service'
+      }
 
       const addService = new AddWorkService()
-      await addService.managerServicesUser(userId, req.body, 'update-service')
+      await addService.managerServicesUser(updateData)
       res.status(200).json({ message: 'Updated Service' })
     } catch (error) {
       if (error instanceof UserDataError) {
@@ -84,17 +99,23 @@ export class AddWorkController {
         return
       }
 
-      const decodedToken = await JwtAdapter.validatedToken<{ id: string }>(token)
+      const decodedToken = await JwtAdapter.validatedToken<{ id: string, roles: string[] }>(token)
 
       if (!decodedToken) {
         res.status(401).json({ error: 'Token not valid' })
         return
       }
 
-      const userId = decodedToken.id
+      // const userId = decodedToken.id
+      const deleteData = {
+        userId: decodedToken.id,
+        roles: decodedToken.roles,
+        data: req.body,
+        action: 'delete-service'
+      }
 
       const addService = new AddWorkService()
-      await addService.managerServicesUser(userId, req.body, 'delete-service')
+      await addService.managerServicesUser(deleteData)
       res.status(200).json({ message: 'Deleted Service' })
     } catch (error) {
       if (error instanceof UserDataError) {

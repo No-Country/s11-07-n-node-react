@@ -1,4 +1,3 @@
-import mongoose, { Types } from 'mongoose'
 import { UserDataError } from '../config/handlerErrors'
 import { PortfolioEntity } from '../data/entities/portfolio.entity'
 import { UserModel } from '../data/models/user.model'
@@ -8,7 +7,14 @@ import PortfolioModel from '../data/models/portfolio.model'
 import { AddWorkDto } from '../data/dtos/add-work.dto'
 import AddWorkModel from '../data/models/add-work/add-work.model'
 import { AddWorkEntity } from '../data/entities/add-work.entity'
-// import { Validators } from '../config/validators'
+import { Schema, Types } from 'mongoose'
+
+interface NewService {
+  userId: string
+  roles: string[]
+  data: AddWorkDto
+  action: string
+}
 
 export class AddWorkService {
   async checkUser (id: string): Promise<UserEntity> {
@@ -27,7 +33,7 @@ export class AddWorkService {
     }
   }
 
-  async checkPortfolio (id: mongoose.Types.ObjectId | undefined): Promise<PortfolioEntity> {
+  async checkPortfolio (id: Schema.Types.ObjectId | undefined): Promise<PortfolioEntity> {
     try {
       const updatePortfolio = await PortfolioModel.findById(id)
 
@@ -71,22 +77,21 @@ export class AddWorkService {
     }
   }
 
-  async addService (WORK_DATA: AddWorkDto, serviceArray: string[] | undefined, portfolio: PortfolioEntity): Promise<void> {
+  async addService (WORK_DATA: AddWorkDto, serviceArray: string[] | undefined, portfolio: PortfolioEntity, id: string): Promise<void> {
     try {
-      // const isValid = Validators.validateAddWorkDto(WORK_DATA)
-
-      // if (!isValid) {
-      //   throw UserDataError.badRequest('unitAmount is minor to 1000 cents')
-      // }
-
-      const { typeService, ...data } = WORK_DATA
-      const newService = await AddWorkModel.create({ typeService, ...data })
+      const { typeService, provider, ...data } = WORK_DATA
+      const newService = await AddWorkModel.create({
+        typeService,
+        provider: id,
+        ...data
+      })
       await newService.save()
       if (Array.isArray(serviceArray)) {
         serviceArray.push(newService.id)
       }
 
-      await portfolio.save()
+      const PortfolioEntity = new PortfolioModel(portfolio)
+      await PortfolioEntity.save()
     } catch (error: unknown) {
       if (error instanceof UserDataError) {
         throw error
@@ -105,7 +110,8 @@ export class AddWorkService {
         })
       }
 
-      await portfolio.save()
+      const PortfolioEntity = new PortfolioModel(portfolio)
+      await PortfolioEntity.save()
       return portfolio
     } catch (error: unknown) {
       if (error instanceof UserDataError) {
@@ -126,7 +132,9 @@ export class AddWorkService {
         serviceArray.pop()
 
         // Guardar el objeto portfolio en la base de datos
-        await portfolio.save()
+        // await portfolio.save()
+        const PortfolioEntity = new PortfolioModel(portfolio)
+        await PortfolioEntity.save()
       }
     } catch (error: unknown) {
       if (error instanceof UserDataError) {
@@ -137,7 +145,7 @@ export class AddWorkService {
   }
 
   async findArrayServiceById (id: string, typeService: string): Promise<AddWorkEntity | undefined> {
-    UserDataError.handleCommonErrors(!Types.ObjectId.isValid(id), 'Invalid ObjectId')
+    // UserDataError.handleCommonErrors(!Types.ObjectId.isValid(id), 'Invalid ObjectId')
 
     try {
       const user = await this.checkUser(id)
@@ -164,11 +172,16 @@ export class AddWorkService {
     }
   }
 
-  async managerServicesUser (id: string, WORK_DATA: AddWorkDto, action: string): Promise<PortfolioEntity> {
-    UserDataError.handleCommonErrors(!Types.ObjectId.isValid(id), 'Invalid ObjectId')
+  async managerServicesUser (newService: NewService): Promise<PortfolioEntity> {
+    const { userId, roles, data: WORK_DATA, action } = newService
+    UserDataError.handleCommonErrors(!Types.ObjectId.isValid(userId), 'Invalid ObjectId')
 
     try {
-      const user = await this.checkUser(id)
+      const user = await this.checkUser(userId)
+
+      if (!roles.includes('WORKER')) {
+        throw UserDataError.badRequest('You are not a worker')
+      }
 
       const portfolio = await this.checkPortfolio(user.portfolio)
 
@@ -176,7 +189,7 @@ export class AddWorkService {
 
       switch (action) {
         case 'add-service': {
-          await this.addService(WORK_DATA, serviceArray, portfolio)
+          await this.addService(WORK_DATA, serviceArray, portfolio, userId)
           break
         }
 

@@ -1,5 +1,5 @@
 import { UserDataError } from '../config/handlerErrors'
-import { PortfolioDto } from '../data/dtos/portfolio.dto'
+// import { PortfolioDto } from '../data/dtos/portfolio.dto'
 import { PortfolioEntity } from '../data/entities/portfolio.entity'
 import AddWorkModel from '../data/models/add-work/add-work.model'
 import PortfolioModel from '../data/models/portfolio.model'
@@ -9,23 +9,30 @@ import PortfolioModel from '../data/models/portfolio.model'
 import { UserService } from './user.service'
 
 export class PortfolioService {
-  private readonly portfolioDto: PortfolioDto
+  // private readonly portfolioEntity: PortfolioEntity
 
-  constructor () {
-    this.portfolioDto = new PortfolioModel()
-  }
+  // constructor () {
+  //   // this.portfolioEntity = new PortfolioModel()
+  // }
 
   async createPortfolio ():
   Promise<PortfolioEntity> {
-    const { ...data } = this.portfolioDto
+    // const { ...data } = this.portfolioEntity
     try {
-      const newPortfolio = await PortfolioModel.create({ data })
+      const newPortfolio = await PortfolioModel.create({
+        servicePlumber: [],
+        serviceElectrician: [],
+        servicePainter: [],
+        serviceMechanic: []
+      })
+
+      // const newPortfolio = await PortfolioModel.create({ data })
       if (newPortfolio === null) {
         throw UserDataError.badRequest('Error creating portfolio')
       }
 
-      // await newPortfolio.save()
-      return newPortfolio
+      await newPortfolio.save()
+      return newPortfolio as PortfolioEntity
     } catch (error: unknown) {
       if (error instanceof UserDataError) {
         throw error

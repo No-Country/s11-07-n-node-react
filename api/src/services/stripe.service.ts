@@ -30,7 +30,7 @@ export class StripeService {
     }
   }
 
-  async createCheckoutSession (id: string, typeService: string): Promise< Stripe.Checkout.Session> {
+  async createCheckoutSession (id: string, typeService: string, roles: string[]): Promise< Stripe.Checkout.Session> {
     try {
       const stripe = new Stripe(this.stripeConfig.apiKey, { apiVersion: '2023-10-16' })
 
@@ -40,6 +40,11 @@ export class StripeService {
       if (service === undefined || service === null) {
         throw UserDataError.badRequest('Service not found')
       }
+
+      if (!roles.includes('WORKER')) {
+        throw UserDataError.badRequest('You are not a worker')
+      }
+
       const selectedService = [service]
       const payService = selectedService.map((data) => ({
 

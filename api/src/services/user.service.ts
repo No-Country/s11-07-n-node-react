@@ -1,46 +1,12 @@
 import { Types } from 'mongoose'
-import { BcryptAdapter } from '../config/bcrypt'
 import { UserDataError } from '../config/handlerErrors'
 import { UserEntity } from '../data/entities/user.entity'
 import { UserModel } from '../data/models/user.model'
-import { RegisterUserDto } from '../data/dtos/create-user.dto'
 import { UpdateUserDto } from '../data/dtos/update-user.dto'
-import { PortfolioService } from './portfolio.service'
 import AddWorkModel from '../data/models/add-work/add-work.model'
 import PortfolioModel from '../data/models/portfolio.model'
 
-// import { AddWorkModel } from '../data/models/add-work/add-work.model'
-// import { PortfolioModel } from '../data/models/portfolio.model'
-
 export class UserService {
-  async push (USER_DATA: RegisterUserDto): Promise<UserEntity | undefined> {
-    const { firstName, lastName, email, password, ...data } = USER_DATA
-
-    await this.findUserByEmail(email)
-    try {
-      const newPortfolio = new PortfolioService()
-      const createdPortfolio = await newPortfolio.createPortfolio()
-
-      const newUser = await UserModel.create({
-        firstName,
-        lastName,
-        email,
-        password: BcryptAdapter.hash(USER_DATA.password),
-        data,
-        portfolio: createdPortfolio.id
-      })
-
-      await createdPortfolio.save()
-      await newUser.save()
-      return newUser.toObject() as UserEntity
-    } catch (error: unknown) {
-      if (error instanceof UserDataError) {
-        throw error
-      }
-      throw UserDataError.internalServer()
-    }
-  }
-
   async findAllUsers (): Promise<UserEntity[]> {
     try {
       const users = await UserModel.find()

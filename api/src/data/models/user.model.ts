@@ -11,23 +11,14 @@ const userSchema = new Schema({
     required: [true, 'Last name is required']
   },
 
-  email: {
-    type: String,
-    required: [true, 'Email is required'],
-    unique: [true, 'Email is already registered']
-  },
-
+  email: { type: String, required: true, unique: true },
   password: {
     type: String,
     required: [true, 'Password is required'],
     minlength: [8, 'Password must be at least 8 characters']
   },
 
-  roles: {
-    type: String,
-    default: 'USER',
-    enum: ['ADMIN', 'USER', 'WORKER']
-  },
+  roles: { type: [String], default: ['USER'], enum: ['ADMIN', 'USER', 'WORKER'], required: true },
 
   isActive: {
     type: Boolean,
@@ -39,10 +30,7 @@ const userSchema = new Schema({
     default: ''
   },
 
-  portfolio: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'Portfolio'
-  },
+  portfolio: { type: Schema.Types.ObjectId, ref: 'Portfolio' },
 
   availabilityStatus: {
     type: String,

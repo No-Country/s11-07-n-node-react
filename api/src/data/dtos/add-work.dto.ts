@@ -27,7 +27,9 @@ export class AddWorkDto {
     public located?: string,
     public unitAmount?: number,
     public description?: string,
-    public images?: string[] | null | undefined
+    public images?: string[] | null | undefined,
+    public name?: string,
+    public provider?: string
 
   ) {}
 
