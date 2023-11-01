@@ -1,14 +1,15 @@
 import jwt from 'jsonwebtoken'
 import { envs } from './envs.config'
-import { Types } from 'mongoose'
+import mongoose from 'mongoose'
 
 const JWT_SEED = envs.JWT_SEED
 const JWT_EXPIRE = envs.JWT_EXPIRE
 
 export interface Payload {
-  id: Types.ObjectId
+  id: mongoose.Types.ObjectId
   email: string
   roles: string[]
+  portfolio: string | mongoose.Types.ObjectId | undefined
 };
 
 export class JwtAdapter {

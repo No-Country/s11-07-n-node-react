@@ -4,7 +4,9 @@ node_modules/
 mongo/
 .env
 *.txt
-
+swagger.js
+client/
+src/data/fake-data
 # Logs
 logs
 *.log
