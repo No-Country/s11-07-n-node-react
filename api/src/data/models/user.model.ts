@@ -1,34 +1,24 @@
 import mongoose, { Schema } from 'mongoose'
 
 const userSchema = new Schema({
-
   firstName: {
     type: String,
-    required: [true, 'The first name is required']
+    required: [true, 'First name is required']
   },
 
   lastName: {
     type: String,
-    required: [true, 'The last name is required']
+    required: [true, 'Last name is required']
   },
 
-  email: {
-    type: String,
-    required: [true, 'The email must be entered'],
-    unique: [true, 'The email is already registered']
-  },
-
+  email: { type: String, required: true, unique: true },
   password: {
     type: String,
-    required: [true, 'The password must be entered'],
-    minlength: [8, 'The password must be at least 8 characters']
+    required: [true, 'Password is required'],
+    minlength: [8, 'Password must be at least 8 characters']
   },
 
-  roles: {
-    type: String,
-    default: 'USER',
-    enum: ['ADMIN', 'USER', 'WORKER']
-  },
+  roles: { type: [String], default: ['USER'], enum: ['ADMIN', 'USER', 'WORKER'], required: true },
 
   isActive: {
     type: Boolean,
@@ -38,6 +28,14 @@ const userSchema = new Schema({
   city: {
     type: String,
     default: ''
+  },
+
+  portfolio: { type: Schema.Types.ObjectId, ref: 'Portfolio' },
+
+  availabilityStatus: {
+    type: String,
+    enum: ['Available', 'Occupied', 'Out of service'],
+    default: 'Available'
   }
 })
 

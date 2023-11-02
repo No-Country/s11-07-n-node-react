@@ -1,5 +1,4 @@
 import { UserDataError } from '../config/handlerErrors'
-import { UserEntity } from '../data/entities/user.entity'
 import { UserModel } from '../data/models/user.model'
 import { RegisterUserDto } from '../data/dtos/create-user.dto'
 import { UserService } from './user.service'
@@ -7,6 +6,7 @@ import { BcryptAdapter } from '../config/bcrypt'
 import { LoginUserDto } from '../data/dtos/login-user.dto'
 import { JwtAdapter, Payload } from '../config/jwt'
 import { envs } from '../config/envs.config'
+import { PortfolioService } from './portfolio.service'
 
 type HashFunction = (password: string) => string
 type MatchPasswordFucntion = (password: string, passHash: string) => boolean
@@ -19,9 +19,41 @@ export class AuthService {
 
   ) {}
 
-  async register (USER_DATA: RegisterUserDto): Promise<UserEntity > {
-    const newUser = await new UserService().push(USER_DATA)
-    return newUser as UserEntity
+  async register (USER_DATA: RegisterUserDto): Promise<string> {
+    const { firstName, lastName, email, password, roles, ...data } = USER_DATA
+
+    const userService = new UserService()
+    await userService.findUserByEmail(email)
+    const newPortfolio = new PortfolioService()
+    const createdPortfolio = await newPortfolio.createPortfolio()
+
+    try {
+      const newUser = await UserModel.create({
+        firstName,
+        lastName,
+        email,
+        roles,
+        password: BcryptAdapter.hash(USER_DATA.password),
+        data,
+        portfolio: createdPortfolio._id
+      })
+
+      await newUser.save()
+
+      const token = JwtAdapter.generateToken({
+        id: newUser._id,
+        email: newUser.email,
+        roles: newUser.roles,
+        portfolio: newUser.portfolio
+      }, envs.JWT_EXPIRE)
+
+      return await token as string
+    } catch (error: unknown) {
+      if (error instanceof UserDataError) {
+        throw error
+      }
+      throw UserDataError.internalServer()
+    }
   }
 
   async login (loginUserDto: LoginUserDto): Promise<string> {
@@ -38,13 +70,14 @@ export class AuthService {
       if (!isPasswordValid) {
         throw UserDataError.unauthorized('Invalid credentials')
       }
+
       const token = JwtAdapter.generateToken({
         id: user._id,
         email: user.email,
-        roles: [user.roles]
+        roles: user.roles,
+        portfolio: user.portfolio
       }, envs.JWT_EXPIRE)
 
-      // 4. Devolver el token
       return await token as string
     } catch (error: unknown) {
       if (error instanceof UserDataError) {

@@ -6,14 +6,15 @@ export class RegisterUserDto {
     public firstName: string,
     public lastName: string,
     public email: string,
-    public password: string
+    public password: string,
+    public roles: string[]
 
   ) {}
 
   static create (object: Record<string, unknown>): [string?, RegisterUserDto?] {
-    const { firstName, lastName, email, password, roles, isActive, city } = object
+    const { firstName, lastName, email, password, isActive, city, roles } = object
 
-    const allowedProperties = ['firstName', 'lastName', 'email', 'password', 'roles', 'isActive', 'city']
+    const allowedProperties = ['firstName', 'lastName', 'email', 'password', 'roles', 'isActive', 'city', 'portfolio']
     for (const key in object) {
       if (!allowedProperties.includes(key)) {
         throw UserDataError.badRequest(`The field ${key} is not a user property`)
@@ -36,11 +37,8 @@ export class RegisterUserDto {
       throw UserDataError.badRequest('Password too short or not valid')
     }
 
-    // Validación de roles solo si se proporciona
-    if (roles !== undefined) {
-      if (!Array.isArray(roles) || !Validators.isValidRoles(roles)) {
-        throw UserDataError.badRequest('Roles is not valid')
-      }
+    if (!Array.isArray(roles) || !Validators.isValidRoles(roles)) {
+      throw UserDataError.badRequest('Roles is not valid')
     }
 
     // Validación de isActive solo si se proporciona
@@ -57,9 +55,23 @@ export class RegisterUserDto {
       }
     }
 
+    // Validación de portfolioWorkerId solo si se proporciona
+    // if (portfolio !== undefined) {
+    //   if (typeof portfolio !== 'string') {
+    //     throw UserDataError.badRequest('Portfolio Worker Id is not valid')
+    //   }
+    // }
+
+    // Validación de availabilityStatus solo si se proporciona
+    // if (availabilityStatus !== undefined) {
+    //   if (typeof availabilityStatus !== 'string') {
+    //     throw UserDataError.badRequest('Availability Status is not valid')
+    //   }
+    // }
+
     return [
       undefined,
-      new RegisterUserDto(firstName.toLowerCase(), lastName.toLowerCase(), email.toLowerCase(), password)
+      new RegisterUserDto(firstName.toLowerCase(), lastName.toLowerCase(), email.toLowerCase(), password, roles)
     ]
   }
 }
