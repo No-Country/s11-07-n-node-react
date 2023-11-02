@@ -85,6 +85,10 @@ function App() {
         <Route path="/address" element={<Address />} />
         {/* <Route path="/address" element={<Directions />} /> */}
         <Route path="/professionalfilter" element={<ProfessionalFilter />} />
+        <Route
+          path="professionalfilter/:name/:category"
+          element={<ConfirmService />}
+        />
         <Route path="/confirm" element={<ConfirmService />} />
         <Route path="/editprofile" element={<EditProfile />} />
         <Route

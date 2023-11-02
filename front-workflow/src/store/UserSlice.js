@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
-import {jwtDecode} from 'jwt-decode';
+import jwtDecode from 'jwt-decode';
 
 const URL = "http://localhost:3000/api/v1/auth/login";
 // const URL = "https://workflow-api-qa.onrender.com/api/v1/auth/login"

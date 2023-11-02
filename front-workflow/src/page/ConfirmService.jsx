@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import imagenTop from "../assets/ImagenTop.png";
 import { useNavigate, useParams } from "react-router-dom";
 import { IoIosArrowBack } from "react-icons/io";
@@ -34,7 +34,7 @@ const StarRating = ({ maxStars, setRating }) => {
 
 const ConfirmService = () => {
   const navigate = useNavigate();
-  const { category } = useParams();
+  const params = useParams();
   const [rating, setRating] = useState(0);
   const [comment, setComment] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -62,7 +62,7 @@ const ConfirmService = () => {
           <img className="w-full" src={imagenTop} alt="" />
         </div>
         <header className=" p-4 ">
-          <Title textColor="text-white" text="Electricista" />
+          <Title textColor="text-white" text={params?.category} />
         </header>
         <div className="relative mt-16 z-20 shadow-2xl rounded-lg p-2 m-6 bg-[#f0f0f0]">
           <div className="w-[85px] absolute top-[-42px] left-[calc(50%-42px)]">
@@ -70,10 +70,10 @@ const ConfirmService = () => {
           </div>
           <div className="text-center pt-10">
             <p className="text-[#242E42] text-sm font-semibold pb-4">
-              Pablo Villafañe
+              {params?.name}
             </p>
             <h2 className="text-[#242E42] text-xl font-medium pb-1">
-              Tec. En Electricidad
+              {params?.category}
             </h2>
             <p className="text-[#6d6d6e] pb-4">Calificación de los usuarios</p>
             <div className="pb-4">

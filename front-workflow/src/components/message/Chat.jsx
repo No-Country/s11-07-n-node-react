@@ -9,24 +9,35 @@ const Chat = () => {
 
   const messageList = [
     {
-      position: "start",
+      own: false,
       msg: "Hola, estás cerca?",
-      color: "bg-white",
     },
     {
-      position: "end",
+      own: true,
       msg: "Estaré allí en unos minutos",
-      color: "bg-[#41BCAC]",
     },
     {
-      position: "start",
+      own: false,
       msg: "Ok!",
-      color: "bg-white",
     },
     {
-      position: "end",
+      own: true,
       msg: "Ya llegué, estoy afuera de suu domicilio",
-      color: "bg-[#41BCAC]",
+    },
+    ,
+    {
+      own: true,
+      msg: "Ya llegué, estoy afuera de suu domicilio",
+    },
+    ,
+    {
+      own: true,
+      msg: "Ya llegué, estoy afuera de suu domicilio",
+    },
+    ,
+    {
+      own: true,
+      msg: "Ya llegué, estoy afuera de suu domicilio",
     },
   ];
   return (
@@ -35,19 +46,22 @@ const Chat = () => {
         <img className="w-full" src={imagenTop} alt="fondo" />
       </div>
 
-      <div className="h-screen mx-5 flex flex-col gap-7 relative  ">
+      <div className="h-screen mx-5 flex flex-col gap-7 relative">
         <Title textColor="text-white" text="Mensajes" />
         <div className="h-[70vh] flex flex-col gap-5 justify-between bg-white bg-opacity-30 shadow-[rgba(0,_0,_0,_0.24)_0px_3px_8px]  rounded-xl p-5">
-          <div className="flex flex-col gap-7">
-            <div className="font-bold text-black text-2xl shadow-bottom-black rounded-md p-1 bg-[rgba(255,255,255,0.5)]">
-              {params.id}
-            </div>
-            {messageList.map(({ position, msg, color, i }) => (
-              <BubbleMsg key={i} position={position} msg={msg} color={color} />
+          <div className="font-bold text-black text-2xl shadow-bottom-black rounded-md p-1 bg-[rgba(255,255,255,0.5)]">
+            {params.id}
+          </div>
+          <div className="flex flex-col gap-7 overflow-y-scroll">
+            {messageList.map(({ own, msg, i }) => (
+              <div key={i}>
+                <BubbleMsg own={own} msg={msg} />
+              </div>
             ))}
           </div>
           <div className="flex flex-row items-center gap-2 ">
-            <input
+            <textarea
+              rows="1"
               data-theme="light"
               type="text"
               placeholder="Escribir un mensaje"

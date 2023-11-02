@@ -2,6 +2,8 @@ import React from "react";
 import Item from "../components/message/Item";
 import imagenTop from "../assets/imagenTop.png";
 import Title from "../components/title/Title";
+import io from "socket.io-client";
+const socket = io.connect("");
 
 const Message = () => {
   const auxImgUrl = "https://picsum.photos/200";
@@ -27,6 +29,8 @@ const Message = () => {
       imgURL: auxImgUrl,
     },
   ];
+
+  const sendMessage = () => {};
 
   return (
     <>
