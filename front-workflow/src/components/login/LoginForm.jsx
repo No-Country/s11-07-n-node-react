@@ -27,8 +27,8 @@ const LoginForm = ({ setShowFooter, setShowNavbar }) => {
     };
     // PARA PROBAR SIN CONECTAR AL BACK
     // dispatch(localUser(userCredentials));
-    // setEmail("");
-    // setPassword("");
+    // setEmail("roles@mail.com");
+    // setPassword("abcd12345");
     // localStorage.setItem("user", JSON.stringify(userCredentials));
     // navigate("/home");
     // setShowFooter(true);
@@ -37,10 +37,13 @@ const LoginForm = ({ setShowFooter, setShowNavbar }) => {
     // PARA USAR CONECTADO AL BACK
     dispatch(loginUser(userCredentials)).then((result) => {
       if (result.payload) {
+        console.log(result.payload);
         setEmail("");
         setPassword("");
+        // es mas rapido y seguro almacenar solo la cadena sin parsearlo a JSON
         localStorage.setItem("user", JSON.stringify(userCredentials));
-        navigate("/home");
+        localStorage.setItem("token", result.payload.token);
+        navigate("/paymentMethods");
         setShowFooter(true);
         setShowNavbar(true);
       } else {
@@ -56,6 +59,7 @@ const LoginForm = ({ setShowFooter, setShowNavbar }) => {
     <>
       {loading && (
         <div className="bg-white">
+          Loading...
           <span className="p-2 text-[#000] blur-0 loading loading-spinner loading-lg absolute top-[40%] left-[50%] translate-x-[-50%] translate-y-[-50%]"></span>
         </div>
       )}

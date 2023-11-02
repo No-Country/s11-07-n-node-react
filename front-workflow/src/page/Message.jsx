@@ -1,12 +1,14 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Item from "../components/message/Item";
 import imagenTop from "../assets/imagenTop.png";
 import Title from "../components/title/Title";
 import io from "socket.io-client";
-const socket = io.connect("");
+import auxImgUrl from "../assets/Portrait_Placeholder.png";
+// const socket = io.connect("http://localhost:3000");
 
 const Message = () => {
-  const auxImgUrl = "https://picsum.photos/200";
+  useEffect(() => {}, []);
+
   const messagesList = [
     {
       name: "Pablo Villafañe",

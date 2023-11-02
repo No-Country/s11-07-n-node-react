@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import imagenTop from "../assets/ImagenTop.png";
 import { useNavigate, useParams } from "react-router-dom";
 import { IoIosArrowBack } from "react-icons/io";
-import myImage from "../assets/Oval2.png";
+import myImage from "../assets/Portrait_Placeholder.png";
 import { BsStarFill } from "react-icons/bs";
 import { FaCheckCircle } from "react-icons/fa";
 import Title from "../components/title/Title";
@@ -66,7 +66,7 @@ const ConfirmService = () => {
         </header>
         <div className="relative mt-16 z-20 shadow-2xl rounded-lg p-2 m-6 bg-[#f0f0f0]">
           <div className="w-[85px] absolute top-[-42px] left-[calc(50%-42px)]">
-            <img src={myImage} alt="" />
+            <img src={myImage} alt="perfil" className="rounded-full" />
           </div>
           <div className="text-center pt-10">
             <p className="text-[#242E42] text-sm font-semibold pb-4">

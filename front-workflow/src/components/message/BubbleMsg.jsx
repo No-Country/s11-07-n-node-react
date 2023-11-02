@@ -1,4 +1,5 @@
 import React from "react";
+import { useEffect } from "react";
 import { TbTriangleInvertedFilled } from "react-icons/tb";
 
 const BubbleMsg = ({ own, msg }) => {

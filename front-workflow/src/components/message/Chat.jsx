@@ -1,13 +1,15 @@
-import React from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useParams } from "react-router-dom";
 import BubbleMsg from "./BubbleMsg";
 import { IoIosSend } from "react-icons/io";
 import imagenTop from "../../assets/imagenTop.png";
 import Title from "../title/Title";
 const Chat = () => {
+  const textareaRef = useRef();
+  const endScrollRef = useRef(null);
+  const [newMessage, setNewMessage] = useState(null);
   const params = useParams();
-
-  const messageList = [
+  const [messages, setMessages] = useState([
     {
       own: false,
       msg: "Hola, estás cerca?",
@@ -22,24 +24,29 @@ const Chat = () => {
     },
     {
       own: true,
-      msg: "Ya llegué, estoy afuera de suu domicilio",
+      msg: "Ya llegué, estoy afuera de su domicilio",
     },
-    ,
-    {
-      own: true,
-      msg: "Ya llegué, estoy afuera de suu domicilio",
-    },
-    ,
-    {
-      own: true,
-      msg: "Ya llegué, estoy afuera de suu domicilio",
-    },
-    ,
-    {
-      own: true,
-      msg: "Ya llegué, estoy afuera de suu domicilio",
-    },
-  ];
+  ]);
+
+  const testFn = () => {
+    if (newMessage.length >= 1) {
+      const newMsg = { own: true, msg: newMessage };
+      const updatedMsg = [...messages, newMsg];
+      setMessages(updatedMsg);
+      // console.log(messages);
+    }
+    setNewMessage("");
+    textareaRef.current.value = "";
+  };
+
+  const scrollToBottom = () => {
+    endScrollRef.current.scrollIntoView({ behavior: "smooth" });
+  };
+
+  useEffect(() => {
+    scrollToBottom();
+  }, [newMessage]);
+
   return (
     <div>
       <div className="w-full absolute -top-2 z-5">
@@ -53,11 +60,17 @@ const Chat = () => {
             {params.id}
           </div>
           <div className="flex flex-col gap-7 overflow-y-scroll">
-            {messageList.map(({ own, msg, i }) => (
+            {messages.map(({ own, msg, i }) => (
               <div key={i}>
-                <BubbleMsg own={own} msg={msg} />
+                <BubbleMsg
+                  own={own}
+                  msg={msg}
+                  messages={messages}
+                  setMessages={setMessages}
+                />
               </div>
             ))}
+            <div ref={endScrollRef} />
           </div>
           <div className="flex flex-row items-center gap-2 ">
             <textarea
@@ -66,8 +79,14 @@ const Chat = () => {
               type="text"
               placeholder="Escribir un mensaje"
               className="input input-ghost w-full shadow-md"
+              value={newMessage}
+              onChange={(e) => setNewMessage(e.target.value)}
+              ref={textareaRef}
             />
-            <div className="bg-[#41BCAC] rounded-md p-1 hover:scale-105 transition-all">
+            <div
+              className="bg-[#41BCAC] rounded-md p-1 hover:scale-105 transition-all"
+              onClick={testFn}
+            >
               <IoIosSend size={30} color="white" />
             </div>
           </div>

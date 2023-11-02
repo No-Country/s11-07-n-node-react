@@ -1,6 +1,7 @@
 import React from "react";
 import imagenTop from "../assets/imagenTop.png";
 import CartUser from "../components/CartUser/CartUser";
+import PortraitImg from "../assets/Portrait_Placeholder.png";
 
 const ProfessionalFilter = () => {
   const users = [
@@ -9,8 +10,7 @@ const ProfessionalFilter = () => {
       ubication: "19 de abril 667",
       distance: "Cerca de tu ubicación",
       price: "2500",
-      photo:
-        "https://d1ih8jugeo2m5m.cloudfront.net/2021/07/imagenes-sin-copyright-gratis.jpg",
+      photo: PortraitImg,
       category: "Veterinario",
     },
     {
@@ -18,8 +18,7 @@ const ProfessionalFilter = () => {
       ubication: "19 de abril 667",
       distance: "Cerca de tu ubicación",
       price: "2500",
-      photo:
-        "https://d1ih8jugeo2m5m.cloudfront.net/2021/07/imagenes-sin-copyright-gratis.jpg",
+      photo: PortraitImg,
       category: "Veterinario",
     },
     {
@@ -27,8 +26,7 @@ const ProfessionalFilter = () => {
       ubication: "19 de abril 667",
       distance: "Cerca de tu ubicación",
       price: "2500",
-      photo:
-        "https://d1ih8jugeo2m5m.cloudfront.net/2021/07/imagenes-sin-copyright-gratis.jpg",
+      photo: PortraitImg,
       category: "Veterinario",
     },
     {
@@ -36,8 +34,7 @@ const ProfessionalFilter = () => {
       ubication: "19 de abril 667",
       distance: "Cerca de tu ubicación",
       price: "2500",
-      photo:
-        "https://d1ih8jugeo2m5m.cloudfront.net/2021/07/imagenes-sin-copyright-gratis.jpg",
+      photo: PortraitImg,
       category: "Plomero",
     },
     {
@@ -45,8 +42,7 @@ const ProfessionalFilter = () => {
       ubication: "19 de abril 667",
       distance: "Cerca de tu ubicación",
       price: "2500",
-      photo:
-        "https://d1ih8jugeo2m5m.cloudfront.net/2021/07/imagenes-sin-copyright-gratis.jpg",
+      photo: PortraitImg,
       category: "Plomero",
     },
     {
@@ -54,8 +50,7 @@ const ProfessionalFilter = () => {
       ubication: "19 de abril 667",
       distance: "Cerca de tu ubicación",
       price: "2500",
-      photo:
-        "https://d1ih8jugeo2m5m.cloudfront.net/2021/07/imagenes-sin-copyright-gratis.jpg",
+      photo: PortraitImg,
       category: "Plomero",
     },
     {
@@ -63,8 +58,7 @@ const ProfessionalFilter = () => {
       ubication: "19 de abril 667",
       distance: "Cerca de tu ubicación",
       price: "2500",
-      photo:
-        "https://d1ih8jugeo2m5m.cloudfront.net/2021/07/imagenes-sin-copyright-gratis.jpg",
+      photo: PortraitImg,
       category: "Plomero",
     },
     {
@@ -72,8 +66,7 @@ const ProfessionalFilter = () => {
       ubication: "the giga mall",
       distance: "a 2km",
       price: "3000",
-      photo:
-        "https://etinor.com/wp-content/uploads/2023/02/76o-Imagen-01-scaled.jpg",
+      photo: PortraitImg,
       category: "plomero",
     },
     {
@@ -81,8 +74,7 @@ const ProfessionalFilter = () => {
       ubication: "Facio 530",
       distance: "a 5km",
       price: "2800",
-      photo:
-        "https://www.enter.co/wp-content/uploads/2018/07/john-schnobrich-520023-unsplash-1024x768.jpg",
+      photo: PortraitImg,
       category: "Dentista",
     },
     {
@@ -90,8 +82,7 @@ const ProfessionalFilter = () => {
       ubication: "Main Street",
       distance: "a 3km",
       price: "2600",
-      photo:
-        "https://www.enter.co/wp-content/uploads/2018/07/john-schnobrich-520023-unsplash-1024x768.jpg",
+      photo: PortraitImg,
       category: "Dentista",
     },
     {
@@ -99,8 +90,7 @@ const ProfessionalFilter = () => {
       ubication: "City Center",
       distance: "a 6km",
       price: "3100",
-      photo:
-        "https://www.enter.co/wp-content/uploads/2018/07/john-schnobrich-520023-unsplash-1024x768.jpg",
+      photo: PortraitImg,
       category: "Electricista",
     },
     {
@@ -108,8 +98,7 @@ const ProfessionalFilter = () => {
       ubication: "Park Avenue",
       distance: "a 4km",
       price: "2900",
-      photo:
-        "https://www.enter.co/wp-content/uploads/2018/07/john-schnobrich-520023-unsplash-1024x768.jpg",
+      photo: PortraitImg,
       category: "Dentista",
     },
     // Nuevos usuarios
@@ -118,8 +107,7 @@ const ProfessionalFilter = () => {
       ubication: "Plaza del Sol",
       distance: "a 8km",
       price: "2200",
-      photo:
-        "https://www.enter.co/wp-content/uploads/2018/07/john-schnobrich-520023-unsplash-1024x768.jpg",
+      photo: PortraitImg,
       category: "Electricista",
     },
     {
@@ -127,8 +115,7 @@ const ProfessionalFilter = () => {
       ubication: "Avenida Central",
       distance: "a 1km",
       price: "3500",
-      photo:
-        "https://www.enter.co/wp-content/uploads/2018/07/john-schnobrich-520023-unsplash-1024x768.jpg",
+      photo: PortraitImg,
       category: "Abogado",
     },
     {
@@ -136,8 +123,7 @@ const ProfessionalFilter = () => {
       ubication: "Avenida Central",
       distance: "a 1km",
       price: "3500",
-      photo:
-        "https://www.enter.co/wp-content/uploads/2018/07/john-schnobrich-520023-unsplash-1024x768.jpg",
+      photo: PortraitImg,
       category: "Abogado",
     },
     {
@@ -145,8 +131,7 @@ const ProfessionalFilter = () => {
       ubication: "Avenida Central",
       distance: "a 1km",
       price: "3500",
-      photo:
-        "https://www.enter.co/wp-content/uploads/2018/07/john-schnobrich-520023-unsplash-1024x768.jpg",
+      photo: PortraitImg,
       category: "Abogado",
     },
     {
@@ -154,8 +139,7 @@ const ProfessionalFilter = () => {
       ubication: "Avenida Central",
       distance: "a 1km",
       price: "3500",
-      photo:
-        "https://www.enter.co/wp-content/uploads/2018/07/john-schnobrich-520023-unsplash-1024x768.jpg",
+      photo: PortraitImg,
       category: "Abogado",
     },
     {
@@ -163,8 +147,7 @@ const ProfessionalFilter = () => {
       ubication: "Paseo de la Reforma",
       distance: "a 12km",
       price: "2700",
-      photo:
-        "https://www.enter.co/wp-content/uploads/2018/07/john-schnobrich-520023-unsplash-1024x768.jpg",
+      photo: PortraitImg,
       category: "Dentista",
     },
     {
@@ -172,8 +155,7 @@ const ProfessionalFilter = () => {
       ubication: "Parque de la Ciudad",
       distance: "a 7km",
       price: "2900",
-      photo:
-        "https://www.enter.co/wp-content/uploads/2018/07/john-schnobrich-520023-unsplash-1024x768.jpg",
+      photo: PortraitImg,
       category: "Dentista",
     },
     // Más nuevos usuarios
@@ -182,8 +164,7 @@ const ProfessionalFilter = () => {
       ubication: "Avenida Insurgentes",
       distance: "a 4km",
       price: "2600",
-      photo:
-        "https://www.enter.co/wp-content/uploads/2018/07/john-schnobrich-520023-unsplash-1024x768.jpg",
+      photo: PortraitImg,
       category: "Plomero",
     },
     {
@@ -191,8 +172,7 @@ const ProfessionalFilter = () => {
       ubication: "Calle 5 de Mayo",
       distance: "a 2km",
       price: "2800",
-      photo:
-        "https://www.enter.co/wp-content/uploads/2018/07/john-schnobrich-520023-unsplash-1024x768.jpg",
+      photo: PortraitImg,
       category: "Programador",
     },
     {
@@ -200,8 +180,7 @@ const ProfessionalFilter = () => {
       ubication: "Plaza de la Constitución",
       distance: "a 1km",
       price: "3200",
-      photo:
-        "https://www.enter.co/wp-content/uploads/2018/07/john-schnobrich-520023-unsplash-1024x768.jpg",
+      photo: PortraitImg,
       category: "Programador",
     },
     {
@@ -209,8 +188,7 @@ const ProfessionalFilter = () => {
       ubication: "Boulevard Reforma",
       distance: "a 10km",
       price: "3000",
-      photo:
-        "https://www.enter.co/wp-content/uploads/2018/07/john-schnobrich-520023-unsplash-1024x768.jpg",
+      photo: PortraitImg,
       category: "Programador",
     },
     {
@@ -218,8 +196,7 @@ const ProfessionalFilter = () => {
       ubication: "Boulevard Reforma",
       distance: "a 10km",
       price: "3000",
-      photo:
-        "https://www.enter.co/wp-content/uploads/2018/07/john-schnobrich-520023-unsplash-1024x768.jpg",
+      photo: PortraitImg,
       category: "Tec.En aire acondicinado",
     },
     {
@@ -227,8 +204,7 @@ const ProfessionalFilter = () => {
       ubication: "Boulevard Reforma",
       distance: "a 10km",
       price: "3000",
-      photo:
-        "https://www.enter.co/wp-content/uploads/2018/07/john-schnobrich-520023-unsplash-1024x768.jpg",
+      photo: PortraitImg,
       category: "Tec.En aire acondicinado",
     },
     {
@@ -236,8 +212,7 @@ const ProfessionalFilter = () => {
       ubication: "Boulevard Reforma",
       distance: "a 10km",
       price: "3000",
-      photo:
-        "https://www.enter.co/wp-content/uploads/2018/07/john-schnobrich-520023-unsplash-1024x768.jpg",
+      photo: PortraitImg,
       category: "Tec.En aire acondicinado",
     },
     {
@@ -245,8 +220,7 @@ const ProfessionalFilter = () => {
       ubication: "Boulevard Reforma",
       distance: "a 10km",
       price: "3000",
-      photo:
-        "https://www.enter.co/wp-content/uploads/2018/07/john-schnobrich-520023-unsplash-1024x768.jpg",
+      photo: PortraitImg,
       category: "Tec.En aire acondicinado",
     },
     {
@@ -254,8 +228,7 @@ const ProfessionalFilter = () => {
       ubication: "Boulevard Reforma",
       distance: "a 10km",
       price: "3000",
-      photo:
-        "https://www.enter.co/wp-content/uploads/2018/07/john-schnobrich-520023-unsplash-1024x768.jpg",
+      photo: PortraitImg,
       category: "Mecánico general",
     },
     {
@@ -263,8 +236,7 @@ const ProfessionalFilter = () => {
       ubication: "Boulevard Reforma",
       distance: "a 10km",
       price: "3000",
-      photo:
-        "https://d1ih8jugeo2m5m.cloudfront.net/2021/07/imagenes-sin-copyright-gratis.jpg",
+      photo: PortraitImg,
       category: "Mecánico general",
     },
     {
@@ -272,8 +244,7 @@ const ProfessionalFilter = () => {
       ubication: "Boulevard Reforma",
       distance: "a 10km",
       price: "3000",
-      photo:
-        "https://d1ih8jugeo2m5m.cloudfront.net/2021/07/imagenes-sin-copyright-gratis.jpg",
+      photo: PortraitImg,
       category: "Mecánico general",
     },
     {
@@ -281,8 +252,7 @@ const ProfessionalFilter = () => {
       ubication: "Boulevard Reforma",
       distance: "a 10km",
       price: "3000",
-      photo:
-        "https://www.enter.co/wp-content/uploads/2018/07/john-schnobrich-520023-unsplash-1024x768.jpg",
+      photo: PortraitImg,
       category: "Mecánico general",
     },
     {
@@ -290,8 +260,7 @@ const ProfessionalFilter = () => {
       ubication: "Boulevard Reforma",
       distance: "a 10km",
       price: "3000",
-      photo:
-        "https://d1ih8jugeo2m5m.cloudfront.net/2021/07/imagenes-sin-copyright-gratis.jpg",
+      photo: PortraitImg,
       category: "Mecánico general",
     },
 

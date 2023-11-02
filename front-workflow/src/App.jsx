@@ -15,14 +15,14 @@ import { useEffect, useState } from "react";
 import { localUser } from "./store/UserSlice";
 import { useDispatch } from "react-redux";
 import PaymentMethods from "./page/PaymentMethods";
-// import Pay from "./page/Pay";
+import Pay from "./page/Pay";
 import NotPay from "./page/NotPay";
-// import { Elements } from "@stripe/react-stripe-js";
-// import { loadStripe } from "@stripe/stripe-js";
+import { Elements } from "@stripe/react-stripe-js";
+import { loadStripe } from "@stripe/stripe-js";
 
-// const stripePromise = loadStripe(
-//   "pk_test_51O4gkgD3YXfw7A9OCrcmMR7KH5RB0lHjigzLXqtap7qigk2Le0kh9Q0OGTjSaYpdSTRTcJS1yIFA9jIVML956B9O00NqWfPeG6"
-// );
+const stripePromise = loadStripe(
+  "pk_test_51O4gkgD3YXfw7A9OCrcmMR7KH5RB0lHjigzLXqtap7qigk2Le0kh9Q0OGTjSaYpdSTRTcJS1yIFA9jIVML956B9O00NqWfPeG6"
+);
 
 import Notification from "./components/Notifications/Notification";
 import Message from "./page/Message";
@@ -56,7 +56,7 @@ function App() {
       } else if (introStorage && !user) {
         navigate("/login");
       } else if (introStorage && user) {
-        // navigate("/home");
+        navigate("/home");
         setShowFooter(true);
         setShowNavbar(true);
       }
@@ -100,15 +100,15 @@ function App() {
             />
           }
         />
-        <Route path="/PaymentMethods" element={<PaymentMethods />} />
-        {/* <Route
+        <Route path="/paymentMethods" element={<PaymentMethods />} />
+        <Route
           path="/Pay"
           element={
             <Elements stripe={stripePromise}>
               <Pay />
             </Elements>
           }
-        /> */}
+        />
         <Route path="/make-payment" element={<PayStripe />} />
         <Route path="/success" element={<Succeeded />} />
         <Route path="/NotPay" element={<NotPay />} />

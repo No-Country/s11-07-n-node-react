@@ -1,5 +1,5 @@
 import React from "react";
-import myImage from "../../pictures/Profile-image.png";
+import myImage from "../../assets/Portrait_Placeholder.png";
 import {
   FaUserCircle,
   FaMapMarkerAlt,
@@ -27,10 +27,10 @@ const Profile = ({ setShowFooter, setShowNavbar }) => {
   return (
     <>
       <section className="h-screen px-4 m-auto  max-w-xs  bg-white">
-      <Title textColor="text-black" text="Perfil"/>
+        <Title textColor="text-black" text="Perfil" />
         <div className="relative">
           <div className="w-[125px] m-auto">
-            <img src={myImage} alt="" />
+            <img src={myImage} alt="perfil" className="rounded-full" />
           </div>
           <div className="absolute bottom-0 right-20 m-[3px] text-[#41BCAC] text-3xl cursor-pointer rounded-full">
             <MdBuildCircle />
@@ -97,7 +97,12 @@ const Profile = ({ setShowFooter, setShowNavbar }) => {
             <span className=" text-xl text-[#41BCAC]">
               <FaCreditCard />
             </span>
-            <h2 className="">Medios de pago</h2>
+            <button
+              onClick={() => navigate("/paymentmethods")}
+              className="text-gray-700 bg-transparent outline-none "
+            >
+              Medios de pago
+            </button>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
