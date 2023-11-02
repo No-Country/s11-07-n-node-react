@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import imagenTop from "../assets/ImagenTop.png";
 import { useNavigate, useParams } from "react-router-dom";
 import { IoIosArrowBack } from "react-icons/io";
 import myImage from "../assets/Oval2.png";
 import { BsStarFill } from "react-icons/bs";
 import { FaCheckCircle } from "react-icons/fa";
+import Title from "../components/title/Title";
 
 // Componente de calificación de estrellas
 const StarRating = ({ maxStars, setRating }) => {
@@ -33,7 +34,7 @@ const StarRating = ({ maxStars, setRating }) => {
 
 const ConfirmService = () => {
   const navigate = useNavigate();
-  const { category } = useParams();
+  const params = useParams();
   const [rating, setRating] = useState(0);
   const [comment, setComment] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -56,19 +57,12 @@ const ConfirmService = () => {
 
   return (
     <>
-      <section className="h-screen m-auto   bg-white">
+      <section className="h-screen m-auto  bg-white">
         <div className="w-full absolute -top-2 z-10">
           <img className="w-full" src={imagenTop} alt="" />
         </div>
-        <header className=" relative z-20 p-2">
-          <div className="flex text-white text-2xl justify-between">
-            {/* <div onClick={() => navigate(-1)}>
-              <IoIosArrowBack />
-            </div> */}
-          </div>
-          <h2 className="text-white text-xl font-semibold font-roboto p-2 mt-10">
-            {category || "Electricista"}
-          </h2>
+        <header className=" p-4 ">
+          <Title textColor="text-white" text={params?.category} />
         </header>
         <div className="relative mt-16 z-20 shadow-2xl rounded-lg p-2 m-6 bg-[#f0f0f0]">
           <div className="w-[85px] absolute top-[-42px] left-[calc(50%-42px)]">
@@ -76,10 +70,10 @@ const ConfirmService = () => {
           </div>
           <div className="text-center pt-10">
             <p className="text-[#242E42] text-sm font-semibold pb-4">
-              Pablo Villafañe
+              {params?.name}
             </p>
             <h2 className="text-[#242E42] text-xl font-medium pb-1">
-              Tec. En Electricidad
+              {params?.category}
             </h2>
             <p className="text-[#6d6d6e] pb-4">Calificación de los usuarios</p>
             <div className="pb-4">

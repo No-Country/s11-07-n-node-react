@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import BubbleMsg from "./BubbleMsg";
 import { IoIosSend } from "react-icons/io";
 import imagenTop from "../../assets/imagenTop.png";
+import Title from "../title/Title";
 const Chat = () => {
   const params = useParams();
 
@@ -46,7 +47,7 @@ const Chat = () => {
       </div>
 
       <div className="h-screen mx-5 flex flex-col gap-7 relative">
-        <h1 className="text-2xl font-bold text-white pt-[8vh]">Mensajes</h1>
+        <Title textColor="text-white" text="Mensajes" />
         <div className="h-[70vh] flex flex-col gap-5 justify-between bg-white bg-opacity-30 shadow-[rgba(0,_0,_0,_0.24)_0px_3px_8px]  rounded-xl p-5">
           <div className="font-bold text-black text-2xl shadow-bottom-black rounded-md p-1 bg-[rgba(255,255,255,0.5)]">
             {params.id}

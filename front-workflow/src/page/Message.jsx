@@ -1,6 +1,7 @@
 import React from "react";
 import Item from "../components/message/Item";
 import imagenTop from "../assets/imagenTop.png";
+import Title from "../components/title/Title";
 import io from "socket.io-client";
 const socket = io.connect("");
 
@@ -37,7 +38,7 @@ const Message = () => {
         <img className="w-full" src={imagenTop} alt="fondo" />
       </div>
       <div className="h-screen mx-5 flex flex-col gap-7 relative">
-        <h1 className="text-2xl font-bold text-white pt-[8vh]">Mensajes</h1>
+        <Title textColor="text-white" text="Mensajes" />
         <div className="flex flex-col gap-1">
           {messagesList.map(({ name, message, imgURL, i }) => (
             <Item key={i} name={name} message={message} imgURL={imgURL} />

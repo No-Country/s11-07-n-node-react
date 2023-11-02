@@ -4,6 +4,7 @@ import { RiDeleteBin6Line } from "react-icons/ri";
 import { IoIosArrowBack, IoIosNotifications } from "react-icons/io";
 import CartNotification from "./CartNotification";
 import { useLocation, useNavigate } from "react-router-dom";
+import Title from "../title/Title";
 const Notification = () => {
   const navigate = useNavigate();
   const location = useLocation();
@@ -55,9 +56,8 @@ const Notification = () => {
     <>
       {notification && (
         <section
-          className={`flex ${
-            backButton ? "justify-between" : "justify-end"
-          } p-3 absolute z-50 w-full text-2xl`}
+          className={`flex ${backButton ? "justify-between" : "justify-end"
+            } p-3 absolute z-50 w-full text-2xl`}
         >
           {backButton && (
             <button
@@ -66,11 +66,11 @@ const Notification = () => {
                   isOpen == false ? setIsOpen(false) : setIsOpen(!isOpen);
               }}
             >
-              <IoIosArrowBack />
+              <IoIosArrowBack style={{color:isOpen?"#fff":path=='/professionalfilter'||"/editprofile"?"#fff":path=="/profile"?"#31D2DC":""}} />
             </button>
           )}
           <button onClick={() => setIsOpen(!isOpen)}>
-            <IoIosNotifications />
+            <IoIosNotifications style={{color:isOpen?"#fff":path=='/professionalfilter'?"#fff":path=="/profile"||"/home"?"gray":""}} />
           </button>
         </section>
       )}
@@ -81,11 +81,11 @@ const Notification = () => {
             <div className="w-full absolute -top-2 z-10">
               <img className="w-full" src={imagenTop} alt="" />
             </div>
-            <header className=" relative z-20 p-2 text-white  pt-[40px] ">
-              <div className="flex items-center pt-3">
-                <h2 className="font-medium text-xl">Notificaciones</h2>
+            <header className=" relative z-20 p-2 text-white mt-1">
+              <div className="flex items-center">
+                  <Title textColor="text-white" text="Notificaciones" />
                 <button className="ml-auto text-2xl" type="button">
-                  <RiDeleteBin6Line />
+                  <RiDeleteBin6Line  />
                 </button>
               </div>
             </header>

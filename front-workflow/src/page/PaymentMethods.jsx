@@ -5,11 +5,14 @@ import MercadoPago from '../assets/MercadoPago.png';
 import Tarjeta from '../assets/Tarjeta.png';
 import paypal from '../assets/paypal.png';
 import chulo from '../assets/chulo.png';
+import Title from '../components/title/Title';
 
 
 const PaymentMethods = () => {
     const [selectedPayment, setSelectedPayment] = useState(null);
     const [showMessage, setShowMessage] = useState(false);
+    const [checkoutSessionData, setCheckoutSessionData] = useState(null);
+    const [errorMessage, setErrorMessage] = useState(null);
    
 
   const paymentMethods = [
@@ -23,7 +26,7 @@ const PaymentMethods = () => {
     setSelectedPayment(index);
   };
 
-  const handleConfirm = () => {
+  const handleConfirm = async   () => {
     if (selectedPayment !== null) {
       // Redirigir a diferentes rutas según el método de pago seleccionado
       switch (selectedPayment) {
@@ -37,17 +40,36 @@ const PaymentMethods = () => {
           window.location.href = '/NotPay';
           break;
         case 3: // Tarjeta de crédito - débito
-          window.location.href = '/pay';
-          break;
-        default:
-          break;
-      }
-    } else {
-      // Mostrar el mensaje de error durante 2 segundos
-      setShowMessage(true);
-      setTimeout(() => setShowMessage(false), 2000);
+        try {
+          const response = await fetch('/create-checkout-session', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+              // agregar cualquier dato adicional para enviar al back-WORKFLOW
+            }),
+          });
+
+          const data = await response.json();
+
+          setCheckoutSessionData(data);
+        } catch (error) {
+          setErrorMessage('Error al crear la sesión de pago');
+          setTimeout(() => {
+            setErrorMessage('');
+          }, 1500);
+        }
+        break;
+      default:
+        break;
     }
-  };
+  } else {
+    // Mostrar el mensaje de error durante 2 segundos
+    setShowMessage(true);
+    setTimeout(() => setShowMessage(false), 2000);
+  }
+};
 
   return (
     <div className="min-h-screen bg-gray-100">
@@ -61,9 +83,7 @@ const PaymentMethods = () => {
           {'<'}
         </a>
       </div>
-      <div className="absolute top-16 left-4">
-        <p className="text-white text-2xl font-roboto">Medios de pago</p>
-      </div>
+      <Title textColor="text-black" text="Medios de pago"/>
       <div className="absolute top-[164px] left-4 " >
   <div className="w-full h-[360px] ml-auto mr-4 bg-white flex flex-col p-6 rounded-md">
     <p className="text-lg mb-2 font-roboto">ELEGIR MÉTODO DE PAGO</p>
@@ -94,6 +114,11 @@ const PaymentMethods = () => {
       {showMessage && (
         <div className="absolute bottom-40 text-red-500 left-4 right-4 text-center">
           Seleccione una de las formas de pago.
+        </div>
+      )}
+       {errorMessage && (
+        <div className="absolute bottom-40 text-red-500 left-4 right-4 text-center">
+          {errorMessage}
         </div>
       )}
     </div>
