@@ -1,0 +1,14 @@
+// tsconfig.prod.json
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "baseUrl": ".",
+    "target": "ES5",
+    "outDir": "dist",
+    // Otras opciones de producción
+  },
+  "exclude": [
+    "node_modules",
+  ]
+  // Otros ajustes específicos de producción
+}

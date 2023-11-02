@@ -41,9 +41,9 @@ export class StripeService {
         throw UserDataError.badRequest('Service not found')
       }
 
-      if (!roles.includes('USER')) {
-        throw UserDataError.unauthorized('You are not authorized to perform this action')
-      }
+      // if (!roles.includes('USER')) {
+      //   throw UserDataError.unauthorized('You are not authorized to perform this action')
+      // }
 
       const selectedService = [service]
       const payService = selectedService.map((data) => ({

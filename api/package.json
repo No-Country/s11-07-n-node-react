@@ -6,11 +6,13 @@
   "scripts": {
     "test": "jest --coverage --detectOpenHandles",
     "dev": "tsnd --respawn --clear src/app.ts",
-    "build": "rimraf ./dist && tsc",
-    "start": "npm run build && node dist/src/app.js",
+    "start": "node dist/src/app.js",
+    "start:dev": "nodemon --exec ts-node src/app.ts",
+    "build": "rimraf dist && npm run build:tsc",
+    "build:clean": "rimraf dist; exit 0",
+    "build:tsc": "tsc -p tsconfig.prod.json",
     "lint": "eslint --ignore-path .gitignore --ext .ts src/",
-    "lint:fix": "npm run lint -- --fix",
-    "start:dev": "nodemon --exec ts-node src/app.ts"
+    "lint:fix": "npm run lint -- --fix"
   },
   "keywords": [],
   "author": "",

@@ -179,9 +179,9 @@ export class AddWorkService {
     try {
       const user = await this.checkUser(userId)
 
-      if (!roles.includes('WORKER')) {
-        throw UserDataError.badRequest('You are not a worker')
-      }
+      // if (!roles.includes('WORKER')) {
+      //   throw UserDataError.badRequest('You are not a worker')
+      // }
 
       const portfolio = await this.checkPortfolio(user.portfolio)
 
