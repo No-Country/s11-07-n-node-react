@@ -4,6 +4,7 @@ import Footer from "../components/Footer/Footer";
 import signomas from "../assets/signomas.png";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import Title from "../components/title/Title";
 
 const Address = () => {
   const [direccion, setDireccion] = useState("");
@@ -60,12 +61,7 @@ const Address = () => {
 
   return (
     <div data-theme="light" className="p-4 bg-gray-100 w-full min-h-screen">
-      <div className="flex items-center my-16">
-        {/* <button onClick={handlePerfilButtonClick}>
-          <img src={flecha} alt="Flecha" className="h-4 w-4" />
-        </button> */}
-        <h5 className="font-bold ml-4 text-2xl">Mis direcciones</h5>
-      </div>
+      <Title textColor="text-black" text="Mis direcciones"/>
 
       <input
         type="text"

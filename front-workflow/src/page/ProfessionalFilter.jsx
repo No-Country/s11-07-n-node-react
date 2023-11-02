@@ -1,8 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import imagenTop from "../assets/imagenTop.png";
-import { useParams } from "react-router-dom";
 import CartUser from "../components/CartUser/CartUser";
-import axios from "axios";
 
 const ProfessionalFilter = () => {
 
@@ -270,10 +268,10 @@ const ProfessionalFilter = () => {
 
     // Continuar con más usuarios...
   ];
-  
+
   const storedValue = localStorage.getItem("category");
   const filteredUsers = users.filter((user) => user.category === storedValue);
-  const existUsers=filteredUsers ==0?`No se encontro profesionales en el area de ${storedValue}`:null
+  const existUsers = filteredUsers == 0 ? `No se encontro profesionales en el area de ${storedValue}` : null
 
   return (
     <>
@@ -284,7 +282,7 @@ const ProfessionalFilter = () => {
 
         <header className="relative z-20 p-2 pt-[60px] ">
           <h2 className="text-white font-semibold font-roboto tracking-widest">
-            { storedValue}
+            {storedValue}
           </h2>
         </header>
         <div className="relative w-full p-2 pb-16 h-auto min-h-screen  ">
@@ -299,6 +297,7 @@ const ProfessionalFilter = () => {
             />
           ))}
         </div>
+
 
           <p className="absolute top-0 right-0 left-0 bottom-0 w-[90%] text-center h-min  text-black  m-auto z-20">
             {existUsers}

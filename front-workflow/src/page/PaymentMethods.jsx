@@ -5,6 +5,7 @@ import MercadoPago from '../assets/MercadoPago.png';
 import Tarjeta from '../assets/Tarjeta.png';
 import paypal from '../assets/paypal.png';
 import chulo from '../assets/chulo.png';
+import Title from '../components/title/Title';
 
 
 const PaymentMethods = () => {
@@ -82,9 +83,7 @@ const PaymentMethods = () => {
           {'<'}
         </a>
       </div>
-      <div className="absolute top-16 left-4">
-        <p className="text-white text-2xl font-roboto">Medios de pago</p>
-      </div>
+      <Title textColor="text-black" text="Medios de pago"/>
       <div className="absolute top-[164px] left-4 " >
   <div className="w-full h-[360px] ml-auto mr-4 bg-white flex flex-col p-6 rounded-md">
     <p className="text-lg mb-2 font-roboto">ELEGIR MÉTODO DE PAGO</p>

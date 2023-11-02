@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { FaArrowLeft } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import imagenTop from "../../assets/ImagenTop.png";
+import Title from "../title/Title";
 
 const EditProfile = () => {
   const navigate = useNavigate();
@@ -12,16 +13,12 @@ const EditProfile = () => {
 
   return (
     <section className="h-screen m-auto  bg-white ">
-      <div className="w-full absolute -top-2 ">
+      <div className="w-full absolute -top-2">
         <img className="w-full" src={imagenTop} alt="" />
       </div>
       <div className="bg-white p-4 rounded-lg w-80 mx-auto">
-        <div className="flex items-center space-x-6 mb-[5rem] pt-10">
-          {/* <span onClick={handleBack} className="cursor-pointer z-10 text-white">
-            <FaArrowLeft />
-          </span> */}
-          <h1 className="text-2xl font-bold text-white z-10">Editar perfil</h1>
-        </div>
+
+      <Title textColor="text-white" text="Editar perfil"/>
 
         <form>
           <div className="flex items-center justify-between mb-3 relative z-1 bg-slate-100">
