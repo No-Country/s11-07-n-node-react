@@ -19,15 +19,21 @@ const swaggerSpec = {
         }
       }
     },
+
+    servers: [
+      {
+        url: 'http://localhost:3000/api/v1',
+        description: 'Servidor de desarrollo'
+      },
+      {
+        url: 'https://work-flow-mongodb.herokuapp.com/api/v1',
+        description: 'Servidor de producción'
+      }
+    ],
     security: [
       {
         BearerAuth: [] // Nombre de la definición de seguridad
       }
-    ],
-
-    servers: [
-      { url: 'http://localhost:3000/api/v1' },
-      { url: 'https://work-flow-mongodb.herokuapp.com/api/v1' }
     ]
   },
   apis: ['./src/routes/*.ts', './src/routes/**/*.ts', './src/routes/**/**/*.ts'
