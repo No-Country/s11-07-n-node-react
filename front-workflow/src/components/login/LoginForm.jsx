@@ -26,27 +26,27 @@ const LoginForm = ({ setShowFooter, setShowNavbar }) => {
       password: password,
     };
     // PARA PROBAR SIN CONECTAR AL BACK
-    dispatch(localUser(userCredentials));
-    setEmail("");
-    setPassword("");
-    localStorage.setItem("user", JSON.stringify(userCredentials));
-    navigate("/home");
-    setShowFooter(true);
-    setShowNavbar(true);
+    // dispatch(localUser(userCredentials));
+    // setEmail("");
+    // setPassword("");
+    // localStorage.setItem("user", JSON.stringify(userCredentials));
+    // navigate("/home");
+    // setShowFooter(true);
+    // setShowNavbar(true);
 
     // PARA USAR CONECTADO AL BACK
-    // dispatch(loginUser(userCredentials)).then((result) => {
-    //   if (result.payload) {
-    //     setEmail("");
-    //     setPassword("");
-    //     localStorage.setItem("user", JSON.stringify(userCredentials));
-    //     navigate("/home");
-    //     setShowFooter(true);
-    //     setShowNavbar(true);
-    //   } else {
-    //     console.log("Error al logear");
-    //   }
-    // });
+    dispatch(loginUser(userCredentials)).then((result) => {
+      if (result.payload) {
+        setEmail("");
+        setPassword("");
+        localStorage.setItem("user", JSON.stringify(userCredentials));
+        navigate("/home");
+        setShowFooter(true);
+        setShowNavbar(true);
+      } else {
+        console.log("Error al logear");
+      }
+    });
   };
   const forgetPass = () => {
     // console.log("olvide mi contrase;a");
