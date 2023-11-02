@@ -66,11 +66,11 @@ const Notification = () => {
                   isOpen == false ? setIsOpen(false) : setIsOpen(!isOpen);
               }}
             >
-              <IoIosArrowBack />
+              <IoIosArrowBack style={{color:isOpen?"#fff":path=='/professionalfilter'||"/editprofile"?"#fff":path=="/profile"?"#31D2DC":""}} />
             </button>
           )}
           <button onClick={() => setIsOpen(!isOpen)}>
-            <IoIosNotifications />
+            <IoIosNotifications style={{color:isOpen?"#fff":path=='/professionalfilter'?"#fff":path=="/profile"||"/home"?"gray":""}} />
           </button>
         </section>
       )}
@@ -85,7 +85,7 @@ const Notification = () => {
               <div className="flex items-center pt-3">
                 <h2 className="font-medium text-xl">Notificaciones</h2>
                 <button className="ml-auto text-2xl" type="button">
-                  <RiDeleteBin6Line />
+                  <RiDeleteBin6Line  />
                 </button>
               </div>
             </header>

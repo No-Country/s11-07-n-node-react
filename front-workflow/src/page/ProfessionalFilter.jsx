@@ -195,6 +195,79 @@ const ProfessionalFilter = () => {
       photo: "https://www.enter.co/wp-content/uploads/2018/07/john-schnobrich-520023-unsplash-1024x768.jpg",
       category: "Programador",
     },
+    {
+      name: "Isabela montenegro",
+      ubication: "Boulevard Reforma",
+      distance: "a 10km",
+      price: "3000",
+      photo: "https://www.enter.co/wp-content/uploads/2018/07/john-schnobrich-520023-unsplash-1024x768.jpg",
+      category: "Tec.En aire acondicinado"
+    },
+    {
+      name: "clara fuentes",
+      ubication: "Boulevard Reforma",
+      distance: "a 10km",
+      price: "3000",
+      photo: "https://www.enter.co/wp-content/uploads/2018/07/john-schnobrich-520023-unsplash-1024x768.jpg",
+      category: "Tec.En aire acondicinado"
+    },
+    {
+      name: "favian montenegro",
+      ubication: "Boulevard Reforma",
+      distance: "a 10km",
+      price: "3000",
+      photo: "https://www.enter.co/wp-content/uploads/2018/07/john-schnobrich-520023-unsplash-1024x768.jpg",
+      category: "Tec.En aire acondicinado"
+    },
+    {
+      name: "justino",
+      ubication: "Boulevard Reforma",
+      distance: "a 10km",
+      price: "3000",
+      photo: "https://www.enter.co/wp-content/uploads/2018/07/john-schnobrich-520023-unsplash-1024x768.jpg",
+      category: "Tec.En aire acondicinado"
+    },
+    {
+      name: "justino",
+      ubication: "Boulevard Reforma",
+      distance: "a 10km",
+      price: "3000",
+      photo: "https://www.enter.co/wp-content/uploads/2018/07/john-schnobrich-520023-unsplash-1024x768.jpg",
+      category: "Mecánico general"
+    }, 
+    {
+      name: "enrique segoviano",
+      ubication: "Boulevard Reforma",
+      distance: "a 10km",
+      price: "3000",
+      photo: "https://d1ih8jugeo2m5m.cloudfront.net/2021/07/imagenes-sin-copyright-gratis.jpg",
+      category: "Mecánico general"
+    },  
+    {
+      name: "claudia delgrano",
+      ubication: "Boulevard Reforma",
+      distance: "a 10km",
+      price: "3000",
+      photo: "https://d1ih8jugeo2m5m.cloudfront.net/2021/07/imagenes-sin-copyright-gratis.jpg",
+      category: "Mecánico general"
+    },  
+    {
+      name: "henry paredes",
+      ubication: "Boulevard Reforma",
+      distance: "a 10km",
+      price: "3000",
+      photo: "https://www.enter.co/wp-content/uploads/2018/07/john-schnobrich-520023-unsplash-1024x768.jpg",
+      category: "Mecánico general"
+    },  
+    {
+      name: "pable escobar",
+      ubication: "Boulevard Reforma",
+      distance: "a 10km",
+      price: "3000",
+      photo: "https://d1ih8jugeo2m5m.cloudfront.net/2021/07/imagenes-sin-copyright-gratis.jpg",
+      category: "Mecánico general"
+    },   
+
     // Continuar con más usuarios...
   ];
   
@@ -230,9 +303,6 @@ const ProfessionalFilter = () => {
           <p className="absolute top-0 right-0 left-0 bottom-0 w-[90%] text-center h-min  text-black  m-auto z-20">
             {existUsers}
             </p>
-   
-
-      
       </section>
     </>
   );
