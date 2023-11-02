@@ -10,6 +10,7 @@ import { MdBuildCircle } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
 import { logout } from "../../store/UserSlice";
 import { useDispatch, useSelector } from "react-redux";
+import Title from "../title/Title";
 
 const Profile = ({ setShowFooter, setShowNavbar }) => {
   const user = useSelector((state) => state.user);
@@ -26,7 +27,7 @@ const Profile = ({ setShowFooter, setShowNavbar }) => {
   return (
     <>
       <section className="h-screen px-4 m-auto  max-w-xs  bg-white">
-        <h1 className="text-2xl font-bold text-black pt-[8vh]">Perfil</h1>
+      <Title textColor="text-black" text="Perfil"/>
         <div className="relative">
           <div className="w-[125px] m-auto">
             <img src={myImage} alt="" />

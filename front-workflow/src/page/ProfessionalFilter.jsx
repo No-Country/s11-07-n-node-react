@@ -2,6 +2,7 @@ import React from "react";
 import imagenTop from "../assets/imagenTop.png";
 import { useParams } from "react-router-dom";
 import CartUser from "../components/CartUser/CartUser";
+import Title from "../components/title/Title";
 
 const ProfessionalFilter = () => {
   const { category } = useParams();
@@ -64,10 +65,8 @@ const ProfessionalFilter = () => {
           <img className="w-full" src={imagenTop} alt="" />
         </div>
 
-        <header className="relative z-20 p-2 pt-[60px] ">
-          <h2 className="text-white font-semibold font-roboto tracking-widest">
-            {category || "Electricista"}
-          </h2>
+        <header className=" p-4 ">
+          <Title textColor="text-white" text="Electricista" />
         </header>
 
         <div className="relative w-full p-2 pb-16  ">
