@@ -3,8 +3,13 @@ dist/
 node_modules/
 mongo/
 .env
-*.txt
-swagger.js
+.env.template
+commitlint.config.js
+jest.config.js
+.editorconfig
+.husky/
+.txt
+.md
 
 # Logs
 logs
